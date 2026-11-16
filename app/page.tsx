@@ -1,5 +1,6 @@
 import NavBar from "@/app/components/navbar/NavBar";
 import Link from "next/link";
+import Loading from "@/app/components/loading/Loading";
 
 export default function Home() {
 
@@ -41,6 +42,8 @@ export default function Home() {
               </div>
 
           </div>
+
+          <Loading />
 
       </>
 
