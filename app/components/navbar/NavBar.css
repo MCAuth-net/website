@@ -1,0 +1,14 @@
+a {
+
+    text-decoration: none;
+    color: #ffffffaa;
+    transition-duration: 200ms;
+    font-family: var(--font-google-sans), Helvetica, sans-serif;
+
+}
+
+a:hover {
+
+    color: white;
+
+}
