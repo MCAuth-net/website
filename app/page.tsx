@@ -20,7 +20,7 @@ export default function Home() {
                   <div className={"relative flex flex-row gap-2 items-center md:self-start self-center"}>
 
                       <Link
-                          href={"/auth"}
+                          href={"/register"}
                           className={"relative bg-[#3c8527dd] hover:bg-[#3c8527] bottom-0 hover:bottom-0.5 pl-5 pr-5 pt-3 pb-3 !text-white rounded-sm"}
                       >
 
@@ -43,7 +43,7 @@ export default function Home() {
 
           </div>
 
-          <Loading />
+          <Loading seconds={2} />
 
       </>
 

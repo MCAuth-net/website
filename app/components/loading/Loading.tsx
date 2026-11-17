@@ -51,7 +51,7 @@ export default function Loading({ seconds = LOADING }: { seconds?: number }) {
 
                 <h3 className={"minecraft-ten text-3xl"}>
                     Loading
-                    <span className={"inline-block w-[1.5ch] text-left"} aria-hidden="true">
+                    <span aria-hidden={"true"}>
                         {dots}
                     </span>
                 </h3>
