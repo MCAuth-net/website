@@ -31,7 +31,7 @@ export default function NavBar() {
 
         <>
 
-            <div className={"fixed top-0 left-0 md:backdrop-blur-2xl md:h-20 h-30 w-full z-100"}>
+            <div className={"fixed top-0 left-0 backdrop-blur-2xl md:h-20 h-30 w-full z-100"}>
 
                 <div className={"absolute right-[50%] translate-x-[50%] max-w-375 w-screen md:p-1 p-5"}>
 

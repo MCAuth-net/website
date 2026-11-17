@@ -39,6 +39,58 @@ export default function Home() {
 
                   </div>
 
+                  <div className={"flex md:flex-row flex-col gap-10 justify-between items-center mt-40"}>
+
+                      <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
+
+                          <h2 className={"text-3xl"}>Integrate</h2>
+
+                          <div className={"flex flex-row gap-1"}>
+
+                              <p>Integrate MCAuth in your website, discord bot, literally whatever you&#39;d like, thanks to our SDK</p>
+
+                          </div>
+
+                      </div>
+
+                      <img
+                          src={"/assets/arrow.png"}
+                          alt={"Arrow"}
+                          className={"w-[75px] h-[64px] md:rotate-0 rotate-90"}
+                      />
+
+                      <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
+
+                          <h2 className={"text-3xl"}>Authenticate</h2>
+
+                          <div className={"flex flex-row gap-1"}>
+
+                              <p>Let your users safely authenticate by joining one of our authentication servers</p>
+
+                          </div>
+
+                      </div>
+
+                      <img
+                          src={"/assets/arrow.png"}
+                          alt={"Arrow"}
+                          className={"w-[75px] h-[64px] md:rotate-0 rotate-90"}
+                      />
+
+                      <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
+
+                          <h2 className={"text-3xl"}>You are in!</h2>
+
+                          <div className={"flex flex-row gap-1"}>
+
+                              <p>That&#39;s it! You are logged in.</p>
+
+                          </div>
+
+                      </div>
+
+                  </div>
+
               </div>
 
           </div>
