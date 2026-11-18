@@ -1,43 +1,95 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { setInterval } from "node:timers";
 
 export default function ServerSelector() {
 
     const [uuid, setUuid] = useState("");
     const [server, setServer] = useState("");
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+
+        void fetch("https://api.mcauth.net/v1/token")
+            .then(async (res) => {
+
+                const token = await res.text();
+                setServer(token);
+
+                setInterval(async () => {
+
+                    const response = await fetch("https://api.mcauth.net/v1/token/check", {
+                        method: "POST",
+                        headers: {
+                            contentType: "application/json",
+                        },
+                        body: JSON.stringify({ token }),
+                    });
+
+                    switch (response.status) {
+
+                        case 200:
+
+                            setUuid(await response.json());
+
+                            return;
+
+                    }
+
+                }, 2000);
+
+            })
+            .catch((e) => {
+
+                setServer("Couldn't get server");
+                setError(true);
+
+            });
+
+    }, []);
 
     return (
 
         <>
 
-            <form className={"server-section w-full"}>
+            <form className={"server-section w-full justify-center"}>
 
-                <p className={"minecraft text"}>Connect to server</p>
+                { error ? null : <p className={"minecraft text"}>Connect to server</p> }
 
                 <div className={"fbg-black border-2 bg-black border-white w-full h-10 cursor-text"}>
 
                     {
 
-                        server !== ""
+                        error ?
 
-                            ?
-
-                                <p className={"minecraft text-2xl"}>{ server }.mcauth.net</p>
+                            <p className={"minecraft text-2xl"}>{ server }</p>
 
                             :
 
-                            <div className={"flex flex-row justify-center items-center h-10"}>
+                            (
 
-                                <img
-                                    src={"/assets/loading.gif"}
-                                    alt={"Loading animation"}
-                                    width={"75px"}
-                                    height={"40px"}
-                                    className={"select-none mb-4"}
-                                />
+                            server !== ""
 
-                            </div>
+                                ?
+
+                                    <p className={"minecraft text-2xl"}>{ server }.mcauth.net</p>
+
+                                :
+
+                                    <div className={"flex flex-row justify-center items-center h-10"}>
+
+                                        <img
+                                            src={"/assets/loading.gif"}
+                                            alt={"Loading animation"}
+                                            width={"75px"}
+                                            height={"40px"}
+                                            className={"select-none mb-4 cursor-default"}
+                                        />
+
+                                    </div>
+
+                            )
 
                     }
 
