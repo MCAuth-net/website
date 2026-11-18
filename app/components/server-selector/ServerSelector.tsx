@@ -1,51 +1,63 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { setInterval } from "node:timers";
+import {useEffect, useState} from "react";
 
 export default function ServerSelector() {
 
-    const [uuid, setUuid] = useState("");
+    const [profile, setProfile] = useState<{uuid: string, name: string}>();
     const [server, setServer] = useState("");
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        let interval: ReturnType<typeof setInterval> | undefined;
+        const controller = new AbortController()
 
-        void fetch("https://api.mcauth.net/v1/token")
+        void fetch("https://api.mcauth.net/v1/token", {
+            signal: controller.signal
+        })
             .then(async (res) => {
 
-                const token = await res.text();
-                setServer(token);
+                if (res.status === 200) {
 
-                setInterval(async () => {
+                    const token = await res.text();
+                    setServer(token);
 
-                    const response = await fetch("https://api.mcauth.net/v1/token/check", {
-                        method: "POST",
-                        headers: {
-                            contentType: "application/json",
-                        },
-                        body: JSON.stringify({ token }),
-                    });
+                    interval = setInterval(async () => {
 
-                    switch (response.status) {
+                        const response = await fetch("https://api.mcauth.net/v1/token/check", {
+                            signal: controller.signal,
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({token}),
+                        });
 
-                        case 200:
+                        if (response.status === 200) {
 
-                            setUuid(await response.json());
+                            clearInterval(interval);
+                            setProfile(await response.json());
 
-                            return;
+                        }
 
-                    }
+                    }, 1000);
 
-                }, 2000);
+                } else throw new Error();
 
             })
             .catch((e) => {
+
+                if (e.name === "AbortError") return;
 
                 setServer("Couldn't get server");
                 setError(true);
 
             });
+
+        return () => {
+            controller.abort()
+            if (interval) clearInterval(interval);
+        };
 
     }, []);
 
@@ -101,7 +113,7 @@ export default function ServerSelector() {
 
                 {
 
-                    uuid
+                    profile
 
                         ?
 
@@ -112,12 +124,12 @@ export default function ServerSelector() {
                                     <div className={"online mr-2"}></div>
 
                                     <img
-                                        src={`https://nmsr.nickac.dev/face/${uuid}?w=32`}
+                                        src={`https://nmsr.jgj52.dev/face/${profile.uuid}?w=32`}
                                         alt={"Player head"}
                                         className={"select-none"}
                                     />
 
-                                    <p className={"text-xl"}>Polokalap</p>
+                                    <p className={"text-xl"}>{ profile.name }</p>
 
                                 </div>
 
