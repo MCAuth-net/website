@@ -4,7 +4,8 @@ import { useState } from "react";
 
 export default function ServerSelector() {
 
-    const [uuid, setUuid] = useState("5248a0e1-a069-45e9-9885-215d88334438");
+    const [uuid, setUuid] = useState("");
+    const [server, setServer] = useState("");
 
     return (
 
@@ -14,9 +15,31 @@ export default function ServerSelector() {
 
                 <p className={"minecraft text"}>Connect to server</p>
 
-                <div className={"fbg-black border-2 bg-black border-white w-full h-10"}>
+                <div className={"fbg-black border-2 bg-black border-white w-full h-10 cursor-text"}>
 
-                    <p className={"minecraft text-2xl"}>book-craft.mcauth.net</p>
+                    {
+
+                        server !== ""
+
+                            ?
+
+                                <p className={"minecraft text-2xl"}>{ server }.mcauth.net</p>
+
+                            :
+
+                            <div className={"flex flex-row justify-center items-center h-10"}>
+
+                                <img
+                                    src={"/assets/loading.gif"}
+                                    alt={"Loading animation"}
+                                    width={"75px"}
+                                    height={"40px"}
+                                    className={"select-none mb-4"}
+                                />
+
+                            </div>
+
+                    }
 
                 </div>
 
