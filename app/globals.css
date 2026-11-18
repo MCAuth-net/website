@@ -73,3 +73,26 @@ body {
   font-family: "Minecraft Ten", sans-serif;
 
 }
+
+.input {
+
+  background: #1a1a1a;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  outline: none;
+  padding: 3px 6px 3px 6px;
+  transition-duration: 200ms;
+
+}
+
+.input:hover {
+
+  border: 1px solid #2e2e2e;
+
+}
+
+.input:focus {
+
+  border: 1px solid #3e3e3e;
+
+}

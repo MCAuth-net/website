@@ -10,15 +10,10 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/register",
-        destination: "/account/register",
+        source: "/auth",
+        destination: "/account/auth",
         permanent: false,
-      },
-      {
-        source: "/login",
-        destination: "/account/login",
-        permanent: false,
-      },
+      }
     ];
   },
   turbopack: {

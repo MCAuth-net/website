@@ -1,0 +1,47 @@
+.server-section {
+
+    border: 1px solid #2e2e2e;
+    border-radius: 15px;
+    background-image: url("/assets/dirt.png");
+    background-size: 64px;
+    height: 150px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 5px 25px #00000055;
+
+    .text {
+
+        text-shadow: 3px 3px 0 #00000055;
+        font-size: 30px;
+
+    }
+
+}
+
+.online {
+
+    width: 10px;
+    height: 10px;
+    background-color: #47c127;
+    border-radius: 100%;
+    animation: online-pulse 2s infinite ease-in-out alternate;
+
+}
+
+@keyframes online-pulse {
+
+    from {
+
+        box-shadow: 0 0 0 5px #257a12;
+
+    }
+
+    to {
+
+        box-shadow: 0 0 0 5px #257a1200;
+
+    }
+    
+}

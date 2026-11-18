@@ -20,7 +20,7 @@ export default function Home() {
                   <div className={"relative flex flex-row gap-2 items-center md:self-start self-center"}>
 
                       <Link
-                          href={"/register"}
+                          href={"/auth"}
                           className={"relative bg-[#3c8527dd] hover:bg-[#3c8527] bottom-0 hover:bottom-0.5 pl-5 pr-5 pt-3 pb-3 !text-white rounded-sm"}
                       >
 
@@ -47,7 +47,7 @@ export default function Home() {
 
                           <div className={"flex flex-row gap-1"}>
 
-                              <p>Integrate MCAuth in your website, discord bot, literally whatever you&#39;d like, thanks to our SDK</p>
+                              <p>Integrate MCAuth in your website, discord bot, literally whatever you&#39;d like, thanks to our SDKs</p>
 
                           </div>
 
