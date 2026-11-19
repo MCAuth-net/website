@@ -11,17 +11,18 @@ export default function NavBar() {
 
     useEffect(() => {
 
-        if (open) {
+        const mq = window.matchMedia("(max-width: 767px)");
 
-            document.body.style.overflow = "hidden";
+        const apply = () => {
+            document.body.style.overflow = open && mq.matches ? "hidden" : "";
+        };
 
-        } else {
+        apply();
 
-            document.body.style.overflow = "";
-
-        }
+        mq.addEventListener("change", apply);
 
         return () => {
+            mq.removeEventListener("change", apply);
             document.body.style.overflow = "";
         };
 

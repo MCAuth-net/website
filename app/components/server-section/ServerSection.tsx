@@ -206,7 +206,7 @@ export default function ServerSection() {
 
                                     </div>
 
-                                    <button
+                                    { /* <button
                                         type={"submit"}
                                         disabled={pending}
                                         className={"flex flex-row bg-[#3c8527dd] hover:bg-[#3c8527] p-2 items-center rounded-md cursor-pointer select-none duration-200 disabled:opacity-60 disabled:cursor-not-allowed"}
@@ -214,7 +214,7 @@ export default function ServerSection() {
 
                                         <p>Let&#39;s go!</p>
 
-                                    </button>
+                                    </button> */ }
 
                                 </>
 
