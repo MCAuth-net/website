@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ServerResponse } from "@/app/lib/types";
+import {redirect} from "next/navigation";
 
 export default function ServerSection() {
 
@@ -46,6 +47,12 @@ export default function ServerSection() {
 
                             clearInterval(interval);
                             setProfile(await response.json());
+
+                            setTimeout(() => {
+
+                                redirect("/dashboard?onboarding=true");
+
+                            }, 2000);
 
                         }
 
@@ -96,7 +103,7 @@ export default function ServerSection() {
 
                     <div className={`server-section ${profile ? "opacity-0" : "opacity-100"} duration-300`}>
 
-                        { error ? null : <p className={"minecraft text"}>Connect to server</p> }
+                        <p className={"minecraft text"}>Connect to server</p>
 
                         <div className={"fbg-black border-2 bg-black border-white w-full h-10 cursor-text"}>
 
