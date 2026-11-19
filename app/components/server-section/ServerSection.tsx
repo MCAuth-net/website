@@ -33,6 +33,7 @@ export default function ServerSection() {
                     interval = setInterval(async () => {
 
                         const response = await fetch("https://api.mcauth.net/v1/token/check", {
+                            credentials: "include",
                             signal: controller.signal,
                             method: "POST",
                             headers: {
