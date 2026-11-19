@@ -1,11 +1,7 @@
 "use client"
 
-import { useActionState, useEffect, useState } from "react";
-import { loginViaMc } from "@/app/account/auth/action";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { ServerResponse } from "@/app/lib/types";
-
-const initialState: ServerResponse = { success: true };
 
 export default function ServerSection() {
 
@@ -15,18 +11,6 @@ export default function ServerSection() {
     const [error, setError] = useState(false);
     const [hover, setHover] = useState(false);
     const [copyMessage, setCopyMessage] = useState("Copy address");
-
-    const [state, formAction, pending] = useActionState(loginViaMc, initialState);
-
-    useEffect(() => {
-
-        if (state && !state.success) {
-
-            toast.error(state.message ?? "Login failed");
-
-        }
-
-    }, [state]);
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval> | undefined;
@@ -102,132 +86,98 @@ export default function ServerSection() {
 
         <>
 
-            <form action={formAction} className={"flex flex-col gap-3 w-full items-center justify-center"}>
+            <form className={"flex flex-col gap-3 w-full items-center justify-center"}>
 
-                <div className={"server-section w-full justify-center"}>
+                <div className={`relative w-full h-43.75 justify-center`}>
 
                     <input type={"text"} name={"token"} value={token} hidden readOnly />
                     <input type={"text"} name={"uuid"} value={profile && profile.uuid} hidden readOnly />
 
-                    { error ? null : <p className={"minecraft text"}>Connect to server</p> }
+                    <div className={`server-section ${profile ? "opacity-0" : "opacity-100"} duration-300`}>
 
-                    <div className={"fbg-black border-2 bg-black border-white w-full h-10 cursor-text"}>
+                        { error ? null : <p className={"minecraft text"}>Connect to server</p> }
 
-                        {
+                        <div className={"fbg-black border-2 bg-black border-white w-full h-10 cursor-text"}>
 
-                            error ?
+                            {
 
-                                <p className={"minecraft text-2xl"}>{ mnemonic }</p>
+                                error ?
 
-                                :
-
-                                (
-
-                                mnemonic !== ""
-
-                                    ?
-
-                                        <p className={"minecraft text-2xl"}>{ mnemonic }.mcauth.net</p>
+                                    <p className={"minecraft text-2xl"}>{ mnemonic }</p>
 
                                     :
 
-                                        <div className={"flex flex-row justify-center items-center h-10"}>
+                                    (
 
-                                            <img
-                                                src={"/assets/loading.gif"}
-                                                alt={"Loading animation"}
-                                                width={"75px"}
-                                                height={"40px"}
-                                                className={"select-none mb-4 cursor-default"}
-                                            />
+                                    mnemonic !== ""
 
-                                        </div>
+                                        ?
 
-                                )
+                                            <p className={"minecraft text-2xl"}>{ mnemonic }.mcauth.net</p>
 
-                        }
+                                        :
+
+                                            <div className={"flex flex-row justify-center items-center h-10"}>
+
+                                                <img
+                                                    src={"/assets/loading.gif"}
+                                                    alt={"Loading animation"}
+                                                    width={"75px"}
+                                                    height={"40px"}
+                                                    className={"select-none mb-4 cursor-default"}
+                                                />
+
+                                            </div>
+
+                                    )
+
+                            }
+
+                        </div>
+
+                        <div
+                            className={"relative w-full cursor-pointer select-none mt-2"}
+                            onMouseEnter={() => setHover(true)}
+                            onMouseLeave={() => setHover(false)}
+                            onClick={handleCopy}
+                        >
+
+                            {
+
+                                hover ?
+
+                                    <img
+                                        src={"/assets/button_highlighted.png"}
+                                        alt={"Button image"}
+                                        width={"100%"}
+                                    />
+
+                                        :
+
+                                    <img
+                                        src={"/assets/button.png"}
+                                        alt={"Button image"}
+                                        width={"100%"}
+                                    />
+
+                            }
+
+                            <p className={"absolute bottom-[50%] right-[50%] translate-[50%] text minecraft !text-xl"}>{ copyMessage }</p>
+
+                        </div>
 
                     </div>
 
                     <div
-                        className={"relative w-full cursor-pointer select-none mt-2"}
-                        onMouseEnter={() => setHover(true)}
-                        onMouseLeave={() => setHover(false)}
-                        onClick={handleCopy}
+                        className={`absolute bottom-[50%] right-[50%] translate-[50%] flex flex-col w-full h-43.75 justify-center items-center ${profile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} duration-300`}
                     >
 
-                        {
+                        insert gif here
 
-                            hover ?
-
-                                <img
-                                    src={"/assets/button_highlighted.png"}
-                                    alt={"Button image"}
-                                    width={"100%"}
-                                />
-
-                                    :
-
-                                <img
-                                    src={"/assets/button.png"}
-                                    alt={"Button image"}
-                                    width={"100%"}
-                                />
-
-                        }
-
-                        <p className={"absolute bottom-[50%] right-[50%] translate-[50%] text minecraft !text-xl"}>{ copyMessage }</p>
+                        <h3 className={"text-2xl"}>Successfully logged in!</h3>
+                        <p>You will be redirected soon!</p>
 
                     </div>
-
-                </div>
-
-                <div className={"flex flex-row gap-3"}>
-
-                    {
-
-                        profile
-
-                            ?
-
-                                <>
-
-                                    <div className={"flex flex-row gap-2 items-center justify-center border border-[#2e2e2e] w-70 font-mono shadow-sm rounded-md pl-2 pr-2 pt-1 pb-1"}>
-
-                                        <div className={"online mr-2"}></div>
-
-                                        <img
-                                            src={`https://nmsr.jgj52.dev/face/${profile.uuid}?w=32`}
-                                            alt={"Player head"}
-                                            className={"select-none"}
-                                        />
-
-                                        <p className={"text-xl"}>{ profile.name }</p>
-
-                                    </div>
-
-                                    { /* <button
-                                        type={"submit"}
-                                        disabled={pending}
-                                        className={"flex flex-row bg-[#3c8527dd] hover:bg-[#3c8527] p-2 items-center rounded-md cursor-pointer select-none duration-200 disabled:opacity-60 disabled:cursor-not-allowed"}
-                                    >
-
-                                        <p>Let&#39;s go!</p>
-
-                                    </button> */ }
-
-                                </>
-
-                            :
-
-                                <div className={"flex flex-row justify-center border border-[#2e2e2e] w-70 font-mono shadow-sm rounded-md pl-2 pr-2 pt-1 pb-1"}>
-
-                                    <p>Waiting for player...</p>
-
-                                </div>
-
-                    }
-
                 </div>
 
             </form>
