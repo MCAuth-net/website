@@ -14,8 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 const googleSans = Google_Sans({
-  variable: "--font-google-sans",
-  subsets: ["latin"],
+    variable: "--font-google-sans",
+    subsets: ["latin"],
+    adjustFontFallback: false,
+    fallback: ["Helvetica", "Arial", "sans-serif"],
 });
 
 const instrumentSans = Instrument_Sans({

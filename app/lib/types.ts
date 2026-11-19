@@ -8,7 +8,6 @@ export type Account = {
     email: string | null;
     uuid: string | null;
     session: string;
-    release: number;
 }
 
 export type ServerResponse = {

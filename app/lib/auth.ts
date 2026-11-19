@@ -2,6 +2,9 @@ import "server-only";
 import argon2, { HashOptions } from "argon2";
 import { Account, ServerResponse } from "@/app/lib/types";
 import { createHash } from "crypto";
+import {cache} from "react";
+import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 
 const options: HashOptions = {
     type: argon2.argon2id,
@@ -19,6 +22,101 @@ async function hash(tohash: string) {
 function hashSha(token: string) {
 
     return createHash("sha256").update(token).digest("hex");
+
+}
+
+export const requireUser = cache(async () => {
+
+    const token = (await cookies()).get("session")?.value;
+    const user = token ? await getUser(token) : null;
+
+    console.log(user);
+
+    if (!user || "success" in user) redirect("/auth");
+
+    return user;
+
+});
+
+export const getIfUser = cache(async () => {
+
+    const token = (await cookies()).get("session")?.value;
+    const user = token ? await getUser(token) : null;
+
+    if (!user || "success" in user) return null;
+
+    return user;
+
+});
+
+export async function getUser(token: string): Promise<ServerResponse | Account> {
+
+    const res = await fetch(`https://api.mcauth.net/v1/me`, {
+        method: "GET",
+        headers: {
+            accept: "application/json",
+            cookie: `session=${token}`,
+        },
+        cache: "no-store",
+    });
+
+    if (res.status === 429) {
+
+        return {
+            success: false,
+            message: `You are being rate limited!`,
+        }
+
+    }
+
+    if (!res.ok) {
+
+        return {
+            success: false,
+            message: "Not authenticated",
+        }
+
+    }
+
+    try {
+
+        const response = await res.json();
+
+        return {
+            id: response.id,
+            email: response.email,
+            uuid: response.uuids[0],
+            session: token,
+        }
+
+    } catch (error) {
+
+        return {
+            success: false,
+            message: "Not authenticated",
+        }
+
+    }
+
+    try {
+
+        const response = await res.json();
+
+        return {
+            id: response.id,
+            email: response.email,
+            uuid: response.uuid[1],
+            session: token,
+        }
+
+    } catch (error) {
+
+        return {
+            success: false,
+            message: "Not authenticated",
+        }
+
+    }
 
 }
 
