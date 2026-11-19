@@ -30,8 +30,6 @@ export const requireUser = cache(async () => {
     const token = (await cookies()).get("session")?.value;
     const user = token ? await getUser(token) : null;
 
-    console.log(user);
-
     if (!user || "success" in user) redirect("/auth");
 
     return user;
