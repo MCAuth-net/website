@@ -173,12 +173,18 @@ export default function ServerSection() {
                         className={`absolute bottom-[50%] right-[50%] translate-[50%] flex flex-col w-full h-43.75 justify-center items-center ${profile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} duration-300`}
                     >
 
-                        insert gif here
+                        <img
+                            src={"/assets/checkmark.png"}
+                            alt={"Checkmark"}
+                            width={"125px"}
+                            className={"select-none mb-3"}
+                        />
 
                         <h3 className={"text-2xl"}>Successfully logged in!</h3>
                         <p>You will be redirected soon!</p>
 
                     </div>
+                    
                 </div>
 
             </form>
