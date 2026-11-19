@@ -2,9 +2,9 @@
 
 import NavBar from "@/app/components/navbar/NavBar";
 import Loading from "@/app/components/loading/Loading";
-import ServerSelector from "@/app/components/server-selector/ServerSelector";
 import Image from "next/image";
 import { useState } from "react";
+import ServerSection from "@/app/components/server-section/ServerSection";
 import "./auth.css";
 
 export default function Page() {
@@ -36,7 +36,7 @@ export default function Page() {
 
                                 ?
 
-                                    <ServerSelector />
+                                    <ServerSection />
 
                                 :
 

@@ -9,3 +9,8 @@ export type Account = {
     uuid: string | null;
     release: number;
 }
+
+export type ServerResponse = {
+    success: boolean;
+    message?: string;
+}

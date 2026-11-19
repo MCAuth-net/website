@@ -1,9 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { loginViaMc } from "@/app/account/auth/action";
+import toast from "react-hot-toast";
+import { ServerResponse } from "@/app/lib/types";
 
-export default function ServerSelector() {
+const initialState: ServerResponse = { success: true };
+
+export default function ServerSection() {
 
     const [profile, setProfile] = useState<{uuid: string, name: string}>();
     const [token, setToken] = useState("");
@@ -11,6 +15,18 @@ export default function ServerSelector() {
     const [error, setError] = useState(false);
     const [hover, setHover] = useState(false);
     const [copyMessage, setCopyMessage] = useState("Copy address");
+
+    const [state, formAction, pending] = useActionState(loginViaMc, initialState);
+
+    useEffect(() => {
+
+        if (state && !state.success) {
+
+            toast.error(state.message ?? "Login failed");
+
+        }
+
+    }, [state]);
 
     useEffect(() => {
         let interval: ReturnType<typeof setInterval> | undefined;
@@ -86,11 +102,12 @@ export default function ServerSelector() {
 
         <>
 
-            <form action={loginViaMc} className={"flex flex-col gap-3 w-full items-center justify-center"}>
+            <form action={formAction} className={"flex flex-col gap-3 w-full items-center justify-center"}>
 
                 <div className={"server-section w-full justify-center"}>
 
                     <input type={"text"} name={"token"} value={token} hidden readOnly />
+                    <input type={"text"} name={"uuid"} value={profile && profile.uuid} hidden readOnly />
 
                     { error ? null : <p className={"minecraft text"}>Connect to server</p> }
 
@@ -189,7 +206,11 @@ export default function ServerSelector() {
 
                                     </div>
 
-                                    <button type={"submit"} className={"flex flex-row bg-[#3c8527dd] hover:bg-[#3c8527] p-2 items-center rounded-md cursor-pointer select-none duration-200"}>
+                                    <button
+                                        type={"submit"}
+                                        disabled={pending}
+                                        className={"flex flex-row bg-[#3c8527dd] hover:bg-[#3c8527] p-2 items-center rounded-md cursor-pointer select-none duration-200 disabled:opacity-60 disabled:cursor-not-allowed"}
+                                    >
 
                                         <p>Let&#39;s go!</p>
 

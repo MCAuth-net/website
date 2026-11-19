@@ -1,7 +1,7 @@
 import "server-only";
 import argon2, { HashOptions } from "argon2";
 import { pool } from "@/app/lib/database";
-import { Account, User } from "@/app/lib/types";
+import {Account, ServerResponse, User} from "@/app/lib/types";
 import { createHash } from "crypto";
 
 const options: HashOptions = {
@@ -23,22 +23,37 @@ function hashSha(token: string) {
 
 }
 
-export async function verifyToken(value: string): Promise<User | null> {
+export async function verifyToken(token: string, uuid: string): Promise<ServerResponse> {
 
-    const result = await pool
-        .query("SELECT uuid, token FROM logins WHERE token = $1",
-            [value]
-        );
+    const res = await fetch(`https://api.mcauth.net/v1/vefify-token`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ token, uuid }),
+    });
 
-    if (result.rows.length === 0) {
+    if (!res.ok) {
 
-        return null;
+        return {
+            success: false,
+            message: "Failed to reach backend server",
+        }
 
     }
 
-    const { uuid, token } = result.rows[0];
+    const response = await res.json();
 
-    return { uuid, token };
+    if (!response.success) {
+
+        return {
+            success: false,
+            message: "Token verification failed",
+        }
+
+    }
+
+    return {
+        success: true,
+    }
 
 }
 
