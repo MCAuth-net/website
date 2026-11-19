@@ -1,6 +1,6 @@
 "use server"
 
-import { verifyToken } from "@/app/lib/auth";
+import { createUser, verifyToken } from "@/app/lib/auth";
 import { ServerResponse } from "@/app/lib/types";
 
 export async function loginViaMc(_prev: ServerResponse, formData: FormData): Promise<ServerResponse> {
@@ -8,11 +8,19 @@ export async function loginViaMc(_prev: ServerResponse, formData: FormData): Pro
     const token = String(formData.get("token")) || "";
     const uuid = String(formData.get("uuid")) || "";
 
-    const result = await verifyToken(token, uuid);
+    const verification = await verifyToken(token, uuid);
 
-    if (!result.success) {
+    if (!verification.success) {
 
-        return result;
+        return verification;
+
+    }
+
+    const user = await createUser(null, null, uuid);
+
+    if ("success" in user && !verification.success) {
+
+        return verification;
 
     }
 

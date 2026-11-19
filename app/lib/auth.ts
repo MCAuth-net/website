@@ -1,7 +1,6 @@
 import "server-only";
 import argon2, { HashOptions } from "argon2";
-import { pool } from "@/app/lib/database";
-import {Account, ServerResponse, User} from "@/app/lib/types";
+import { Account, ServerResponse } from "@/app/lib/types";
 import { createHash } from "crypto";
 
 const options: HashOptions = {
@@ -25,11 +24,20 @@ function hashSha(token: string) {
 
 export async function verifyToken(token: string, uuid: string): Promise<ServerResponse> {
 
-    const res = await fetch(`https://api.mcauth.net/v1/vefify-token`, {
+    const res = await fetch(`https://api.mcauth.net/v1/verify-token`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ token, uuid }),
     });
+
+    if (res.status === 429) {
+
+        return {
+            success: false,
+            message: `You are being rate limited!`,
+        }
+
+    }
 
     if (!res.ok) {
 
@@ -46,7 +54,7 @@ export async function verifyToken(token: string, uuid: string): Promise<ServerRe
 
         return {
             success: false,
-            message: "Token verification failed",
+            message: response.message,
         }
 
     }
@@ -57,43 +65,99 @@ export async function verifyToken(token: string, uuid: string): Promise<ServerRe
 
 }
 
-export async function createUser(user_email: string | null, password: string | null, user_uuid: string | null): Promise<Account | null> { // Add error codes tomorrow
+export async function createUser(user_email: string | null, password: string | null, user_uuid: string | null): Promise<Account | ServerResponse> {
 
-    if (!user_email && !user_uuid) {
+    // General checks
+    if (!user_uuid && !user_email) {
 
-        return null;
-
-    }
-
-    if (!password) {
-
-        return null;
+        return {
+            success: false,
+            message: "Not enough information provided",
+        }
 
     }
 
-    const userCheck = await pool
-        .query("SELECT 1 FROM accounts WHERE uuid = $1 OR email = $2 AND email NOT NULL AND uuid NOT NULL",
-            [user_uuid, user_email]
-        );
+    if (password && password.length < 8) {
 
-    if (userCheck.rows.length !== 0) {
-
-        return null; // User exists
+        return {
+            success: false,
+            message: "Password is too short",
+        }
 
     }
 
-    const createdUser = await pool
-        .query("INSERT INTO accounts (uuid, email, password, registered) VALUES ($1, $2, $3, unixepoch()) RETURNING *",
-            [user_uuid, user_email, hash(password)]
-        );
+    // User check
+    const userCheck = await fetch(`https://api.mcauth.net/v1/check-user`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ user_uuid }),
+    });
 
-    const { id, uuid, email, release } = createdUser.rows[0];
+    if (userCheck.status === 429) {
 
-    return {
-        id,
-        uuid,
-        email,
-        release,
+        return {
+            success: false,
+            message: `You are being rate limited!`,
+        }
+
     }
+
+    if (!userCheck.ok) {
+
+        return {
+            success: false,
+            message: "Failed to reach backend server",
+        }
+
+    }
+
+    const userResponse = await userCheck.json();
+
+    if (!userResponse.success) {
+
+        return {
+            success: false,
+            message: userResponse.message,
+        }
+
+    }
+
+    // Registration
+    const registration = await fetch(`https://api.mcauth.net/v1/register`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ user_uuid, user_email, password }),
+    });
+
+    if (registration.status === 429) {
+
+        return {
+            success: false,
+            message: `You are being rate limited!`,
+        }
+
+    }
+
+    if (!registration.ok) {
+
+        return {
+            success: false,
+            message: "Failed to reach backend server",
+        }
+
+    }
+
+    const registerResponse = await registration.json();
+
+    if (!registerResponse.success) {
+
+        return {
+            success: false,
+            message: registerResponse.message,
+        }
+
+    }
+
+    return registerResponse as Account;
 
 }
