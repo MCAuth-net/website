@@ -1,6 +1,27 @@
 import "server-only";
+import argon2, { HashOptions } from "argon2";
 import { pool } from "@/app/lib/database";
 import { Account, User } from "@/app/lib/types";
+import { createHash } from "crypto";
+
+const options: HashOptions = {
+    type: argon2.argon2id,
+    memoryCost: 65536,
+    timeCost: 4,
+    parallelism: 2,
+};
+
+async function hash(tohash: string) {
+
+    return argon2.hash(tohash, options);
+
+}
+
+function hashSha(token: string) {
+
+    return createHash("sha256").update(token).digest("hex");
+
+}
 
 export async function verifyToken(value: string): Promise<User | null> {
 
@@ -48,7 +69,7 @@ export async function createUser(user_email: string | null, password: string | n
 
     const createdUser = await pool
         .query("INSERT INTO accounts (uuid, email, password, registered) VALUES ($1, $2, $3, unixepoch()) RETURNING *",
-            [user_uuid, user_email, password] // HASH THE PASSWORD
+            [user_uuid, user_email, hash(password)]
         );
 
     const { id, uuid, email, release } = createdUser.rows[0];
