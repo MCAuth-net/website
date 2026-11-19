@@ -41,7 +41,7 @@ export default function Page() {
                                 :
 
                                 <div
-                                    className={"flex flex-row gap-2 justify-center items-center bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer minecraft-ten text-[23px] duration-200"}
+                                    className={"flex flex-row gap-2 justify-center items-center button-primary pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer minecraft-ten text-[23px] duration-200"}
                                     onClick={() => { setMc(true); }}
                                 >
 
@@ -102,7 +102,7 @@ export default function Page() {
                             </div>
 
                             <button
-                                className={"flex flex-row gap-2 justify-center items-center mt-2 bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer text-[23px] duration-200"}
+                                className={"flex flex-row gap-2 justify-center items-center mt-2 button-primary pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer text-[23px] duration-200"}
                             >
 
                                 Log in
