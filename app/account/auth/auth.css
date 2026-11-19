@@ -4,16 +4,16 @@
     border-radius: 15px;
     background-image: url("/assets/dirt.png");
     background-size: 64px;
-    height: 150px;
+    height: 175px;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 10px;
     box-shadow: 0 5px 25px #00000055;
 
     .text {
 
-        text-shadow: 3px 3px 0 #00000055;
+        text-shadow: 2px 2px 0 #00000055;
         font-size: 30px;
 
     }
