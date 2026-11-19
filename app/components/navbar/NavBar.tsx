@@ -116,7 +116,7 @@ export default function NavBar() {
 
                                     </div>
 
-                                    <div className={"absolute bottom-10 flex flex-row gap-2 w-screen z-2 p-2 justify-between"}>
+                                    <div className={"absolute bottom-25 flex flex-row gap-2 w-screen z-2 p-2 justify-between"}>
 
                                         <Link className={"flex flex-row items-center justify-center text-xl bg-[#3c8527dd] hover:bg-[#3c8527] !text-white rounded-md w-full h-12"} href={"/register"}>Get Started</Link>
                                         <Link className={"flex flex-row items-center justify-center text-xl bg-[#333333aa] hover:bg-[#333333cc] !text-white rounded-md w-full h-12"} href={"/login"}>Sign in</Link>
