@@ -39,28 +39,30 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${googleSans.variable} ${instrumentSans.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
-      <Toaster
-          position={"bottom-right"}
-          toastOptions={{
-            duration: 4000,
-            className: "border border-[#2e2e2e]",
-            style: {
-              background: "#1a1a1a",
-              color: "#fff",
-              borderRadius: "10px",
-              padding: "12px 16px",
-            },
-            success: {
-              duration: 3000,
-              iconTheme: { primary: "#22c55e", secondary: "#fff" },
-            },
-            error: {
-              duration: 6000,
-              iconTheme: { primary: "#dc2626", secondary: "#fff" },
-            },
-          }}
-      />
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Toaster
+            position={"bottom-right"}
+            toastOptions={{
+              duration: 4000,
+              className: "border border-[#2e2e2e]",
+              style: {
+                background: "#1a1a1a",
+                color: "#fff",
+                borderRadius: "10px",
+                padding: "12px 16px",
+              },
+              success: {
+                duration: 3000,
+                iconTheme: { primary: "#22c55e", secondary: "#fff" },
+              },
+              error: {
+                duration: 6000,
+                iconTheme: { primary: "#dc2626", secondary: "#fff" },
+              },
+            }}
+        />
+      </body>
     </html>
   );
 }
