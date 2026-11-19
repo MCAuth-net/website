@@ -39,11 +39,11 @@ export default function Home() {
 
                   </div>
 
-                    <div className={"flex md:flex-col flex-col gap-4 mt-40"}>
+                    <div className={"flex md:flex-col flex-col gap-4 xl:items-start items-center mt-40"}>
 
                         <h2 className={"text-3xl"}>How it works</h2>
 
-                        <div className={"flex md:flex-row flex-col gap-10 justify-between items-center"}>
+                        <div className={"flex xl:flex-row flex-col gap-10 justify-between items-center"}>
 
                         <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
 
@@ -60,7 +60,7 @@ export default function Home() {
                         <img
                             src={"/assets/arrow.png"}
                             alt={"Arrow"}
-                            className={"w-[75px] h-[64px] md:rotate-0 rotate-90"}
+                            className={"w-[75px] h-[64px] xl:rotate-0 rotate-90"}
                         />
 
                         <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
@@ -78,7 +78,7 @@ export default function Home() {
                         <img
                             src={"/assets/arrow.png"}
                             alt={"Arrow"}
-                            className={"w-[75px] h-[64px] md:rotate-0 rotate-90"}
+                            className={"w-[75px] h-[64px] xl:rotate-0 rotate-90"}
                         />
 
                         <div className={"flex flex-col gap-1 w-100 h-30 items-center border border-[#2e2e2e] p-5 rounded-xl shadow-xl"}>
