@@ -64,7 +64,7 @@ export default function NavBar() {
                         <div className={"hidden md:flex flex-row gap-5 items-center"}>
 
                             <Link className={"button-secondary"} href="/auth">Log in</Link>
-                            <Link className={"button-primary"} href="/auth">Get started</Link>
+                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/auth">Get started</Link>
 
                         </div>
 

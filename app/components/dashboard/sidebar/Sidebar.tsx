@@ -2,6 +2,7 @@
 
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Sidebar() {
 
@@ -11,9 +12,9 @@ export default function Sidebar() {
 
         <>
 
-            <div className={`fixed left-0 top-0 lg:flex hidden flex-col h-screen ${open ? "w-60" : "w-15"} border-r border-[#1a1a1a] duration-300`}>
+            <div className={`relative lg:flex hidden flex-col h-screen ${open ? "w-60" : "w-15"} border-r border-[#1a1a1a] duration-300 overflow-clip`}>
 
-                <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"} overflow-clip`}>
+                <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"}`}>
 
                     <a
                         href={"/"}
@@ -44,6 +45,35 @@ export default function Sidebar() {
                     >
 
                         <GoogleIcon icon={open ? "left_panel_open" : "left_panel_close"} className={"text-[#afafaf] select-none"} />
+
+                    </div>
+
+                </div>
+
+                <div className={"flex flex-col justify-between w-full mt-3"}>
+
+                    <div className={`flex flex-col gap-2 ${open ? "p-3" : "p-2.5"} pt-0 items-center justify-center`}>
+
+                        <Link
+                            href={"/dashboard/settings"}
+                            className={`relative flex flex-row gap-2 items-center text-[#afafaf] select-none w-full h-10 ${open ? "p-3" : "p-2.5"} pb-2 pt-2 rounded-md hover:bg-[#2e2e2e] duration-200`}
+                        >
+
+                            <GoogleIcon icon={"settings"} className={`absolute ${open ? "left-2" : "left-1.5"} duration-300`} />
+
+                            <p
+                                aria-hidden={!open}
+                                tabIndex={open ? 0 : -1}
+                                className={`absolute shrink-0 select-none transition-all duration-300 ease-out ${
+                                    open
+                                        ? "left-10 opacity-100"
+                                        : "-left-10 opacity-0 pointer-events-none"
+                                }`}
+                            >
+                                Settings
+                            </p>
+
+                        </Link>
 
                     </div>
 

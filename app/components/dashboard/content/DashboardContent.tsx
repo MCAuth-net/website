@@ -8,7 +8,7 @@ export default async function DashboardContent() {
 
         <>
 
-            <p>asd</p>
+
 
         </>
 
