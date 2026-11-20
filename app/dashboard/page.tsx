@@ -2,8 +2,12 @@ import Sidebar from "@/app/components/dashboard/sidebar/Sidebar";
 import DashboardContent from "@/app/components/dashboard/content/DashboardContent";
 import Topbar from "@/app/components/dashboard/topbar/Topbar";
 import { Suspense } from "react";
+import { requireUser } from "@/app/lib/auth";
+import Loading from "@/app/components/loading/Loading";
 
 export default async function Dashboard() {
+
+    const user = await requireUser();
 
     return (
 
@@ -11,7 +15,7 @@ export default async function Dashboard() {
 
             <div className={"flex flex-row"}>
 
-                <Sidebar />
+                <Sidebar user={user} />
 
                 <div className={`flex flex-col w-full`}>
 
@@ -26,6 +30,8 @@ export default async function Dashboard() {
                 </div>
 
             </div>
+
+            <Loading seconds={1} />
 
         </>
 

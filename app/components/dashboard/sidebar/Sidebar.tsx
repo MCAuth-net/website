@@ -2,10 +2,11 @@
 
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import { useState } from "react";
-import Link from "next/link";
 import SidebarNav from "@/app/components/dashboard/sidebar/elements/SidebarNav";
+import { Account } from "@/app/lib/types";
+import SidebarUser from "@/app/components/dashboard/sidebar/elements/SidebarUser";
 
-export default function Sidebar() {
+export default function Sidebar({ user }: { user: Account }) {
 
     const [open, setOpen] = useState(false);
 
@@ -13,7 +14,7 @@ export default function Sidebar() {
 
         <>
 
-            <div className={`relative lg:flex hidden flex-col h-screen ${open ? "w-60" : "w-15"} border-r border-[#1a1a1a] duration-300 overflow-clip`}>
+            <div className={`relative lg:flex hidden flex-col h-screen ${open ? "w-60" : "w-15"} border-r border-[#1a1a1a] transition-[width] duration-300 ease-out overflow-clip`}>
 
                 <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"}`}>
 
@@ -51,10 +52,20 @@ export default function Sidebar() {
 
                 </div>
 
-                <div className={"flex flex-col justify-between w-full mt-3"}>
+                <div className={"flex flex-col justify-between w-full h-full"}>
 
-                    <SidebarNav open={open} text={"Settings"} icon={"settings"} link={"/dashboard/settings"} />
-                    <SidebarNav open={open} text={"Docs"} icon={"docs"} link={"/docs"} />
+                    <div className={"flex flex-col w-full mt-3"}>
+
+                        <SidebarNav open={open} text={"Settings"} icon={"settings"} link={"/dashboard/settings"} />
+                        <SidebarNav open={open} text={"Docs"} icon={"docs"} link={"/docs"} />
+
+                    </div>
+
+                    <div className={"p-2.5"}>
+
+                        <SidebarUser open={open} user={user} />
+
+                    </div>
 
                 </div>
 
