@@ -6,6 +6,7 @@ import {redirect} from "next/navigation";
 
 export default function ServerSection() {
 
+    const [open, setOpen] = useState(false);
     const [profile, setProfile] = useState<{uuid: string, name: string}>();
     const [token, setToken] = useState("");
     const [mnemonic, setMnemonic] = useState("");
@@ -89,6 +90,34 @@ export default function ServerSection() {
         }, 2000);
 
     };
+
+    if (!open) {
+
+        return (
+
+            <>
+
+                <div
+                    className={"flex flex-row gap-2 justify-center items-center button-primary pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer minecraft-ten text-[23px] duration-200"}
+                    onClick={() => { setOpen(true); }}
+                >
+
+                    <img
+                        src={"/assets/mc-white.png"}
+                        alt={"Minecraft logo"}
+                        className={"w-7 h-7"}
+                        width={20}
+                        height={20}
+                    />
+
+                    Log in with Minecraft
+                </div>
+
+            </>
+
+        )
+
+    }
 
     return (
 

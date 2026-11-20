@@ -36,6 +36,17 @@ export const requireUser = cache(async () => {
 
 });
 
+export const requireNoUser = cache(async () => {
+
+    const token = (await cookies()).get("session")?.value;
+    const user = token ? await getUser(token) : null;
+
+    if (user && !("success" in user)) redirect("/dashboard");
+
+    return user;
+
+});
+
 export const getIfUser = cache(async () => {
 
     const token = (await cookies()).get("session")?.value;
@@ -49,7 +60,7 @@ export const getIfUser = cache(async () => {
 
 export async function getUser(token: string): Promise<ServerResponse | Account> {
 
-    const res = await fetch(`https://api.mcauth.net/v1/me`, {
+    const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
         headers: {
             accept: "application/json",

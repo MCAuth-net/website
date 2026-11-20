@@ -1,16 +1,15 @@
-"use client"
-
 import NavBar from "@/app/components/navbar/NavBar";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
-import { useState } from "react";
 import ServerSection from "@/app/components/server-section/ServerSection";
-import "./auth.css";
 import LoginForm from "@/app/account/auth/LoginForm";
+import { requireNoUser } from "@/app/lib/auth";
+import "./auth.css";
 
-export default function Page() {
+export default async function Page() {
 
-    const [mc, setMc] = useState(false);
+    const user = await requireNoUser();
+
 
     return (
 
@@ -31,33 +30,7 @@ export default function Page() {
 
                         </div>
 
-                        {
-
-                            mc
-
-                                ?
-
-                                    <ServerSection />
-
-                                :
-
-                                <div
-                                    className={"flex flex-row gap-2 justify-center items-center button-primary pr-3 pl-3 pt-1 pb-1 !text-white rounded-sm cursor-pointer minecraft-ten text-[23px] duration-200"}
-                                    onClick={() => { setMc(true); }}
-                                >
-
-                                    <Image
-                                        src={"/assets/mc-white.png"}
-                                        alt={"Minecraft logo"}
-                                        className={"w-7 h-7"}
-                                        width={20}
-                                        height={20}
-                                    />
-                                    
-                                    Log in with Minecraft
-                                </div>
-
-                        }
+                        <ServerSection />
 
                         <div className={"absolute -bottom-2.75 bg-[#111111] pl-3 pr-3 select-none"}>
 
