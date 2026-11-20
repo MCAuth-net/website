@@ -3,6 +3,7 @@
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import { useState } from "react";
 import Link from "next/link";
+import SidebarNav from "@/app/components/dashboard/sidebar/elements/SidebarNav";
 
 export default function Sidebar() {
 
@@ -52,30 +53,8 @@ export default function Sidebar() {
 
                 <div className={"flex flex-col justify-between w-full mt-3"}>
 
-                    <div className={`flex flex-col gap-2 ${open ? "p-3" : "p-2.5"} pt-0 items-center justify-center`}>
-
-                        <Link
-                            href={"/dashboard/settings"}
-                            className={`relative flex flex-row gap-2 items-center text-[#afafaf] select-none w-full h-10 ${open ? "p-3" : "p-2.5"} pb-2 pt-2 rounded-md hover:bg-[#2e2e2e] duration-200`}
-                        >
-
-                            <GoogleIcon icon={"settings"} className={`absolute ${open ? "left-2" : "left-1.5"} duration-300`} />
-
-                            <p
-                                aria-hidden={!open}
-                                tabIndex={open ? 0 : -1}
-                                className={`absolute shrink-0 select-none transition-all duration-300 ease-out ${
-                                    open
-                                        ? "left-10 opacity-100"
-                                        : "-left-10 opacity-0 pointer-events-none"
-                                }`}
-                            >
-                                Settings
-                            </p>
-
-                        </Link>
-
-                    </div>
+                    <SidebarNav open={open} text={"Settings"} icon={"settings"} link={"/dashboard/settings"} />
+                    <SidebarNav open={open} text={"Docs"} icon={"docs"} link={"/docs"} />
 
                 </div>
 

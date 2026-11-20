@@ -15,7 +15,7 @@ export default async function Dashboard() {
 
                 <div className={`flex flex-col w-full`}>
 
-                    <Topbar />
+                    <Topbar text={"Dashboard"} />
 
                     <Suspense>
 
