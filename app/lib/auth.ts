@@ -62,9 +62,9 @@ export async function getUser(token: string): Promise<ServerResponse | Account> 
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
+        credentials: "include",
         headers: {
             accept: "application/json",
-            cookie: `session=${token}`,
         },
         cache: "no-store",
     });
@@ -133,6 +133,7 @@ export async function verifyToken(token: string, uuid: string): Promise<ServerRe
 
     const res = await fetch(`https://api.mcauth.net/v1/verify-token`, {
         method: "POST",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ token, uuid }),
     });
@@ -196,6 +197,7 @@ export async function createUser(user_email: string | null, password: string | n
     // User check
     const userCheck = await fetch(`https://api.mcauth.net/v1/check-user`, {
         method: "POST",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ user_uuid }),
     });
@@ -232,6 +234,7 @@ export async function createUser(user_email: string | null, password: string | n
     // Registration
     const registration = await fetch(`https://api.mcauth.net/v1/register`, {
         method: "POST",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ user_uuid, user_email, password }),
     });

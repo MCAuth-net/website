@@ -21,11 +21,7 @@ export default async function Dashboard() {
 
                     <Topbar text={"Dashboard"} />
 
-                    <Suspense>
-
-                        <DashboardContent />
-
-                    </Suspense>
+                    <DashboardContent />
 
                 </div>
 
