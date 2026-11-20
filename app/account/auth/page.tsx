@@ -1,15 +1,12 @@
 import NavBar from "@/app/components/navbar/NavBar";
 import Loading from "@/app/components/loading/Loading";
-import Image from "next/image";
 import ServerSection from "@/app/components/server-section/ServerSection";
 import LoginForm from "@/app/account/auth/LoginForm";
-import { requireNoUser } from "@/app/lib/auth";
 import "./auth.css";
 
+export const instant = false;
+
 export default async function Page() {
-
-    const user = await requireNoUser();
-
 
     return (
 
