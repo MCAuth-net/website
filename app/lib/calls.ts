@@ -16,8 +16,6 @@ export const requireNoUser = async () => {
 
     if (user) location.href = "/dashboard";
 
-    return user;
-
 }
 
 export async function getUser() {

@@ -6,20 +6,16 @@ import ServerSection from "@/app/components/server-section/ServerSection";
 import LoginForm from "@/app/account/auth/LoginForm";
 import { useEffect, useState } from "react";
 import {Account} from "@/app/lib/types";
-import {requireUser} from "@/app/lib/calls";
+import {requireNoUser, requireUser} from "@/app/lib/calls";
 import "./auth.css";
 
 export default function Page() {
 
-    const [user, setUser] = useState<Account | null>(null);
-
     useEffect(() => {
 
-        void requireUser().then(setUser);
+        void requireNoUser();
 
     }, [])
-
-    if (!user) return null;
 
     return (
 
