@@ -5,7 +5,7 @@ import Link from "next/link";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
 import {Account} from "@/app/lib/types";
-import {requireUser} from "@/app/lib/calls";
+import {getIfUser, requireUser} from "@/app/lib/calls";
 
 export default function NavBar() {
 
@@ -14,7 +14,7 @@ export default function NavBar() {
 
     useEffect(() => {
 
-        void requireUser().then(setUser);
+        void getIfUser().then(setUser);
 
     }, [])
 
