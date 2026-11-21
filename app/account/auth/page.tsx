@@ -4,8 +4,6 @@ import ServerSection from "@/app/components/server-section/ServerSection";
 import LoginForm from "@/app/account/auth/LoginForm";
 import "./auth.css";
 
-export const instant = false;
-
 export default async function Page() {
 
     return (

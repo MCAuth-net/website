@@ -49,11 +49,11 @@ export default function ServerSection() {
                             clearInterval(interval);
                             setProfile(await response.json());
 
-                            setTimeout(() => {
+                            // setTimeout(() => {
 
-                                redirect("/dashboard?onboarding=true");
+                            //     redirect("/dashboard?onboarding=true");
 
-                            }, 2000);
+                            // }, 2000);
 
                         }
 

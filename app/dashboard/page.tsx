@@ -1,14 +1,24 @@
+"use client"
+
 import Sidebar from "@/app/components/dashboard/sidebar/Sidebar";
 import DashboardContent from "@/app/components/dashboard/content/DashboardContent";
 import Topbar from "@/app/components/dashboard/topbar/Topbar";
 import Loading from "@/app/components/loading/Loading";
-import { requireUser } from "@/app/lib/auth";
+import { useEffect, useState } from "react";
+import { Account } from "@/app/lib/types";
+import { getUser, requireUser } from "@/app/lib/calls";
 
-export const instant = false;
+export default function Dashboard() {
 
-export default async function Dashboard() {
+    const [user, setUser] = useState<Account | null>(null);
 
-    const user = await requireUser();
+    useEffect(() => {
+
+        void requireUser().then(setUser);
+
+    }, [])
+
+    if (!user) return null;
 
     return (
 
