@@ -53,9 +53,11 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
 
                     </div>
 
-                    <div className={`absolute flex flex-col justify-center select-none mt-1 ${open ? "left-13 opacity-100" : "-left-30 opacity-0 pointer-events-none"} duration-300`}>
+                    <div
+                        className={`absolute box-border flex flex-col justify-center select-none mt-1 whitespace-nowrap ${open ? "left-13 opacity-100" : "-left-20 opacity-0 pointer-events-none"} duration-300`}
+                    >
 
-                        <p className={"text-sm font-bold leading-4"}> {user.name} </p>
+                        <p className={"text-sm font-bold leading-4"}> { user.displayName || user.name} </p>
                         <p className={"text-[12px] text-white/70"}>Click for more options</p>
 
                     </div>
@@ -63,9 +65,19 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                 </div>
 
                 <div
-                    className={`absolute bottom-14 right-[50%] translate-x-[50%] flex flex-col gap-1 w-full bg-[#1a1a1a] border border-[#2e2e2e66] rounded-md shadow-md p-1 duration-100 ${submenu && open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"}`}
+                    className={`absolute bottom-14 right-[50%] translate-x-[50%] flex flex-col gap-1.5 w-full bg-[#1a1a1a] border border-[#2e2e2e66] rounded-md shadow-md p-1 duration-100 ${submenu && open ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"}`}
                     ref={submenuRef}
                 >
+
+                    <div
+                        className={"flex flex-row gap-1 p-1 pr-2 pl-2 cursor-pointer hover:bg-[#2e2e2e] rounded-md select-none duration-200"}
+                    >
+
+                        <GoogleIcon icon={"settings"} className={""} />
+
+                        <p className={""}>Settings</p>
+
+                    </div>
 
                     <div
                         className={"flex flex-row gap-1 p-1 pr-2 pl-2 cursor-pointer hover:bg-[#2e2e2e] rounded-md select-none duration-200"}

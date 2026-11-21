@@ -56,7 +56,7 @@ export default function Sidebar({ user }: { user: Account }) {
 
                     <div className={"flex flex-col w-full mt-3"}>
 
-                        <SidebarNav open={open} text={"Settings"} icon={"settings"} link={"/dashboard/settings"} />
+                        <SidebarNav open={open} text={"Applications"} icon={"link_2"} link={"/dashboard/apps"} />
                         <SidebarNav open={open} text={"Services"} icon={"database"} link={"/dashboard/services"} />
                         <SidebarNav open={open} text={"Docs"} icon={"docs"} link={"/docs"} />
 
