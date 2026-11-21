@@ -32,7 +32,7 @@ export default function Dashboard() {
 
                     <Topbar text={"Dashboard"} />
 
-                    <DashboardContent />
+                    <DashboardContent user={user} />
 
                 </div>
 

@@ -124,7 +124,7 @@ body {
 
 .button-primary {
 
-  @apply bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md;
+  @apply bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md duration-200;
   box-shadow:
           0 2px 5px #ffffff44 inset,
           0 -4px 5px #00000055 inset;
@@ -133,6 +133,12 @@ body {
 
 .button-secondary {
 
-  @apply hover:bg-white/10 pr-3 pl-3 pt-1 pb-1 !text-white rounded-md;
+  @apply bg-white/5 hover:bg-white/10 pr-3 pl-3 pt-1 pb-1 !text-white rounded-md duration-200;
+
+}
+
+.button-primary-flat {
+
+  @apply bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md duration-200;
 
 }
