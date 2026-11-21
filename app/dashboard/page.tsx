@@ -6,7 +6,7 @@ import Topbar from "@/app/components/dashboard/topbar/Topbar";
 import Loading from "@/app/components/loading/Loading";
 import { useEffect, useState } from "react";
 import { Account } from "@/app/lib/types";
-import { getUser, requireUser } from "@/app/lib/calls";
+import { requireUser } from "@/app/lib/calls";
 
 export default function Dashboard() {
 

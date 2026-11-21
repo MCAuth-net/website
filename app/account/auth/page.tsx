@@ -4,9 +4,8 @@ import NavBar from "@/app/components/navbar/NavBar";
 import Loading from "@/app/components/loading/Loading";
 import ServerSection from "@/app/components/server-section/ServerSection";
 import LoginForm from "@/app/account/auth/LoginForm";
-import { useEffect, useState } from "react";
-import {Account} from "@/app/lib/types";
-import {requireNoUser, requireUser} from "@/app/lib/calls";
+import { useEffect } from "react";
+import { requireNoUser } from "@/app/lib/calls";
 import "./auth.css";
 
 export default function Page() {

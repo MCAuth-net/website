@@ -20,6 +20,8 @@ export const requireNoUser = async () => {
 
 export async function getUser() {
 
+    // return {"email":"email@jgj52.dev","id":1,"uuid":"37ed39c1-98bb-4c75-9e7a-3b2bf66df04a"};
+
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
         credentials: "include",

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import {redirect} from "next/navigation";
 
 export default function ServerSection() {
 
@@ -47,11 +48,11 @@ export default function ServerSection() {
                             clearInterval(interval);
                             setProfile(await response.json());
 
-                            // setTimeout(() => {
-
-                            //     redirect("/dashboard?onboarding=true");
-
-                            // }, 2000);
+                            //setTimeout(() => {
+//
+                            //    redirect("/dashboard?onboarding=true");
+//
+                            //}, 2000);
 
                         }
 
@@ -124,9 +125,6 @@ export default function ServerSection() {
             <form className={"flex flex-col gap-3 w-full items-center justify-center"}>
 
                 <div className={`relative w-full h-43.75 justify-center`}>
-
-                    <input type={"text"} name={"token"} value={token} hidden readOnly />
-                    <input type={"text"} name={"uuid"} value={profile && profile.uuid} hidden readOnly />
 
                     <div className={`server-section ${profile ? "opacity-0" : "opacity-100"} duration-300`}>
 

@@ -45,7 +45,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                     <div className={`absolute ${open ? "left-2" : "left-0"} bottom-[50%] translate-y-[50%] flex flex-row justify-center items-center duration-300`}>
 
                         <img
-                            src={"https://cdn.discordapp.com/avatars/754265397888548875/73c38fe74ef2438b0af90abba50567c0.webp?size=128"}
+                            src={`https://nmsr.jgj52.dev/face/${user.uuid}?w=36`}
                             alt={"Profile picture"}
                             width={"36px"}
                             className={"rounded-full shadow-sm shadow-[#00000066] select-none z-100"}
@@ -53,9 +53,9 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
 
                     </div>
 
-                    <div className={`absolute flex flex-col justify-center select-none mt-1 ${open ? "left-13 opacity-100" : "-left-20 opacity-0 pointer-events-none"} duration-300`}>
+                    <div className={`absolute flex flex-col justify-center select-none mt-1 ${open ? "left-13 opacity-100" : "-left-30 opacity-0 pointer-events-none"} duration-300`}>
 
-                        <p className={"text-sm font-bold leading-3"}>Polokalap</p>
+                        <p className={"text-sm font-bold leading-4"}>Polokalap</p>
                         <p className={"text-[12px] text-white/70"}>Click for more options</p>
 
                     </div>
