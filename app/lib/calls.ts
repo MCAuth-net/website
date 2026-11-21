@@ -10,6 +10,14 @@ export const requireUser = async () => {
 
 }
 
+export const getIfUser = async () => {
+
+    const user = await getUser();
+
+    return user;
+
+}
+
 export const requireNoUser = async () => {
 
     const user = await getUser();

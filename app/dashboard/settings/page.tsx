@@ -6,7 +6,7 @@ import Loading from "@/app/components/loading/Loading";
 import { useEffect, useState } from "react";
 import { Account } from "@/app/lib/types";
 import { requireUser } from "@/app/lib/calls";
-import SettingsContent from "@/app/dashboard/settings/settings-content/SettingsContent";
+import SettingsContent from "@/app/components/dashboard/content/SettingsContent";
 
 export default function Dashboard() {
 

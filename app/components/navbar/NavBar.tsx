@@ -4,10 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import "./NavBar.css";
 import { useEffect, useState } from "react";
+import {Account} from "@/app/lib/types";
+import {requireUser} from "@/app/lib/calls";
 
 export default function NavBar() {
 
     const [open, setOpen] = useState(false);
+    const [user, setUser] = useState<Account | null>(null);
+
+    useEffect(() => {
+
+        void requireUser().then(setUser);
+
+    }, [])
 
     useEffect(() => {
 
@@ -61,10 +70,36 @@ export default function NavBar() {
 
                         </div>
 
-                        <div className={"hidden md:flex flex-row gap-5 items-center"}>
+                        <div className={"hidden md:flex flex-row gap-3 items-center"}>
 
-                            <Link className={"button-secondary"} href="/auth">Log in</Link>
-                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/auth">Get started</Link>
+                            {
+
+                                user ?
+
+                                    (
+
+                                        <>
+
+                                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/dashboard">Dashboard</Link>
+
+                                        </>
+
+                                    )
+
+                                    :
+
+                                    (
+
+                                        <>
+
+                                            <Link className={"button-secondary"} href="/auth">Log in</Link>
+                                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/auth">Get started</Link>
+
+                                        </>
+
+                                    )
+
+                            }
 
                         </div>
 
