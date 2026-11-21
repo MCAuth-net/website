@@ -10,7 +10,11 @@ export default function Sidebar({ user, open, setOpen }: { user: Account, open: 
 
     useEffect(() => {
 
-        localStorage.setItem("sidebar_open", String(open));
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+
+            localStorage.setItem("sidebar_open", String(open));
+
+        }
 
     }, [open]);
 
