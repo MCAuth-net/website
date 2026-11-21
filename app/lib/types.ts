@@ -5,6 +5,7 @@ export type User = {
 
 export type Account = {
     id: number;
+    display: string;
     email: string | null;
     uuid: string | null;
     session: string;

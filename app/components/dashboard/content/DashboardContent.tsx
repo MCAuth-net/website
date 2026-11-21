@@ -16,10 +16,10 @@ export default function DashboardContent({ user }: { user: Account }) {
                     <div className={"flex flex-row gap-2"}>
 
                         <a
-                            href={"/dashboard/servers"}
-                            className={"button-primary-flat w-35"}
+                            href={"/dashboard/services"}
+                            className={"button-primary-flat w-37"}
                         >
-                            Manage servers
+                            Manage services
                         </a>
 
                         <a
