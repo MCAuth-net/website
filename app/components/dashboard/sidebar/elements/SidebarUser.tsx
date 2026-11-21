@@ -55,7 +55,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
 
                     <div className={`absolute flex flex-col justify-center select-none mt-1 ${open ? "left-13 opacity-100" : "-left-30 opacity-0 pointer-events-none"} duration-300`}>
 
-                        <p className={"text-sm font-bold leading-4"}>Polokalap</p>
+                        <p className={"text-sm font-bold leading-4"}> {user.name} </p>
                         <p className={"text-[12px] text-white/70"}>Click for more options</p>
 
                     </div>
