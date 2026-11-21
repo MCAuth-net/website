@@ -1,4 +1,4 @@
-export default async function DashboardContent() {
+export default function DashboardContent() {
 
     return (
 
