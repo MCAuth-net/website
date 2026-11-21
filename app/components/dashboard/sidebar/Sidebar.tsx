@@ -12,7 +12,7 @@ export default function Sidebar({ user, open, setOpen }: { user: Account, open: 
 
         <>
 
-            <div className={`fixed lg:relative flex flex-col h-screen bg-[#111111] ${open ? "w-60 left-0" : "w-15 lg:left-0 -left-15"} border-r border-[#1a1a1a] transition-[width] duration-300 ease-out overflow-clip lg:z-1 z-100`}>
+            <div className={`fixed lg:relative flex flex-col h-screen bg-[#111111] ${open ? "w-60 left-0" : "w-15 lg:left-0 -left-15"} border-r border-[#1a1a1a] transition-[width,left] duration-300 ease-out overflow-clip lg:z-1 z-100`}>
 
                 <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"}`}>
 
