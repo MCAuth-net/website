@@ -4,9 +4,7 @@ export const requireUser = async () => {
 
     const user = await getUser();
 
-    console.log(user);
-
-    // if (!user) location.href = "/auth";
+    if (!user) location.href = "/auth";
 
     return user;
 
