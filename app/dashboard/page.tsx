@@ -1,7 +1,7 @@
 "use client"
 
 import Sidebar from "@/app/components/dashboard/sidebar/Sidebar";
-import DashboardContent from "@/app/components/dashboard/content/DashboardContent";
+import DashboardContent from "@/app/dashboard/content/DashboardContent";
 import Topbar from "@/app/components/dashboard/topbar/Topbar";
 import Loading from "@/app/components/loading/Loading";
 import { useEffect, useState } from "react";
@@ -14,6 +14,8 @@ export default function Dashboard() {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
+
+        setOpen(localStorage.getItem("sidebar_open") === "true");
 
         void requireUser().then(setUser);
 

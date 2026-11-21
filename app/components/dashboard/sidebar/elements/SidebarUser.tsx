@@ -69,7 +69,8 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                     ref={submenuRef}
                 >
 
-                    <div
+                    <a
+                        href={"/dashboard/settings"}
                         className={"flex flex-row gap-1 p-1 pr-2 pl-2 cursor-pointer hover:bg-[#2e2e2e] rounded-md select-none duration-200"}
                     >
 
@@ -77,7 +78,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
 
                         <p className={""}>Settings</p>
 
-                    </div>
+                    </a>
 
                     <div
                         className={"flex flex-row gap-1 p-1 pr-2 pl-2 cursor-pointer hover:bg-[#2e2e2e] rounded-md select-none duration-200"}

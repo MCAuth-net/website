@@ -1,12 +1,18 @@
 "use client"
 
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
-import {Dispatch, SetStateAction, useState} from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import SidebarNav from "@/app/components/dashboard/sidebar/elements/SidebarNav";
 import { Account } from "@/app/lib/types";
 import SidebarUser from "@/app/components/dashboard/sidebar/elements/SidebarUser";
 
 export default function Sidebar({ user, open, setOpen }: { user: Account, open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) {
+
+    useEffect(() => {
+
+        localStorage.setItem("sidebar_open", String(open));
+
+    }, [open]);
 
     return (
 
@@ -17,7 +23,7 @@ export default function Sidebar({ user, open, setOpen }: { user: Account, open: 
                 <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"}`}>
 
                     <a
-                        href={"/"}
+                        href={"/dashboard"}
                         aria-hidden={!open}
                         tabIndex={open ? 0 : -1}
                         className={`shrink-0 select-none transition-all duration-300 ease-out ${
@@ -28,7 +34,7 @@ export default function Sidebar({ user, open, setOpen }: { user: Account, open: 
                     >
 
                         <img
-                            src={"assets/logo.png"}
+                            src={"/assets/logo.png"}
                             className={"select-none"}
                             width={128}
                         />
