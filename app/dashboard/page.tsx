@@ -11,6 +11,7 @@ import { requireUser } from "@/app/lib/calls";
 export default function Dashboard() {
 
     const [user, setUser] = useState<Account | null>(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
 
@@ -26,11 +27,11 @@ export default function Dashboard() {
 
             <div className={"flex flex-row"}>
 
-                <Sidebar user={user} />
+                <Sidebar user={user} open={open} setOpen={setOpen} />
 
                 <div className={`flex flex-col w-full`}>
 
-                    <Topbar text={"Dashboard"} />
+                    <Topbar text={"Dashboard"} open={open} setOpen={setOpen} />
 
                     <DashboardContent user={user} />
 

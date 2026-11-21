@@ -1,20 +1,18 @@
 "use client"
 
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
-import { useState } from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import SidebarNav from "@/app/components/dashboard/sidebar/elements/SidebarNav";
 import { Account } from "@/app/lib/types";
 import SidebarUser from "@/app/components/dashboard/sidebar/elements/SidebarUser";
 
-export default function Sidebar({ user }: { user: Account }) {
-
-    const [open, setOpen] = useState(false);
+export default function Sidebar({ user, open, setOpen }: { user: Account, open: boolean, setOpen: Dispatch<SetStateAction<boolean>> }) {
 
     return (
 
         <>
 
-            <div className={`relative lg:flex hidden flex-col h-screen ${open ? "w-60" : "w-15"} border-r border-[#1a1a1a] transition-[width] duration-300 ease-out overflow-clip`}>
+            <div className={`fixed lg:relative flex flex-col h-screen bg-[#111111] ${open ? "w-60 left-0" : "w-15 lg:left-0 -left-15"} border-r border-[#1a1a1a] transition-[width] duration-300 ease-out overflow-clip lg:z-1 z-100`}>
 
                 <div className={`flex flex-row w-full h-15 items-center ${open ? "p-3 pb-0 pt-0" : "p-2.5 pb-0 pt-0"}`}>
 
@@ -58,6 +56,7 @@ export default function Sidebar({ user }: { user: Account }) {
 
                         <SidebarNav open={open} text={"Applications"} icon={"link_2"} link={"/dashboard/apps"} />
                         <SidebarNav open={open} text={"Services"} icon={"database"} link={"/dashboard/services"} />
+                        <SidebarNav open={open} text={"Community"} icon={"public"} link={"https://dc.mcauth.net"} />
                         <SidebarNav open={open} text={"Docs"} icon={"docs"} link={"/docs"} />
 
                     </div>
