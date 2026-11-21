@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { ServerResponse } from "@/app/lib/types";
-import {redirect} from "next/navigation";
 
 export default function ServerSection() {
 
