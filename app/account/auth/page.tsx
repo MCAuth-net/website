@@ -1,10 +1,25 @@
+"use client"
+
 import NavBar from "@/app/components/navbar/NavBar";
 import Loading from "@/app/components/loading/Loading";
 import ServerSection from "@/app/components/server-section/ServerSection";
 import LoginForm from "@/app/account/auth/LoginForm";
+import { useEffect, useState } from "react";
+import {Account} from "@/app/lib/types";
+import {requireUser} from "@/app/lib/calls";
 import "./auth.css";
 
-export default async function Page() {
+export default function Page() {
+
+    const [user, setUser] = useState<Account | null>(null);
+
+    useEffect(() => {
+
+        void requireUser().then(setUser);
+
+    }, [])
+
+    if (!user) return null;
 
     return (
 
