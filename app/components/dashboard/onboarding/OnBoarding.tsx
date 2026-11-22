@@ -1,5 +1,5 @@
-import { Account } from "@/app/lib/types";
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
+import { Account } from "@/app/lib/types";
 import { useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
 

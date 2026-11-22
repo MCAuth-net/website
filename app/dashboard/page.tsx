@@ -10,13 +10,21 @@ import { requireUser } from "@/app/lib/calls";
 import {useSearchParams} from "next/navigation";
 import OnBoarding from "@/app/components/dashboard/onboarding/OnBoarding";
 
+function OnboardingGate({ user }: { user: Account }) {
+
+    const searchParams = useSearchParams();
+    const onboarding = searchParams.get("onboarding") === "true";
+
+    if (!onboarding) return null;
+
+    return <OnBoarding user={user} />;
+
+}
+
 export default function Dashboard() {
 
     const [user, setUser] = useState<Account | null>(null);
     const [open, setOpen] = useState(false);
-
-    const searchParams = useSearchParams();
-    const onboarding = searchParams.get("onboarding") === "true";
 
     useEffect(() => {
 
@@ -46,9 +54,9 @@ export default function Dashboard() {
 
             </div>
 
-            <Suspense>
+            <Suspense fallback={null}>
 
-                { /* onboarding && <OnBoarding user={user} /> */ }
+                <OnboardingGate user={user} />
 
             </Suspense>
 
