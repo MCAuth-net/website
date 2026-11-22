@@ -2,6 +2,7 @@ import { Account } from "@/app/lib/types";
 import { useEffect, useRef, useState } from "react";
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import {logout} from "@/app/lib/calls";
+import toast from "react-hot-toast";
 
 export default function SidebarUser({ open, user }: { open: boolean, user: Account }) {
 
@@ -85,6 +86,13 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                         onClick={async () => {
 
                             await logout();
+                            toast.success("Logged out!");
+
+                            setTimeout(() => {
+
+                                window.location.reload();
+
+                            }, 1000);
 
                         }}
                     >
