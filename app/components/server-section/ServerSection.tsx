@@ -14,7 +14,11 @@ export default function ServerSection() {
     const [copyMessage, setCopyMessage] = useState("Copy address");
 
     useEffect(() => {
+
+        if (!open) return;
+
         let interval: ReturnType<typeof setInterval> | undefined;
+        let redirectTimeout: ReturnType<typeof setTimeout> | undefined;
         const controller = new AbortController()
 
         void fetch("https://api.mcauth.net/v1/token", {
@@ -48,7 +52,7 @@ export default function ServerSection() {
                             clearInterval(interval);
                             setProfile(await response.json());
 
-                            setTimeout(() => {
+                            redirectTimeout = setTimeout(() => {
 
                                 redirect("/dashboard?onboarding=true");
 
@@ -71,11 +75,12 @@ export default function ServerSection() {
             });
 
         return () => {
-            controller.abort()
+            controller.abort();
             if (interval) clearInterval(interval);
+            if (redirectTimeout) clearTimeout(redirectTimeout);
         };
 
-    }, []);
+    }, [open]);
 
     const handleCopy = async () => {
 
