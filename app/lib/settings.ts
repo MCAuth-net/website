@@ -4,7 +4,7 @@ export function getAccentColor(user: Account | null) {
 
     if (!user) return "3c8527";
 
-    switch (user.accent) {
+    switch (user.color) {
 
         case "green":
             return "3c8527";
