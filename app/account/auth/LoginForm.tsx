@@ -1,12 +1,14 @@
 "use client"
 
 import { useState } from "react";
-import { login } from "./action";
 import toast from "react-hot-toast";
+import {login} from "@/app/lib/calls";
 
 export default function LoginForm() {
 
     const [pending, setPending] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -14,7 +16,7 @@ export default function LoginForm() {
 
         setPending(true);
 
-        const ok = await login(new FormData(event.currentTarget));
+        const ok = await login(email, password);
 
         setPending(false);
 
@@ -47,7 +49,9 @@ export default function LoginForm() {
                 <input
                     type={"text"}
                     className={"input w-70 text-lg"}
-                    name={"username"}
+                    name={"email"}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
             </div>
@@ -60,6 +64,8 @@ export default function LoginForm() {
                     type={"password"}
                     className={"input w-70"}
                     name={"password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
 
             </div>

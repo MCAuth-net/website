@@ -26,9 +26,21 @@ export const requireNoUser = async () => {
 
 }
 
-export async function getUser() {
+export async function getUser(): Promise<Account | null> {
 
-    // return {"display_name":null,"email":null,"id":1,"name":"Polokalap","uuid":"5248a0e1-a069-45e9-9885-215d88334438","uuids":{"5248a0e1-a069-45e9-9885-215d88334438":"Polokalap"}};
+    // return {
+    //     displayName: null,
+    //     email: null,
+    //     id: 1,
+    //     name: "Polokalap",
+    //     uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+    //     uuids: {
+    //         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+    //         name: "Polokalap"
+    //     },
+    //     color: "violet",
+    //     session: "asd",
+    // };
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
@@ -50,6 +62,22 @@ export async function logout(): Promise<boolean> {
     const res = await fetch(`https://api.mcauth.net/v1/auth`, {
         method: "DELETE",
         credentials: "include",
+    });
+
+    return res.ok;
+
+}
+
+export async function login(email: string, password: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/auth", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ email, password }),
     });
 
     return res.ok;
