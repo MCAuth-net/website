@@ -127,7 +127,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                         <div className={"flex flex-row gap-3 items-center"}>
 
-                            <p className={`text-white/70 select-none ${user.email ? "blur-lg" : ""}`}>{ user.email || "Not set yet" }</p>
+                            <p className={`text-white/70 select-none ${user.email ? "blur-sm " : ""} hover:blur-none duration-200`}>{ user.email || "Not set yet" }</p>
 
                             <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
 
