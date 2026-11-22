@@ -1,8 +1,3 @@
-export type User = {
-    uuid: string;
-    token: string;
-}
-
 export type Account = {
     id: number;
     email: string | null;
@@ -13,6 +8,7 @@ export type Account = {
         name: string;
     };
     displayName: string | null;
+    accent: string;
     session: string;
 }
 

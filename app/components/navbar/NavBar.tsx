@@ -6,6 +6,7 @@ import "./NavBar.css";
 import { useEffect, useState } from "react";
 import {Account} from "@/app/lib/types";
 import {getIfUser, requireUser} from "@/app/lib/calls";
+import {getAccentColor} from "@/app/lib/settings";
 
 export default function NavBar() {
 
@@ -80,7 +81,7 @@ export default function NavBar() {
 
                                         <>
 
-                                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/dashboard">Dashboard</Link>
+                                            <Link className={`bg-[#${getAccentColor(user)}] hover:bg-[#${getAccentColor(user)}] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md`} href="/dashboard">Dashboard</Link>
 
                                         </>
 
@@ -93,7 +94,7 @@ export default function NavBar() {
                                         <>
 
                                             <Link className={"button-secondary"} href="/auth">Log in</Link>
-                                            <Link className={"bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md"} href="/auth">Get started</Link>
+                                            <Link className={`bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md`} href="/auth">Get started</Link>
 
                                         </>
 
@@ -154,7 +155,7 @@ export default function NavBar() {
 
                                     <div className={"absolute bottom-25 flex flex-row gap-2 w-screen z-2 p-2 justify-between"}>
 
-                                        <Link className={"flex flex-row items-center justify-center text-xl bg-[#3c8527dd] hover:bg-[#3c8527] !text-white rounded-md w-full h-12"} href={"/register"}>Get Started</Link>
+                                        <Link className={`flex flex-row items-center justify-center text-xl bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] !text-white rounded-md w-full h-12`} href={"/register"}>Get Started</Link>
                                         <Link className={"flex flex-row items-center justify-center text-xl bg-[#333333aa] hover:bg-[#333333cc] !text-white rounded-md w-full h-12"} href={"/login"}>Sign in</Link>
 
                                     </div>

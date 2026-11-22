@@ -1,8 +1,22 @@
+"use client"
+
 import NavBar from "@/app/components/navbar/NavBar";
 import Link from "next/link";
 import Loading from "@/app/components/loading/Loading";
+import { getAccentColor } from "@/app/lib/settings";
+import {useEffect, useState} from "react";
+import { Account } from "@/app/lib/types";
+import { getIfUser } from "@/app/lib/calls";
 
 export default function Home() {
+
+    const [user, setUser] = useState<Account | null>(null);
+
+    useEffect(() => {
+
+        void getIfUser().then(setUser);
+
+    }, []);
 
   return (
 
@@ -21,7 +35,7 @@ export default function Home() {
 
                       <Link
                           href={"/auth"}
-                          className={"relative bg-[#3c8527dd] hover:bg-[#3c8527] bottom-0 hover:bottom-0.5 pl-5 pr-5 pt-3 pb-3 !text-white rounded-sm"}
+                          className={`relative bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] bottom-0 hover:bottom-0.5 pl-5 pr-5 pt-3 pb-3 !text-white rounded-sm`}
                       >
 
                           <p>Get started</p>

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@source inline("{bg,hover:bg,text}-[#{3c8527,3c5ccc,1f9c8f,7a3cc8,e05c9c,f0c020,c83030,8a8a8a}]");
+@source inline("{bg,hover:bg,text}-[#{3c8527dd,3c5cccdd,1f9c8fdd,7a3cc8dd,e05c9cdd,f0c020dd,c83030dd,8a8a8add}]");
+
 :root {
   --background: #ffffff;
   --foreground: #111111;
@@ -134,11 +137,5 @@ body {
 .button-secondary {
 
   @apply bg-white/5 hover:bg-white/10 pr-3 pl-3 pt-1 pb-1 !text-white rounded-md duration-200;
-
-}
-
-.button-primary-flat {
-
-  @apply bg-[#3c8527dd] hover:bg-[#3c8527] pr-3 pl-3 pt-1 pb-1 !text-white rounded-md duration-200;
 
 }

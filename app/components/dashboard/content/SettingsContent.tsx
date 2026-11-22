@@ -1,6 +1,7 @@
 import { Account } from "@/app/lib/types";
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import { Dispatch, SetStateAction, useState } from "react";
+import {getAccentColor} from "@/app/lib/settings";
 
 export default function SettingsContent({ user }: { user: Account }) {
 
@@ -25,11 +26,11 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                         <p className={"text-sm font-semibold"}>Account</p>
 
-                        <SettingsNavigation icon={"person"} id={id} setId={setId} text={"General"} this_element={0} />
+                        <SettingsNavigation user={user} icon={"person"} id={id} setId={setId} text={"General"} this_element={0} />
 
-                        <SettingsNavigation icon={"palette"} id={id} setId={setId} text={"Appearance"} this_element={1} />
+                        <SettingsNavigation user={user} icon={"palette"} id={id} setId={setId} text={"Appearance"} this_element={1} />
 
-                        <SettingsNavigation icon={"visibility_off"} id={id} setId={setId} text={"Privacy"} this_element={2} />
+                        <SettingsNavigation user={user} icon={"visibility_off"} id={id} setId={setId} text={"Privacy"} this_element={2} />
 
                     </div>
 
@@ -37,9 +38,9 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                         <p className={"text-sm font-semibold"}>Security</p>
 
-                        <SettingsNavigation icon={"security_key"} id={id} setId={setId} text={"2FA"} this_element={3} />
+                        <SettingsNavigation user={user} icon={"security_key"} id={id} setId={setId} text={"2FA"} this_element={3} />
 
-                        <SettingsNavigation icon={"logout"} id={id} setId={setId} text={"Sessions"} this_element={4} />
+                        <SettingsNavigation user={user} icon={"logout"} id={id} setId={setId} text={"Sessions"} this_element={4} />
 
                     </div>
 
@@ -53,7 +54,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
 }
 
-function SettingsNavigation({ text, icon = "question_mark", this_element, id, setId }: { text: string; icon: string, this_element: number, id: number, setId: Dispatch<SetStateAction<number>> }) {
+function SettingsNavigation({ user, text, icon = "question_mark", this_element, id, setId }: { user: Account, text: string; icon: string, this_element: number, id: number, setId: Dispatch<SetStateAction<number>> }) {
 
     const open = this_element === id;
 
@@ -70,7 +71,7 @@ function SettingsNavigation({ text, icon = "question_mark", this_element, id, se
                 }}
             >
 
-                <div className={`flex flex-col items-center justify-center p-0.5 bg-[#${open ? "3c8527" : "2a2a2a"}] rounded-md shadow-sm duration-200`}>
+                <div className={`flex flex-col items-center justify-center p-0.5 bg-[#${open ? `${getAccentColor(user)}` : "2a2a2a"}] rounded-md shadow-sm duration-200`}>
 
                     <GoogleIcon icon={icon} className={"scale-90"} />
 
