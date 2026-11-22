@@ -103,6 +103,24 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                     </div>
 
+                    <div className={"flex flex-row justify-between mt-1"}>
+
+                        <p>Username</p>
+
+                        <div className={"flex flex-row gap-3 items-center"}>
+
+                            <p className={"text-white/70 select-none"}>{ user.name }</p>
+
+                            <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
+
+                                <GoogleIcon icon={"edit"} className={"scale-80 select-none"} />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>

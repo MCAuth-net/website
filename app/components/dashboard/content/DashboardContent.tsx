@@ -1,5 +1,5 @@
 import { Account } from "@/app/lib/types";
-import {getAccentColor} from "@/app/lib/settings";
+import { getAccentColor } from "@/app/lib/settings";
 
 export default function DashboardContent({ user }: { user: Account }) {
 

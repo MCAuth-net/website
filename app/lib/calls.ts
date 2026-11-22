@@ -28,19 +28,19 @@ export const requireNoUser = async () => {
 
 export async function getUser(): Promise<Account | null> {
 
-    // return {
-    //     displayName: null,
-    //     email: null,
-    //     id: 1,
-    //     name: "Polokalap",
-    //     uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-    //     uuids: {
-    //         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-    //         name: "Polokalap"
-    //     },
-    //     color: "violet",
-    //     session: "asd",
-    // };
+    return {
+        displayName: null,
+        email: null,
+        id: 1,
+        name: "Polokalap",
+        uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+        uuids: {
+            uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+            name: "Polokalap"
+        },
+        color: "violet",
+        session: "asd",
+    };
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
@@ -78,6 +78,22 @@ export async function login(email: string, password: string): Promise<boolean> {
             accept: "application/json",
         },
         body: JSON.stringify({ email, password }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changeEmail(email: string, password: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/email", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ new_email: email, password }),
     });
 
     return res.ok;

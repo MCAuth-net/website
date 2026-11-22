@@ -4,14 +4,19 @@ import Sidebar from "@/app/components/dashboard/sidebar/Sidebar";
 import DashboardContent from "@/app/components/dashboard/content/DashboardContent";
 import Topbar from "@/app/components/dashboard/topbar/Topbar";
 import Loading from "@/app/components/loading/Loading";
-import { useEffect, useState } from "react";
+import {Suspense, useEffect, useState} from "react";
 import { Account } from "@/app/lib/types";
 import { requireUser } from "@/app/lib/calls";
+import {useSearchParams} from "next/navigation";
+import OnBoarding from "@/app/components/dashboard/onboarding/OnBoarding";
 
 export default function Dashboard() {
 
     const [user, setUser] = useState<Account | null>(null);
     const [open, setOpen] = useState(false);
+
+    const searchParams = useSearchParams();
+    const onboarding = searchParams.get("onboarding") === "true";
 
     useEffect(() => {
 
@@ -40,6 +45,12 @@ export default function Dashboard() {
                 </div>
 
             </div>
+
+            <Suspense>
+
+                { onboarding && <OnBoarding user={user} /> }
+
+            </Suspense>
 
             <Loading seconds={1} />
 

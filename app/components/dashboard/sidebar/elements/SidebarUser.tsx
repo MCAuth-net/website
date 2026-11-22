@@ -1,7 +1,7 @@
 import { Account } from "@/app/lib/types";
 import { useEffect, useRef, useState } from "react";
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
-import {logout} from "@/app/dashboard/actions";
+import {logout} from "@/app/lib/calls";
 
 export default function SidebarUser({ open, user }: { open: boolean, user: Account }) {
 
