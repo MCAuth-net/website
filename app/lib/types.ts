@@ -8,7 +8,7 @@ export type Account = {
         name: string;
     };
     displayName: string | null;
-    accent: string;
+    color: string;
     session: string;
 }
 
