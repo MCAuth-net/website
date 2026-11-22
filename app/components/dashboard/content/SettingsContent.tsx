@@ -18,7 +18,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
             </div>
 
-            { process.env.NEXT_PUBLIC_PRODUCTION === "true" && <div className={"fixed flex flex-col items-center justify-center backdrop-blur-[2px] w-full h-full z-10"}>
+            { process.env.NEXT_PUBLIC_PRODUCTION === "true" && <div className={"fixed top-13 flex flex-col items-center justify-center backdrop-blur-[2px] w-full h-full z-10"}>
 
                 <div className={"flex flex-col items-center"}>
 
