@@ -48,11 +48,11 @@ export default function ServerSection() {
                             clearInterval(interval);
                             setProfile(await response.json());
 
-                            //setTimeout(() => {
-//
-                            //    redirect("/dashboard?onboarding=true");
-//
-                            //}, 2000);
+                            setTimeout(() => {
+
+                                redirect("/dashboard?onboarding=true");
+
+                            }, 2000);
 
                         }
 
