@@ -48,7 +48,7 @@ export default function Dashboard() {
 
             <Suspense>
 
-                { onboarding && <OnBoarding user={user} /> }
+                { /* onboarding && <OnBoarding user={user} /> */ }
 
             </Suspense>
 

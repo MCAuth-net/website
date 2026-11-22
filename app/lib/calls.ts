@@ -28,19 +28,19 @@ export const requireNoUser = async () => {
 
 export async function getUser(): Promise<Account | null> {
 
-    return {
-        displayName: null,
-        email: null,
-        id: 1,
-        name: "Polokalap",
-        uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-        uuids: {
-            uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-            name: "Polokalap"
-        },
-        color: "violet",
-        session: "asd",
-    };
+    // return {
+    //     displayName: null,
+    //     email: null,
+    //     id: 1,
+    //     name: "Polokalap",
+    //     uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+    //     uuids: {
+    //         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+    //         name: "Polokalap"
+    //     },
+    //     color: "violet",
+    //     session: "asd",
+    // };
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
@@ -68,7 +68,22 @@ export async function logout(): Promise<boolean> {
 
 }
 
-export async function login(email: string, password: string): Promise<boolean> {
+export async function login(username: string, password: string): Promise<boolean> {
+
+    const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+    let name = null;
+    let email = null;
+
+    if (emailCheck.test(username)) {
+
+        email = username;
+
+    } else {
+
+        name = username;
+
+    }
 
     const res = await fetch("https://api.mcauth.net/v1/auth", {
         method: "POST",
@@ -77,7 +92,7 @@ export async function login(email: string, password: string): Promise<boolean> {
             "Content-Type": "application/json",
             accept: "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
     });
 
     return res.ok;

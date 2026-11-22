@@ -1,7 +1,7 @@
 import { Account } from "@/app/lib/types";
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
-import {useState} from "react";
-import {getAccentColor} from "@/app/lib/settings";
+import { useState } from "react";
+import { getAccentColor } from "@/app/lib/settings";
 
 export default function OnBoarding({ user }: { user: Account }) {
 
