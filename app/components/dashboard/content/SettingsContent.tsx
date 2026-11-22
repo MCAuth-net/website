@@ -18,6 +18,18 @@ export default function SettingsContent({ user }: { user: Account }) {
 
             </div>
 
+            <div className={"fixed flex flex-col items-center justify-center backdrop-blur-[2px] w-full h-full z-10"}>
+
+                <div className={"flex flex-col items-center"}>
+
+                    <GoogleIcon icon={"lock"} className={"text-white/70 select-none scale-400"} />
+                    <p className={"mt-10 text-white/70 text-xl"}>This page is under development!</p>
+                    <p className={"text-white/70 text-xl"}>Come back soon.</p>
+
+                </div>
+
+            </div>
+
             <div className={"flex lg:flex-row flex-col gap-1 m-8 mt-5"}>
 
                 <div className={"flex flex-col gap-3 p-2 pt-1 pb-1 rounded-md"}>
