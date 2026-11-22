@@ -28,19 +28,19 @@ export const requireNoUser = async () => {
 
 export async function getUser(): Promise<Account | null> {
 
-    // return {
-    //     displayName: null,
-    //     email: null,
-    //     id: 1,
-    //     name: "Polokalap",
-    //     uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-    //     uuids: {
-    //         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
-    //         name: "Polokalap"
-    //     },
-    //     color: "violet",
-    //     session: "asd",
-    // };
+    if (process.env.NEXT_PUBLIC_PRODUCTION === "false") return {
+        displayName: null,
+        email: null,
+        id: 1,
+        name: "Polokalap",
+        uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+        uuids: {
+            uuid: "5248a0e1-a069-45e9-9885-215d88334438",
+            name: "Polokalap"
+        },
+        color: "violet",
+        session: "asd",
+    };
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {
         method: "GET",
