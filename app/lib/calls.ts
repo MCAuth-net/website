@@ -114,3 +114,101 @@ export async function changeEmail(email: string, password: string): Promise<bool
     return res.ok;
 
 }
+
+export async function confirmEmail(code: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/email/confirm", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ code }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changePassword(old_password: string, new_password: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/password", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ old_password, new_password }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changeColor(color: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/color", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ new_color: color }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changeName(name: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/name", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ new_name: name }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changePrimaryUUID(uuid: string): Promise<boolean> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/uuid", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ primary_uuid: uuid }),
+    });
+
+    return res.ok;
+
+}
+
+export async function changePfp(file: File): Promise<boolean> {
+
+    const form = new FormData()
+    form.append("pfp", file)
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/pfp", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+        body: form,
+    });
+
+    return res.ok;
+
+}
