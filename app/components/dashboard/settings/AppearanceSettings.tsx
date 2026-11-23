@@ -1,16 +1,59 @@
-import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import toast from "react-hot-toast";
+import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
-import { logout } from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export default function AppearanceSettings({ user }: { user: Account}) {
+export default function AppearanceSettings({ user, saving, setSaving }: { user: Account, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+
+    const [selected, setSelected] = useState(getAccentColor(user));
+
+    const defaultColor = getAccentColor(user);
+
+    useEffect(() => {
+
+        if (
+            defaultColor !== selected
+        ) {
+
+            setSaving(true);
+
+        } else {
+
+            setSaving(false);
+
+        }
+
+    })
+
+    const colors = [
+        { name: "Green", value: "3c8527" },
+        { name: "Blue", value: "3c5ccc" },
+        { name: "Teal", value: "1f9c8f" },
+        { name: "Violet", value: "7a3cc8" },
+        { name: "Pink", value: "e05c9c" },
+        { name: "Yellow", value: "f0c020" },
+        { name: "Red", value: "c83030" },
+        { name: "Grey", value: "8a8a8a" },
+    ];
+
+    const handleSave = () => {
+
+        toast.success("meow");
+
+    };
+
+    const handleReset = () => {
+
+        toast.error("meow");
+
+    };
 
     return (
 
         <>
 
-            <div className={"flex flex-col gap-2 bg-[#1a1a1a] rounded-md shadow-md p-4 lg:w-full m-2"}>
+            <div className={"flex flex-col gap-2 bg-[#1a1a1a] rounded-md shadow-md p-4 md:w-full h-min m-2"}>
 
                 <div>
 
@@ -25,91 +68,40 @@ export default function AppearanceSettings({ user }: { user: Account}) {
 
                     <div className={"flex flex-row gap-1"}>
 
-                        <div className={"flex flex-col items-center justify-center w-15"}>
+                        {
 
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#3c8527] rounded-full cursor-pointer"}
-                            ></div>
+                            colors.map((color, index) => (
 
-                            <p className={"text-sm font-semibold"}>Green</p>
+                                <div
+                                    className={"flex flex-col items-center justify-center w-15"}
+                                    key={index}
+                                >
 
-                        </div>
+                                    <div
+                                        className={`w-10 h-10 border-2 bg-[#${color.value}] rounded-full cursor-pointer`}
+                                        onClick={() => {
 
-                        <div className={"flex flex-col items-center justify-center w-15"}>
+                                            setSelected(color.value);
 
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#3c5ccc] rounded-full cursor-pointer"}
-                            ></div>
+                                        }}
+                                        style={{ borderColor: color.value == selected ? "#ffffff66" : "#00000066"}}
+                                    ></div>
 
-                            <p className={"text-sm font-semibold"}>Blue</p>
+                                    <p className={"text-sm font-semibold select-none"}>{ color.name }</p>
 
-                        </div>
+                                </div>
 
-                        <div className={"flex flex-col items-center justify-center w-15"}>
+                            ))
 
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#1f9c8f] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Teal</p>
-
-                        </div>
-
-                        <div className={"flex flex-col items-center justify-center w-15"}>
-
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#7a3cc8] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Violet</p>
-
-                        </div>
-
-                        <div className={"flex flex-col items-center justify-center w-15"}>
-
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#e05c9c] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Pink</p>
-
-                        </div>
-
-                        <div className={"flex flex-col items-center justify-center w-15"}>
-
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#f0c020] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Yellow</p>
-
-                        </div>
-
-                        <div className={"flex flex-col items-center justify-center w-15"}>
-
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#c83030] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Red</p>
-
-                        </div>
-
-                        <div className={"flex flex-col items-center justify-center w-15"}>
-
-                            <div
-                                className={"w-10 h-10 border-2 border-[#00000066] bg-[#8a8a8a] rounded-full cursor-pointer"}
-                            ></div>
-
-                            <p className={"text-sm font-semibold"}>Grey</p>
-
-                        </div>
+                        }
 
                     </div>
 
                 </div>
 
             </div>
+
+            <SavingMenu saving={saving} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
 
         </>
 

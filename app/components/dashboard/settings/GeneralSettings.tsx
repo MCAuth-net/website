@@ -3,14 +3,28 @@ import toast from "react-hot-toast";
 import { Account } from "@/app/lib/types";
 import { logout } from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
+import {Dispatch, SetStateAction} from "react";
+import SavingMenu from "@/app/components/saving/SavingMenu";
 
-export default function GeneralSettings({ user }: { user: Account}) {
+export default function GeneralSettings({ user, saving, setSaving }: { user: Account, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+
+    const handleSave = () => {
+
+        toast.success("meow");
+
+    };
+
+    const handleReset = () => {
+
+        toast.error("meow");
+
+    };
 
     return (
 
         <>
 
-            <div className={"flex flex-col gap-2 bg-[#1a1a1a] rounded-md shadow-md p-4 lg:w-full m-2"}>
+            <div className={"flex flex-col gap-2 bg-[#1a1a1a] rounded-md shadow-md p-4 md:w-full h-min m-2"}>
 
                 <div>
 
@@ -148,6 +162,8 @@ export default function GeneralSettings({ user }: { user: Account}) {
                 </div>
 
             </div>
+
+            <SavingMenu saving={saving} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
 
         </>
 

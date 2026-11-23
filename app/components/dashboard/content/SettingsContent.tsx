@@ -1,15 +1,14 @@
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
+import GeneralSettings from "../settings/GeneralSettings";
+import AppearanceSettings from "@/app/components/dashboard/settings/AppearanceSettings";
 import { Account } from "@/app/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
-import { logout } from "@/app/lib/calls";
-import toast from "react-hot-toast";
-import GeneralSettings from "../settings/GeneralSettings";
-import AppearanceSettings from "@/app/components/dashboard/settings/AppearanceSettings";
 
 export default function SettingsContent({ user }: { user: Account }) {
 
     const [id, setId] = useState(0);
+    const [saving, setSaving] = useState(false);
 
     return (
 
@@ -34,11 +33,11 @@ export default function SettingsContent({ user }: { user: Account }) {
 
             </div> }
 
-            <div className={"flex lg:flex-row flex-col gap-1 m-8 mt-5"}>
+            <div className={"relative flex md:flex-row flex-col gap-1 m-8 mt-5 h-full"}>
 
                 <div className={"flex flex-col gap-3 p-2 pt-1 pb-1 rounded-md"}>
 
-                    <div className={"flex flex-col gap-1 lg:w-50 bg-[#1a1a1a] p-2 rounded-md shadow-md"}>
+                    <div className={"flex flex-col gap-1 md:w-50 bg-[#1a1a1a] p-2 rounded-md shadow-md"}>
 
                         <p className={"text-sm font-semibold"}>Account</p>
 
@@ -50,7 +49,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                     </div>
 
-                    <div className={"flex flex-col gap-1 lg:w-50 bg-[#1a1a1a] p-2 rounded-md shadow-md"}>
+                    <div className={"flex flex-col gap-1 md:w-50 bg-[#1a1a1a] p-2 rounded-md shadow-md"}>
 
                         <p className={"text-sm font-semibold"}>Security</p>
 
@@ -65,9 +64,9 @@ export default function SettingsContent({ user }: { user: Account }) {
                 {(() => {
                     switch (id) {
                         case 0:
-                            return <GeneralSettings user={user} />;
+                            return <GeneralSettings user={user} saving={saving} setSaving={setSaving} />;
                         case 1:
-                            return <AppearanceSettings user={user} />;
+                            return <AppearanceSettings user={user} saving={saving} setSaving={setSaving} />;
                         default:
                             return null;
                     }
