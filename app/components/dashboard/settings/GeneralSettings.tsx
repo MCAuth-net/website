@@ -8,13 +8,12 @@ import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 export default function GeneralSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
-    const [displayName, setDisplayName] = useState(user.displayName);
+    const [defaultDisplayName, setDefaultDisplayName] = useState(user.displayName);
+    const [displayName, setDisplayName] = useState(defaultDisplayName);
     const [editingDisplayName, setEditingDisplayName] = useState(false);
 
     const [pfpFile, setPfpFile] = useState<File | null>(null);
     const [pfpPreview, setPfpPreview] = useState<string | null>(null);
-
-    const defaultDisplayName = user.displayName;
 
     useEffect(() => {
 
@@ -31,7 +30,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
         }
 
-    });
+    }, [displayName, pfpFile]);
 
     const handleSave = async () => {
 
@@ -60,6 +59,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
         } else {
 
             toast.success("Saved successfully!");
+            setDefaultDisplayName(displayName);
 
         }
 
