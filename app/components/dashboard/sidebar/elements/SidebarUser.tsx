@@ -58,7 +58,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                         className={`absolute box-border flex flex-col justify-center select-none mt-1 whitespace-nowrap ${open ? "left-13 opacity-100" : "-left-20 opacity-0 pointer-events-none"} duration-300`}
                     >
 
-                        <p className={"text-sm font-bold leading-4"}> { user.displayName || user.name} </p>
+                        <p className={"text-sm font-bold leading-4"}> { user.display_name || user.name} </p>
                         <p className={"text-[12px] text-white/70"}>Click for more options</p>
 
                     </div>

@@ -8,7 +8,7 @@ export type Account = {
         uuid: string;
         name: string;
     };
-    displayName: string | null;
+    display_name: string | null;
     color: string;
     session: string;
 }

@@ -8,7 +8,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 export default function GeneralSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
-    const [defaultDisplayName, setDefaultDisplayName] = useState(user.displayName);
+    const [defaultDisplayName, setDefaultDisplayName] = useState(user.display_name);
     const [displayName, setDisplayName] = useState(defaultDisplayName);
     const [editingDisplayName, setEditingDisplayName] = useState(false);
 
@@ -36,7 +36,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
         let error = false;
 
-        if (displayName !== user.displayName && displayName) {
+        if (displayName !== user.display_name && displayName) {
 
             const displayNameChange = await changeName(displayName);
             setEditingDisplayName(false);
@@ -68,7 +68,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
     const handleReset = () => {
 
-        setDisplayName(user.displayName);
+        setDisplayName(user.display_name);
         setEditingDisplayName(false);
 
         if (pfpPreview) URL.revokeObjectURL(pfpPreview);
@@ -187,7 +187,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                                 )
                                 :
                                 (
-                                    <p className={"text-white/70 select-none"}>{ user.displayName || displayName || "Not set yet" }</p>
+                                    <p className={"text-white/70 select-none"}>{ user.display_name || displayName || "Not set yet" }</p>
                                 )
 
                         }
