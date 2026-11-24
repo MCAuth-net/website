@@ -62,7 +62,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                 </div>
 
-                <div className={"relative flex flex-col w-full"}>
+                <div className={"relative flex flex-col md:w-full mr-4"}>
 
                     <GeneralSettings user={user} open={id === 0} saving={saving} setSaving={setSaving} />
                     <AppearanceSettings user={user} open={id === 1} saving={saving} setSaving={setSaving} />

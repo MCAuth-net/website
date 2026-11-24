@@ -24,7 +24,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
         <>
 
-            <div className={`absolute flex flex-col gap-2 p-4 md:w-full h-min m-2 bg-[#1a1a1a] rounded-md shadow-md ${open ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>
+            <div className={`absolute flex flex-col gap-2 p-4 w-full h-min m-2 bg-[#1a1a1a] rounded-md shadow-md ${open ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>
 
                 <div>
 
@@ -35,7 +35,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
                 <div className={"flex flex-row gap-2"}>
 
-                    <div className={"relative cursor-pointer"}>
+                    <div className={"relative cursor-pointer h-min"}>
 
                         <label
                             className={"cursor-pointer"}

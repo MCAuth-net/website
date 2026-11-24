@@ -70,7 +70,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
         <>
 
-            <div className={`absolute flex flex-col gap-2 p-4 md:w-full h-min m-2 bg-[#1a1a1a] rounded-md shadow-md ${open ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>
+            <div className={`absolute flex flex-col gap-2 p-4 w-full h-min m-2 bg-[#1a1a1a] rounded-md shadow-md ${open ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>
 
                 <div>
 
