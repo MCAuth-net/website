@@ -30,7 +30,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
         }
 
-    }, [displayName, pfpFile]);
+    }, [displayName, defaultDisplayName, pfpFile]);
 
     const handleSave = async () => {
 
@@ -60,6 +60,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
             toast.success("Saved successfully!");
             setDefaultDisplayName(displayName);
+            setPfpFile(null);
 
         }
 
