@@ -14,10 +14,12 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
     const [pfpFile, setPfpFile] = useState<File | null>(null);
     const [pfpPreview, setPfpPreview] = useState<string | null>(null);
 
+    const defaultDisplayName = user.displayName;
+
     useEffect(() => {
 
         if (
-            displayName !== user.displayName ||
+            displayName !== defaultDisplayName ||
             pfpFile !== null
         ) {
 

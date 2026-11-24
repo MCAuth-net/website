@@ -9,9 +9,9 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
     const [selected, setSelected] = useState(getAccentColor(user));
 
-    const defaultColor = getAccentColor(user);
-
     useEffect(() => {
+
+        const defaultColor = getAccentColor(user);
 
         if (
             defaultColor !== selected
@@ -48,7 +48,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
         if (!colorChange) {
 
-            setSelected(defaultColor);
+            setSelected(getAccentColor(user));
 
             toast.error("Saving unsuccessful");
 
@@ -62,7 +62,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
     const handleReset = () => {
 
-        setSelected(defaultColor);
+        setSelected(getAccentColor(user));
 
     };
 
