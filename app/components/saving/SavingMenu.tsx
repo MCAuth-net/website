@@ -18,8 +18,8 @@ export default function SavingMenu({ saving, setSaving, onSave, onReset, user }:
                         className={`flex flex-col items-center justify-center bg-[#2f2f2fdd] hover:bg-[#3e3e3e] border border-[#ffffff33] p-3 pt-1 pb-1 rounded-md cursor-pointer duration-200`}
                         onClick={() => {
 
-                            onReset();
                             setSaving(false);
+                            onReset();
 
                         }}
                     >
@@ -32,8 +32,8 @@ export default function SavingMenu({ saving, setSaving, onSave, onReset, user }:
                         className={`flex flex-col items-center justify-center bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] border border-[#ffffff33] p-3 pt-1 pb-1 rounded-md cursor-pointer duration-200`}
                         onClick={() => {
 
-                            onSave();
                             setSaving(false);
+                            onSave();
 
                         }}
                     >

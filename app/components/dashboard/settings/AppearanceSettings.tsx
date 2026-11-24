@@ -7,14 +7,13 @@ import { changeColor } from "@/app/lib/calls";
 
 export default function AppearanceSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
-    const [selected, setSelected] = useState(getAccentColor(user));
+    const [accentColor, setAccentColor] = useState(getAccentColor(user));
+    const [selected, setSelected] = useState(accentColor);
 
     useEffect(() => {
 
-        const defaultColor = getAccentColor(user);
-
         if (
-            defaultColor !== selected
+            accentColor !== selected
         ) {
 
             setSaving(true);
@@ -25,7 +24,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
         }
 
-    })
+    }, [selected, accentColor]);
 
     const colors = [
         { name: "Green", value: "3c8527" },
@@ -40,15 +39,13 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
     const handleSave = async () => {
 
-        setSaving(false);
-
         const colorName = getColorName(selected);
 
         const colorChange = await changeColor(colorName);
 
         if (!colorChange) {
 
-            setSelected(getAccentColor(user));
+            setSelected(accentColor);
 
             toast.error("Saving unsuccessful");
 
@@ -62,7 +59,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
     const handleReset = () => {
 
-        setSelected(getAccentColor(user));
+        setSelected(accentColor);
 
     };
 

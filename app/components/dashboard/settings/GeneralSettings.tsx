@@ -35,8 +35,6 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
     const handleSave = async () => {
 
-        setSaving(false);
-
         let error = false;
 
         if (displayName !== user.displayName && displayName) {
