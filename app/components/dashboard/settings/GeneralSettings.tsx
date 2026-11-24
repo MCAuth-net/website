@@ -1,22 +1,22 @@
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import toast from "react-hot-toast";
+import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
 import { logout } from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
-import {Dispatch, SetStateAction} from "react";
-import SavingMenu from "@/app/components/saving/SavingMenu";
+import { Dispatch, SetStateAction } from "react";
 
 export default function GeneralSettings({ user, saving, setSaving }: { user: Account, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
     const handleSave = () => {
 
-        toast.success("meow");
+
 
     };
 
     const handleReset = () => {
 
-        toast.error("meow");
+
 
     };
 

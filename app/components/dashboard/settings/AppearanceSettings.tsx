@@ -1,8 +1,9 @@
 import toast from "react-hot-toast";
 import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
-import { getAccentColor } from "@/app/lib/settings";
+import {getAccentColor, getColorName} from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import {changeColor} from "@/app/lib/calls";
 
 export default function AppearanceSettings({ user, saving, setSaving }: { user: Account, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
@@ -37,15 +38,31 @@ export default function AppearanceSettings({ user, saving, setSaving }: { user: 
         { name: "Grey", value: "8a8a8a" },
     ];
 
-    const handleSave = () => {
+    const handleSave = async () => {
 
-        toast.success("meow");
+        const colorName = getColorName(selected);
+
+        const colorChange = await changeColor(colorName);
+
+        if (!colorChange) {
+
+            setSelected(defaultColor);
+            setSaving(false);
+
+            toast.error("Saving unsuccessful");
+
+        } else {
+
+            setSaving(false);
+            toast.success("Saved successfully!");
+
+        }
 
     };
 
     const handleReset = () => {
 
-        toast.error("meow");
+        setSelected(defaultColor);
 
     };
 

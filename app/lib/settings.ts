@@ -36,3 +36,38 @@ export function getAccentColor(user: Account | null) {
     }
 
 }
+
+export function getColorName(color: string) {
+
+    switch (color) {
+
+        case "3c8527":
+            return "green";
+
+        case "3c5ccc":
+            return "blue";
+
+        case "1f9c8f":
+            return "teal";
+
+        case "7a3cc8":
+            return "violet";
+
+        case "e05c9c":
+            return "pink";
+
+        case "f0c020":
+            return "yellow";
+
+        case "c83030":
+            return "red";
+
+        case "8a8a8a":
+            return "grey";
+
+        default:
+            return "green";
+
+    }
+
+}
