@@ -46,12 +46,12 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
         if (!colorChange) {
 
             setSelected(accentColor);
-
             toast.error("Saving unsuccessful");
 
         } else {
 
             toast.success("Saved successfully!");
+            setAccentColor(selected);
 
         }
 
