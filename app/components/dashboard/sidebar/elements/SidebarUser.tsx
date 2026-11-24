@@ -49,7 +49,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                             src={user.pfp ? "https://api.mcauth.net/v1/profile/pfp" : `https://nmsr.jgj52.dev/face/${user.uuid}?w=36`}
                             alt={"Profile picture"}
                             width={"36px"}
-                            className={"rounded-full shadow-sm shadow-[#00000066] select-none z-100"}
+                            className={"rounded-full shadow-sm shadow-[#00000066] select-none z-100 bg-[#1e1e1e] w-9 h-9 object-cover"}
                         />
 
                     </div>
