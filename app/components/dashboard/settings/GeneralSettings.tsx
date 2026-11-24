@@ -33,12 +33,14 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
     const handleSave = async () => {
 
+        setSaving(false);
+
         let error = false;
 
         if (displayName !== user.displayName && displayName) {
 
             const displayNameChange = await changeName(displayName);
-
+            setEditingDisplayName(false);
             if (!displayNameChange) error = true;
 
         }
@@ -46,7 +48,6 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
         if (pfpFile !== null) {
 
             const pfpChange = await changePfp(pfpFile);
-
             if (!pfpChange) error = true;
 
         }
@@ -54,6 +55,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
         if (error) {
 
             toast.error("Saving unsuccessful");
+            handleReset();
 
         } else {
 

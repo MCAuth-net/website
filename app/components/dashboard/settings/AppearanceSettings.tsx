@@ -40,6 +40,8 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
     const handleSave = async () => {
 
+        setSaving(false);
+
         const colorName = getColorName(selected);
 
         const colorChange = await changeColor(colorName);
@@ -47,13 +49,11 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
         if (!colorChange) {
 
             setSelected(defaultColor);
-            setSaving(false);
 
             toast.error("Saving unsuccessful");
 
         } else {
 
-            setSaving(false);
             toast.success("Saved successfully!");
 
         }
