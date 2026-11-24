@@ -5,7 +5,7 @@ import {getAccentColor, getColorName} from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {changeColor} from "@/app/lib/calls";
 
-export default function AppearanceSettings({ user, saving, setSaving }: { user: Account, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+export default function AppearanceSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
     const [selected, setSelected] = useState(getAccentColor(user));
 
@@ -70,7 +70,7 @@ export default function AppearanceSettings({ user, saving, setSaving }: { user: 
 
         <>
 
-            <div className={"flex flex-col gap-2 bg-[#1a1a1a] rounded-md shadow-md p-4 md:w-full h-min m-2"}>
+            <div className={`absolute flex flex-col gap-2 p-4 md:w-full h-min m-2 bg-[#1a1a1a] rounded-md shadow-md ${open ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>
 
                 <div>
 
@@ -115,6 +115,7 @@ export default function AppearanceSettings({ user, saving, setSaving }: { user: 
                     </div>
 
                 </div>
+
 
             </div>
 
