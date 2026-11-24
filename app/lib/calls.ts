@@ -29,7 +29,7 @@ export const requireNoUser = async () => {
 export async function getUser(): Promise<Account | null> {
 
     if (process.env.NEXT_PUBLIC_PRODUCTION === "false") return {
-        displayName: null,
+        display_name: "Cicus",
         email: null,
         id: 1,
         name: "Polokalap",

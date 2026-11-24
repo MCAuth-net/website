@@ -187,7 +187,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                                 )
                                 :
                                 (
-                                    <p className={"text-white/70 select-none"}>{ user.display_name || displayName || "Not set yet" }</p>
+                                    <p className={"text-white/70 select-none"}>{ defaultDisplayName || "Not set yet" }</p>
                                 )
 
                         }

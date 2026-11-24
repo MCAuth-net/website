@@ -4,14 +4,11 @@ export type Account = {
     uuid: string | null;
     name: string | null;
     pfp: boolean | null;
-    uuids: {
-        uuid: string;
-        name: string;
-    };
+    uuids: Record<string, string>;
     display_name: string | null;
     color: string;
-    session: string;
-}
+    session?: string;
+};
 
 export type ServerResponse = {
     success: boolean;
