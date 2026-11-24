@@ -1,9 +1,9 @@
 import toast from "react-hot-toast";
 import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
-import {getAccentColor, getColorName} from "@/app/lib/settings";
+import { getAccentColor, getColorName } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import {changeColor} from "@/app/lib/calls";
+import { changeColor } from "@/app/lib/calls";
 
 export default function AppearanceSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
@@ -21,7 +21,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
         } else {
 
-            setSaving(false);
+            if (open) setSaving(false);
 
         }
 
@@ -119,7 +119,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
             </div>
 
-            <SavingMenu saving={saving} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
+            <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
 
         </>
 

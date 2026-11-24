@@ -2,21 +2,103 @@ import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import toast from "react-hot-toast";
 import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
-import { logout } from "@/app/lib/calls";
+import {changeName, changePfp, logout} from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
-import { Dispatch, SetStateAction } from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 export default function GeneralSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
 
-    const handleSave = () => {
+    const [displayName, setDisplayName] = useState(user.displayName);
+    const [editingDisplayName, setEditingDisplayName] = useState(false);
 
+    const [pfpFile, setPfpFile] = useState<File | null>(null);
+    const [pfpPreview, setPfpPreview] = useState<string | null>(null);
 
+    useEffect(() => {
+
+        if (
+            displayName !== user.displayName ||
+            pfpFile !== null
+        ) {
+
+            setSaving(true);
+
+        } else {
+
+            if (open) setSaving(false);
+
+        }
+
+    });
+
+    const handleSave = async () => {
+
+        let error = false;
+
+        if (displayName !== user.displayName && displayName) {
+
+            const displayNameChange = await changeName(displayName);
+
+            if (!displayNameChange) error = true;
+
+        }
+
+        if (pfpFile !== null) {
+
+            const pfpChange = await changePfp(pfpFile);
+
+            if (!pfpChange) error = true;
+
+        }
+
+        if (error) {
+
+            toast.error("Saving unsuccessful");
+
+        } else {
+
+            toast.success("Saved successfully!");
+
+        }
 
     };
 
     const handleReset = () => {
 
+        setDisplayName(user.displayName);
+        setEditingDisplayName(false);
 
+        if (pfpPreview) URL.revokeObjectURL(pfpPreview);
+        setPfpFile(null);
+        setPfpPreview(null);
+
+    };
+
+    const handlePfpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+
+            toast.error("Please select an image file.");
+            return;
+
+        }
+
+        if (file.size > 2 * 1024 * 1024) {
+
+            toast.error("Image must be smaller than 2 MB.");
+            return;
+
+        }
+
+        if (pfpPreview) URL.revokeObjectURL(pfpPreview);
+
+        setPfpFile(file);
+        setPfpPreview(URL.createObjectURL(file));
+
+        e.target.value = "";
 
     };
 
@@ -43,9 +125,9 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                         >
 
                             <img
-                                src={`https://nmsr.jgj52.dev/face/${user.uuid}?w=96`}
+                                src={pfpPreview || (user.pfp ? "https://api.mcauth.net/v1/profile/pfp" : `https://nmsr.jgj52.dev/face/${user.uuid}?w=96`)}
                                 alt={"Profile picture"}
-                                className={"bg-[#1e1e1e]"}
+                                className={"bg-[#1e1e1e] w-24 h-24 object-cover"}
                             />
 
                             <div className={"absolute bottom-0 right-0 flex flex-col items-center justify-center p-0.5 bg-[#1a1a1a]"}>
@@ -75,6 +157,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                             type={"file"}
                             accept={"image/*"}
                             className={"hidden"}
+                            onChange={handlePfpChange}
                         />
 
                     </div>
@@ -87,11 +170,35 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
                     <div className={"flex flex-row gap-3 items-center"}>
 
-                        <p className={"text-white/70 select-none"}>{ user.displayName || "Not set yet" }</p>
+                        {
 
-                        <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
+                            editingDisplayName ?
+                                (
+                                    <input
+                                        type={"text"}
+                                        className={"input w-30 !border-white/10 !active:border-white/30"}
+                                        placeholder={"Display name"}
+                                        value={displayName || ""}
+                                        onChange={(e) => setDisplayName(e.target.value)}
+                                    />
+                                )
+                                :
+                                (
+                                    <p className={"text-white/70 select-none"}>{ user.displayName || displayName || "Not set yet" }</p>
+                                )
 
-                            <GoogleIcon icon={"edit"} className={"scale-80 select-none"} />
+                        }
+
+                        <div
+                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}
+                            onClick={() => {
+
+                                setEditingDisplayName(!editingDisplayName);
+
+                            }}
+                        >
+
+                            <GoogleIcon icon={editingDisplayName ? "close" : "edit"} className={"scale-80 select-none"} />
 
                         </div>
 
@@ -163,7 +270,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
             </div>
 
-            <SavingMenu saving={saving} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
+            <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
 
         </>
 

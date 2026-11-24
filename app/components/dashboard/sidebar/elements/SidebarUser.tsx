@@ -46,7 +46,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
                     <div className={`absolute ${open ? "left-2" : "left-0"} bottom-[50%] translate-y-[50%] flex flex-row justify-center items-center duration-300`}>
 
                         <img
-                            src={`https://nmsr.jgj52.dev/face/${user.uuid}?w=36`}
+                            src={user.pfp ? "https://api.mcauth.net/v1/profile/pfp" : `https://nmsr.jgj52.dev/face/${user.uuid}?w=36`}
                             alt={"Profile picture"}
                             width={"36px"}
                             className={"rounded-full shadow-sm shadow-[#00000066] select-none z-100"}

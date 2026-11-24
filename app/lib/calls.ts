@@ -1,4 +1,4 @@
-import type {Account} from "./types.ts";
+import type { Account } from "./types.ts";
 
 export const requireUser = async () => {
 
@@ -33,6 +33,7 @@ export async function getUser(): Promise<Account | null> {
         email: null,
         id: 1,
         name: "Polokalap",
+        pfp: false,
         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
         uuids: {
             uuid: "5248a0e1-a069-45e9-9885-215d88334438",

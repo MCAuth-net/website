@@ -5,6 +5,7 @@ import SettingsNavigation from "@/app/components/dashboard/settings/SettingsNavi
 import { Account } from "@/app/lib/types";
 import { useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
+import PrivacySettings from "@/app/components/dashboard/settings/PrivacySettings";
 
 export default function SettingsContent({ user }: { user: Account }) {
 
@@ -66,6 +67,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                     <GeneralSettings user={user} open={id === 0} saving={saving} setSaving={setSaving} />
                     <AppearanceSettings user={user} open={id === 1} saving={saving} setSaving={setSaving} />
+                    <PrivacySettings user={user} open={id === 2} saving={saving} setSaving={setSaving} />
 
                 </div>
 

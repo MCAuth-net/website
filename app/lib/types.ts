@@ -3,6 +3,7 @@ export type Account = {
     email: string | null;
     uuid: string | null;
     name: string | null;
+    pfp: boolean | null;
     uuids: {
         uuid: string;
         name: string;
