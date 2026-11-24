@@ -12,6 +12,10 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
     const [displayName, setDisplayName] = useState(defaultDisplayName);
     const [editingDisplayName, setEditingDisplayName] = useState(false);
 
+    const [defaultEmail, setDefaultEmail] = useState(user.email);
+    const [email, setEmail] = useState(defaultEmail);
+    const [editingEmail, setEditingEmail] = useState(false);
+
     const [pfpFile, setPfpFile] = useState<File | null>(null);
     const [pfpPreview, setPfpPreview] = useState<string | null>(null);
 
@@ -197,6 +201,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                             onClick={() => {
 
                                 setEditingDisplayName(!editingDisplayName);
+                                setDisplayName(defaultDisplayName);
 
                             }}
                         >
@@ -233,9 +238,16 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
                     <div className={"flex flex-row gap-3 items-center"}>
 
-                        <p className={`text-white/70 select-none ${user.email ? "blur-sm " : ""} hover:blur-none duration-200`}>{ user.email || "Not set yet" }</p>
+                        <p className={`text-white/70 select-none ${user.email ? "blur-sm " : ""} hover:blur-none duration-200`}>{ defaultEmail || "Not set yet" }</p>
 
-                        <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
+                        <div
+                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}
+                            onClick={() => {
+
+                                setEditingEmail(true);
+
+                            }}
+                        >
 
                             <GoogleIcon icon={"edit"} className={"scale-80 select-none"} />
 
@@ -266,6 +278,73 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                         <GoogleIcon icon={"logout"} className={"select-none"} />
 
                         <p className={"select-none"}>Log out</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div
+                className={`block fixed top-0 left-0 w-screen h-screen bg-black/5 z-100 backdrop-blur-xs cursor-pointer ${editingEmail ? "opacity-100" : "opacity-0 pointer-events-none"} transition-opacity duration-200`}
+                onClick={() => {
+
+                    setEditingEmail(false);
+
+                }}
+            ></div>
+
+            <div className={
+                `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "md:opacity-100 bottom-0" : "md:opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22]`
+            }>
+
+                <div
+                    className={"hidden md:flex flex-col items-center justify-center absolute top-5 right-5 rounded-full bg-transparent hover:bg-[#2e2e2e] h-10 w-10 duration-200"}
+                    onClick={() => {
+
+                        setEditingEmail(false);
+
+                    }}
+                >
+
+                    <GoogleIcon icon={"close"} className={"text-white/50 scale-125 cursor-pointer"} />
+
+                </div>
+
+                <div className={"flex flex-col items-center md:p-10 md:mt-3 p-7"}>
+
+                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Set your new <span className={`text-[#${getAccentColor(user)}]`}>email</span>!</h1>
+                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter your new email bellow, and your password, so we know it&#39;s actually you.</p>
+
+                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+
+                        <label className={"flex flex-col"}>
+
+                            <p className={"text-md"}>New email:</p>
+
+                            <input
+                                type={"text"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                            />
+
+                        </label>
+
+                        <label className={"flex flex-col"}>
+
+                            <p className={"text-md"}>Password:</p>
+
+                            <input
+                                type={"password"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                            />
+
+                        </label>
+
+                        <div className={`flex flex-col items-center bg-[#${getAccentColor(user)}] p-1 pr-2 pl-2 rounded-md shadow-md scale-125`}>
+
+                            <p className={"font-semibold"}>Next</p>
+
+                        </div>
 
                     </div>
 
