@@ -269,7 +269,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 <div className={"flex flex-row justify-between"}>
 
                     <div
-                        className={`flex flex-row gap-1 items-center bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
+                        className={`flex flex-row gap-1 items-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
                         onClick={async () => {
 
                             await logout();
@@ -314,6 +314,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 setEditingEmail={setEditingEmail}
                 page={page}
                 setPage={setPage}
+                siteColor={siteColor}
             />
 
             <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
@@ -324,7 +325,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
 }
 
-export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPassword, setEmailPassword, editingEmail, setEditingEmail, page, setPage }: { user: Account, defaultEmail: string, email: string, setEmail: Dispatch<SetStateAction<string | null>>; emailPassword: string, setEmailPassword: Dispatch<SetStateAction<string>>, editingEmail: boolean, setEditingEmail: Dispatch<SetStateAction<boolean>>, page: number, setPage: Dispatch<SetStateAction<number>> }) {
+export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPassword, setEmailPassword, editingEmail, setEditingEmail, page, setPage, siteColor }: { user: Account, defaultEmail: string, email: string, setEmail: Dispatch<SetStateAction<string | null>>; emailPassword: string, setEmailPassword: Dispatch<SetStateAction<string>>, editingEmail: boolean, setEditingEmail: Dispatch<SetStateAction<boolean>>, page: number, setPage: Dispatch<SetStateAction<number>>, siteColor: string }) {
 
     const [code, setCode] = useState("");
 
@@ -434,7 +435,7 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
                     </label> }
 
                     <div
-                        className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${getAccentColor(user)}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                        className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
                         onClick={async () => {
 
                             if (!isDataEntered) return;
@@ -476,7 +477,7 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
                     </label>
 
                     <div
-                        className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${getAccentColor(user)}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                        className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
                         onClick={async () => {
 
                             if (!isCodeEntered) return;
@@ -502,7 +503,7 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
                 <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
 
                     <div
-                        className={`flex flex-col items-center justify-center bg-[#${getAccentColor(user)}] cursor-pointer duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                        className={`flex flex-col items-center justify-center bg-[#${siteColor}] cursor-pointer duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
                         onClick={() => {
 
                             setEditingEmail(false);
