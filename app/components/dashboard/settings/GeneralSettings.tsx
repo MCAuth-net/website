@@ -339,12 +339,13 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
 
     const changeEmailHandler = async () => {
 
-        setPage(page + 1);
+        setPage(-1);
 
         const request = await changeEmail(email, emailPassword);
 
         if (request) {
 
+            setPage(1);
             toast.success("Email sent successfully.");
 
         } else {
@@ -359,18 +360,19 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
 
     const confirmEmailHandler = async () => {
 
-        setPage(page + 1);
+        setPage(-1);
 
         const request = await confirmEmail(code);
         setCode("");
 
         if (request) {
 
+            setPage(2);
             toast.success("New email set successfully");
 
         } else {
 
-            toast.error("Failed to verify email, try again.")
+            toast.error("Failed to verify email, try again.");
             setPage(0);
 
         }
