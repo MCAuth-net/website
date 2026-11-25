@@ -2,15 +2,16 @@ import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import GeneralSettings from "../settings/GeneralSettings";
 import AppearanceSettings from "@/app/components/dashboard/settings/AppearanceSettings";
 import SettingsNavigation from "@/app/components/dashboard/settings/SettingsNavigation";
+import PrivacySettings from "@/app/components/dashboard/settings/PrivacySettings";
 import { Account } from "@/app/lib/types";
 import { useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
-import PrivacySettings from "@/app/components/dashboard/settings/PrivacySettings";
 
 export default function SettingsContent({ user }: { user: Account }) {
 
     const [id, setId] = useState(0);
     const [saving, setSaving] = useState(false);
+    const [siteColor, setSiteColor] = useState(getAccentColor(user));
 
     return (
 
@@ -18,7 +19,7 @@ export default function SettingsContent({ user }: { user: Account }) {
 
             <div className={"lg:p-8 p-4 pr-5 pl-5 mt-6"}>
 
-                <h1 className={"lg:text-5xl text-4xl font-semibold"}>Account <span className={`text-[#${getAccentColor(user)}]`}>settings</span></h1>
+                <h1 className={"lg:text-5xl text-4xl font-semibold"}>Account <span className={`text-[#${siteColor}]`}>settings</span></h1>
                 <p className={"text-white/70"}>Manage your account settings, and appearance</p>
 
             </div>
@@ -43,11 +44,11 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                         <p className={"text-sm font-semibold select-none"}>Account</p>
 
-                        <SettingsNavigation user={user} icon={"person"} id={id} setId={setId} text={"General"} this_element={0} saving={saving} />
+                        <SettingsNavigation user={user} icon={"person"} id={id} setId={setId} text={"General"} this_element={0} saving={saving} siteColor={siteColor} />
 
-                        <SettingsNavigation user={user} icon={"palette"} id={id} setId={setId} text={"Appearance"} this_element={1} saving={saving} />
+                        <SettingsNavigation user={user} icon={"palette"} id={id} setId={setId} text={"Appearance"} this_element={1} saving={saving} siteColor={siteColor} />
 
-                        <SettingsNavigation user={user} icon={"visibility_off"} id={id} setId={setId} text={"Privacy"} this_element={2} saving={saving} />
+                        <SettingsNavigation user={user} icon={"visibility_off"} id={id} setId={setId} text={"Privacy"} this_element={2} saving={saving} siteColor={siteColor} />
 
                     </div>
 
@@ -55,9 +56,9 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                         <p className={"text-sm font-semibold select-none"}>Security</p>
 
-                        <SettingsNavigation user={user} icon={"security_key"} id={id} setId={setId} text={"2FA"} this_element={3} saving={saving} />
+                        <SettingsNavigation user={user} icon={"security_key"} id={id} setId={setId} text={"2FA"} this_element={3} saving={saving} siteColor={siteColor} />
 
-                        <SettingsNavigation user={user} icon={"logout"} id={id} setId={setId} text={"Sessions"} this_element={4} saving={saving} />
+                        <SettingsNavigation user={user} icon={"logout"} id={id} setId={setId} text={"Sessions"} this_element={4} saving={saving} siteColor={siteColor} />
 
                     </div>
 
@@ -65,9 +66,9 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                 <div className={"relative flex flex-col md:w-full mr-4"}>
 
-                    <GeneralSettings user={user} open={id === 0} saving={saving} setSaving={setSaving} />
-                    <AppearanceSettings user={user} open={id === 1} saving={saving} setSaving={setSaving} />
-                    <PrivacySettings user={user} open={id === 2} saving={saving} setSaving={setSaving} />
+                    <GeneralSettings user={user} open={id === 0} saving={saving} setSaving={setSaving} siteColor={siteColor} />
+                    <AppearanceSettings user={user} open={id === 1} saving={saving} setSaving={setSaving} siteColor={siteColor} setSiteColor={setSiteColor} />
+                    <PrivacySettings user={user} open={id === 2} saving={saving} setSaving={setSaving} siteColor={siteColor} />
 
                 </div>
 

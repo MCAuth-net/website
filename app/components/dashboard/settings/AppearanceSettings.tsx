@@ -5,7 +5,7 @@ import { getAccentColor, getColorName } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { changeColor } from "@/app/lib/calls";
 
-export default function AppearanceSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+export default function AppearanceSettings({ user, open, saving, setSaving, siteColor = getAccentColor(user), setSiteColor }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string, setSiteColor: Dispatch<SetStateAction<string>> }) {
 
     const [accentColor, setAccentColor] = useState(getAccentColor(user));
     const [selected, setSelected] = useState(accentColor);
@@ -60,6 +60,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
     const handleReset = () => {
 
         setSelected(accentColor);
+        setSiteColor(accentColor);
 
     };
 
@@ -96,6 +97,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
                                         onClick={() => {
 
                                             setSelected(color.value);
+                                            setSiteColor(color.value);
 
                                         }}
                                         style={{ borderColor: color.value == selected ? "#ffffff66" : "#00000066"}}
@@ -113,10 +115,9 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
                 </div>
 
-
             </div>
 
-            <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
+            <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} siteColor={siteColor} />
 
         </>
 

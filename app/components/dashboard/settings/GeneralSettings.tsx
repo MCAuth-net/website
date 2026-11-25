@@ -8,7 +8,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-export default function GeneralSettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+export default function GeneralSettings({ user, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
 
     const [defaultDisplayName, setDefaultDisplayName] = useState(user.display_name);
     const [displayName, setDisplayName] = useState(defaultDisplayName);

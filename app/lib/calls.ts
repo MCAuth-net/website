@@ -1,4 +1,4 @@
-import type {Account, ServerResponse} from "./types.ts";
+import type { Account, ServerResponse } from "./types.ts";
 
 export const requireUser = async () => {
 

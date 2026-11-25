@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { getAccentColor } from "@/app/lib/settings";
 import { Account } from "@/app/lib/types";
 
-export default function SavingMenu({ saving, setSaving, onSave, onReset, user }: { saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, onSave: () => void, onReset: () => void, user: Account }) {
+export default function SavingMenu({ saving, setSaving, onSave, onReset, user, siteColor = getAccentColor(user) }: { saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, onSave: () => void, onReset: () => void, user: Account, siteColor: string }) {
 
     return (
 
@@ -29,7 +29,7 @@ export default function SavingMenu({ saving, setSaving, onSave, onReset, user }:
                     </div>
 
                     <div
-                        className={`flex flex-col items-center justify-center bg-[#${getAccentColor(user)}dd] hover:bg-[#${getAccentColor(user)}] border border-[#ffffff33] p-3 pt-1 pb-1 rounded-md cursor-pointer duration-200`}
+                        className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff33] p-3 pt-1 pb-1 rounded-md cursor-pointer duration-200`}
                         onClick={() => {
 
                             setSaving(false);

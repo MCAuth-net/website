@@ -1,9 +1,9 @@
-import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
 import { Dispatch, SetStateAction } from "react";
+import { getAccentColor } from "@/app/lib/settings";
 
-export default function PrivacySettings({ user, open, saving, setSaving }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>> }) {
+export default function PrivacySettings({ user, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
 
     const handleSave = () => {
 
