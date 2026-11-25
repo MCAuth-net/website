@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { getAccentColor } from "@/app/lib/settings";
 import { Account } from "@/app/lib/types";
 
-export default function SavingMenu({ saving, setSaving, onSave, onReset, user, siteColor = getAccentColor(user) }: { saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, onSave: () => void, onReset: () => void, user: Account, siteColor: string }) {
+export default function SavingMenu({ saving, setSaving, onSave, onReset, user, siteColor = getAccentColor(user) }: { saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, onSave: () => void, onReset: () => void, user: Account, siteColor?: string }) {
 
     return (
 
