@@ -4,7 +4,7 @@ import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
 import {changeEmail, changeName, changePfp, confirmEmail, logout} from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
-import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -308,6 +308,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 defaultEmail={defaultEmail || ""}
                 email={email || ""}
                 setEmail={setEmail}
+                setDefaultEmail={setDefaultEmail}
                 emailPassword={emailPassword}
                 setEmailPassword={setEmailPassword}
                 editingEmail={editingEmail}
@@ -325,7 +326,35 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
 }
 
-export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPassword, setEmailPassword, editingEmail, setEditingEmail, page, setPage, siteColor }: { user: Account, defaultEmail: string, email: string, setEmail: Dispatch<SetStateAction<string | null>>; emailPassword: string, setEmailPassword: Dispatch<SetStateAction<string>>, editingEmail: boolean, setEditingEmail: Dispatch<SetStateAction<boolean>>, page: number, setPage: Dispatch<SetStateAction<number>>, siteColor: string }) {
+export function ChangeEmailMenu(
+    {
+        user,
+        defaultEmail,
+        email,
+        setEmail,
+        setDefaultEmail,
+        emailPassword,
+        setEmailPassword,
+        editingEmail,
+        setEditingEmail,
+        page,
+        setPage,
+        siteColor
+    }:
+    {
+        user: Account,
+        defaultEmail: string,
+        email: string,
+        setEmail: Dispatch<SetStateAction<string | null>>;
+        setDefaultEmail: Dispatch<SetStateAction<string | null>>;
+        emailPassword: string,
+        setEmailPassword: Dispatch<SetStateAction<string>>,
+        editingEmail: boolean,
+        setEditingEmail: Dispatch<SetStateAction<boolean>>,
+        page: number,
+        setPage: Dispatch<SetStateAction<number>>,
+        siteColor: string
+    }) {
 
     const [code, setCode] = useState("");
 
@@ -371,6 +400,7 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
         if (request.success) {
 
             setPage(2);
+            setDefaultEmail(email);
             toast.success("New email set successfully");
 
         } else {
