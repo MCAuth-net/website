@@ -153,7 +153,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
                     </div>
 
-                    <div className={"flex flex-col gap-1 p-3"}>
+                    <div className={"flex flex-col gap-1 p-0 md:p-3"}>
 
                         <p className={"font-semibold text-sm"}>Profile Picture</p>
                         <p className={"text-sm text-white/70"}>Click the image to set your new avatar</p>

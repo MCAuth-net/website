@@ -8,9 +8,9 @@ export default function SavingMenu({ saving, setSaving, onSave, onReset, user }:
 
         <>
 
-            <div className={`fixed right-[50%] ${saving ? "bottom-5 opacity-100" : "-bottom-20 opacity-0 pointer-events-none"} transition-[bottom,opacity] duration-300 translate-x-[50%] flex flex-row items-center p-4 justify-between lg:w-[75vw] max-w-200 w-110 h-13 bg-[#1e1e1e] rounded-xl shadow-lg border border-[#2e2e2e]`}>
+            <div className={`fixed right-[50%] ${saving ? "bottom-5 opacity-100" : "-bottom-20 opacity-0 pointer-events-none"} transition-[bottom,opacity] duration-300 translate-x-[50%] flex flex-row items-center p-4 justify-between lg:w-[75vw] max-w-200 md:min-w-110 w-100 h-13 bg-[#1e1e1e] rounded-xl shadow-lg border border-[#2e2e2e]`}>
 
-                <p className={"text-white/70 select-none"}>Don&#39;t forget to save your changes!</p>
+                <p className={"text-white/70 select-none text-sm md:text-[16px]"}>Don&#39;t forget to save your changes!</p>
 
                 <div className={"flex flex-row gap-2"}>
 
