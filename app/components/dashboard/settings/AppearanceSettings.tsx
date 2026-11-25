@@ -46,6 +46,7 @@ export default function AppearanceSettings({ user, open, saving, setSaving, site
         if (!colorChange.success) {
 
             setSelected(accentColor);
+            handleReset();
             toast.error(colorChange.error || "Internal server error");
 
         } else {

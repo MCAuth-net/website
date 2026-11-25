@@ -177,7 +177,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                 </div>
 
-                <div className={"flex flex-row justify-between mt-1"}>
+                <div className={"flex flex-row justify-between items-center"}>
 
                     <p>Display name</p>
 
@@ -220,7 +220,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                 </div>
 
-                <div className={"flex flex-row justify-between mt-1"}>
+                <div className={"flex flex-row justify-between items-center"}>
 
                     <p>Username</p>
 
@@ -238,7 +238,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                 </div>
 
-                <div className={"flex flex-row justify-between mt-1"}>
+                <div className={"flex flex-row justify-between items-center"}>
 
                     <p>Email</p>
 
@@ -259,6 +259,29 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                         >
 
                             <GoogleIcon icon={"edit"} className={"scale-80 select-none"} />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className={"flex flex-row justify-between items-center"}>
+
+                    <p>Password</p>
+
+                    <div className={"flex flex-row gap-3 items-center"}>
+
+                        <div
+                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] border border-[#ffffff44] p-1 rounded-md shadow-md cursor-pointer duration-200"}
+                            onClick={() => {
+
+
+
+                            }}
+                        >
+
+                            Change password
 
                         </div>
 
@@ -415,7 +438,7 @@ export function ChangeEmailMenu(
     return (
 
         <div className={
-            `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "md:opacity-100 bottom-0" : "md:opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22] overflow-hidden`
+            `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22] overflow-hidden`
         }>
 
             <div
