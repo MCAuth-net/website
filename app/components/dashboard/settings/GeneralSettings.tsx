@@ -140,7 +140,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
                             <img
                                 src={pfpPreview || (user.pfp ? "https://api.mcauth.net/v1/profile/pfp" : `https://nmsr.jgj52.dev/face/${user.uuid}?w=96`)}
                                 alt={"Profile picture"}
-                                className={"bg-[#1e1e1e] w-24 h-24 object-cover"}
+                                className={"bg-[#1e1e1e] min-w-24 max-h-24 object-cover"}
                             />
 
                             <div className={"absolute bottom-0 right-0 flex flex-col items-center justify-center p-0.5 bg-[#1a1a1a]"}>
@@ -226,7 +226,7 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
                     <div className={"flex flex-row gap-3 items-center"}>
 
-                        <p className={"text-white/70 select-none"}>{ user.name }</p>
+                        <p className={"text-white/70 select-none"}>{ user.name ? user.name.toLowerCase() : "Not set yet" }</p>
 
                         <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
 
