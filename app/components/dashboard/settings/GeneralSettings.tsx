@@ -42,35 +42,37 @@ export default function GeneralSettings({ user, open, saving, setSaving }: { use
 
     const handleSave = async () => {
 
-        let error = false;
-
         if (displayName !== user.display_name && displayName) {
 
             const displayNameChange = await changeName(displayName);
             setEditingDisplayName(false);
-            if (!displayNameChange) error = true;
+
+            if (!displayNameChange.success) {
+
+                toast.error(displayNameChange.error || "Internal server error");
+                handleReset();
+                return;
+
+            }
 
         }
 
         if (pfpFile !== null) {
 
             const pfpChange = await changePfp(pfpFile);
-            if (!pfpChange) error = true;
+            if (!pfpChange.success) {
+
+                toast.error(pfpChange.error || "Internal server error");
+                handleReset();
+                return;
+
+            }
 
         }
 
-        if (error) {
-
-            toast.error("Saving unsuccessful");
-            handleReset();
-
-        } else {
-
-            toast.success("Saved successfully!");
-            setDefaultDisplayName(displayName);
-            setPfpFile(null);
-
-        }
+        toast.success("Saved successfully!");
+        setDefaultDisplayName(displayName);
+        setPfpFile(null);
 
     };
 
@@ -343,7 +345,7 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
 
         const request = await changeEmail(email, emailPassword);
 
-        if (request) {
+        if (request.success) {
 
             setPage(1);
             toast.success("Email sent successfully.");
@@ -365,14 +367,14 @@ export function ChangeEmailMenu({ user, defaultEmail, email, setEmail, emailPass
         const request = await confirmEmail(code);
         setCode("");
 
-        if (request) {
+        if (request.success) {
 
             setPage(2);
             toast.success("New email set successfully");
 
         } else {
 
-            toast.error("Failed to verify email, try again.");
+            toast.error(request.error || "Internal server error");
             setPage(0);
 
         }

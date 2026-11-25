@@ -12,6 +12,5 @@ export type Account = {
 
 export type ServerResponse = {
     success: boolean;
-    message?: string;
-    key?: string;
+    error?: string;
 }

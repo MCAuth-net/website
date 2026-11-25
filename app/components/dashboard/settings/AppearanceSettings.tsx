@@ -43,10 +43,10 @@ export default function AppearanceSettings({ user, open, saving, setSaving }: { 
 
         const colorChange = await changeColor(colorName);
 
-        if (!colorChange) {
+        if (!colorChange.success) {
 
             setSelected(accentColor);
-            toast.error("Saving unsuccessful");
+            toast.error(colorChange.error || "Internal server error");
 
         } else {
 

@@ -1,4 +1,4 @@
-import type { Account } from "./types.ts";
+import type {Account, ServerResponse} from "./types.ts";
 
 export const requireUser = async () => {
 
@@ -69,7 +69,7 @@ export async function logout(): Promise<boolean> {
 
 }
 
-export async function login(username: string, password: string): Promise<boolean> {
+export async function login(username: string, password: string): Promise<ServerResponse> {
 
     const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -96,11 +96,11 @@ export async function login(username: string, password: string): Promise<boolean
         body: JSON.stringify({ name, email, password }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changeEmail(email: string, password: string): Promise<boolean> {
+export async function changeEmail(email: string, password: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/email", {
         method: "POST",
@@ -112,11 +112,11 @@ export async function changeEmail(email: string, password: string): Promise<bool
         body: JSON.stringify({ new_email: email, password }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function confirmEmail(code: string): Promise<boolean> {
+export async function confirmEmail(code: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/email/confirm", {
         method: "POST",
@@ -128,11 +128,11 @@ export async function confirmEmail(code: string): Promise<boolean> {
         body: JSON.stringify({ code }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changePassword(old_password: string, new_password: string): Promise<boolean> {
+export async function changePassword(old_password: string, new_password: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/password", {
         method: "POST",
@@ -144,11 +144,11 @@ export async function changePassword(old_password: string, new_password: string)
         body: JSON.stringify({ old_password, new_password }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changeColor(color: string): Promise<boolean> {
+export async function changeColor(color: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/color", {
         method: "POST",
@@ -160,11 +160,11 @@ export async function changeColor(color: string): Promise<boolean> {
         body: JSON.stringify({ new_color: color }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changeName(name: string): Promise<boolean> {
+export async function changeName(name: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/name", {
         method: "POST",
@@ -176,11 +176,11 @@ export async function changeName(name: string): Promise<boolean> {
         body: JSON.stringify({ new_name: name }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changePrimaryUUID(uuid: string): Promise<boolean> {
+export async function changePrimaryUUID(uuid: string): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/uuid", {
         method: "POST",
@@ -192,11 +192,11 @@ export async function changePrimaryUUID(uuid: string): Promise<boolean> {
         body: JSON.stringify({ primary_uuid: uuid }),
     });
 
-    return res.ok;
+    return await res.json();
 
 }
 
-export async function changePfp(file: File): Promise<boolean> {
+export async function changePfp(file: File): Promise<ServerResponse> {
 
     const form = new FormData()
     form.append("pfp", file)
@@ -210,6 +210,6 @@ export async function changePfp(file: File): Promise<boolean> {
         body: form,
     });
 
-    return res.ok;
+    return await res.json();
 
 }
