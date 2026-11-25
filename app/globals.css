@@ -1,11 +1,12 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source inline("{bg,hover:bg,text}-[#{3c8527,3c5ccc,1f9c8f,7a3cc8,e05c9c,f0c020,c83030,8a8a8a}]");
 @source inline("{bg,hover:bg,text}-[#{3c8527dd,3c5cccdd,1f9c8fdd,7a3cc8dd,e05c9cdd,f0c020dd,c83030dd,8a8a8add}]");
 
 :root {
-  --background: #ffffff;
-  --foreground: #111111;
+  --background: #111111;
+  --foreground: #ededed;
   color-scheme: dark;
 }
 
@@ -14,13 +15,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111111;
-    --foreground: #ededed;
-  }
 }
 
 body {
