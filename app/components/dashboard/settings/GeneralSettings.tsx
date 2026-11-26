@@ -160,7 +160,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                         <label
                             htmlFor={"profile-picture-upload"}
-                            className={"bg-[#262626] hover:bg-[#2e2e2e] p-1 pr-2 pl-2 rounded-sm text-sm w-fit cursor-pointer duration-200"}
+                            className={"bg-[#262626] hover:bg-[#2e2e2e] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-fit cursor-pointer duration-200"}
                         >
                             Upload PFP
                         </label>
