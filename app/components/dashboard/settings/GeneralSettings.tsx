@@ -297,7 +297,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 <div className={"flex flex-row gap-2"}>
 
                     <div
-                        className={`flex flex-row gap-1 items-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
+                        className={`flex flex-row gap-1 items-center bg-[#c83030dd] hover:bg-[#c83030] border border-[#ffffff22] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
                         onClick={async () => {
 
                             await logout();
