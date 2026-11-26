@@ -5,6 +5,7 @@ import { Account } from "@/app/lib/types";
 import {changeEmail, changeName, changePfp, confirmEmail, logout} from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Menu2fa from "@/app/components/2fa-menu/2fa";
 
 const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -335,6 +336,8 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 </div>
 
             </div>
+
+            <Menu2fa />
 
             <ChangeEmailMenu
                 user={user}

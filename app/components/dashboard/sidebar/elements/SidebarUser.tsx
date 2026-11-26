@@ -39,7 +39,7 @@ export default function SidebarUser({ open, user }: { open: boolean, user: Accou
             >
 
                 <div
-                    className={`flex flex-row gap-2 items-center h-12 cursor-pointer rounded-md pl-2" ${open ? "hover:bg-[#2e2e2e]" : ""} duration-200`}
+                    className={`flex flex-row gap-2 items-center h-12 rounded-md pl-2" ${open ? "hover:bg-[#2e2e2e] cursor-pointer" : ""} duration-200`}
                     onClick={() => { setSubmenu(!submenu); }}
                 >
 
