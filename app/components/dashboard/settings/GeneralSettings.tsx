@@ -337,8 +337,6 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
             </div>
 
-            <Menu2fa />
-
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -355,8 +353,6 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
             />
 
             <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
-
-
 
         </>
 

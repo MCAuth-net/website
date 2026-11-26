@@ -30,7 +30,7 @@ export async function getUser(): Promise<Account | null> {
 
     if (process.env.NEXT_PUBLIC_PRODUCTION === "false") return {
         display_name: "Cicus",
-        email: null,
+        email: "Polokalap@proton.me",
         id: 1,
         name: "Polokalap",
         pfp: false,
