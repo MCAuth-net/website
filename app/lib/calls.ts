@@ -215,3 +215,244 @@ export async function changePfp(file: File): Promise<ServerResponse> {
     return await res.json();
 
 }
+
+export async function getToken(): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/token", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function checkToken(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/token/check", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
+
+export async function getPfp(): Promise<Blob | null> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/pfp", {
+        method: "GET",
+        credentials: "include",
+    });
+
+    if (!res.ok) return null;
+
+    return await res.blob();
+
+}
+
+export async function deleteAccount(): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile", {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function change2FAMethods(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/change/2fa_methods", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
+
+export async function set2FAApp(code?: string): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/2fa/app", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ code }),
+    });
+
+    return await res.json();
+
+}
+
+export async function remove2FAApp(): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/2fa/app", {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function auth2FAApp(code: string): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/2fa/app", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ code }),
+    });
+
+    return await res.json();
+
+}
+
+export async function auth2FAEmailStart(): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/2fa/email/start", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function auth2FAEmailEnd(code: string): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/profile/2fa/email/end", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify({ code }),
+    });
+
+    return await res.json();
+
+}
+
+export async function listClients(): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/clients", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function readClient(id: string): Promise<ServerResponse> {
+
+    const res = await fetch(`https://api.mcauth.net/v1/client?id=${encodeURIComponent(id)}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            accept: "application/json",
+        },
+    });
+
+    return await res.json();
+
+}
+
+export async function createClient(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/client", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
+
+export async function updateClient(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/client", {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
+
+export async function deleteClient(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/client", {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
+
+export async function updateClientSecret(body: Record<string, unknown>): Promise<ServerResponse> {
+
+    const res = await fetch("https://api.mcauth.net/v1/client", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+            accept: "application/json",
+        },
+        body: JSON.stringify(body),
+    });
+
+    return await res.json();
+
+}
