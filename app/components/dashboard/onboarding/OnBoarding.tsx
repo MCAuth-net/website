@@ -7,6 +7,8 @@ export default function OnBoarding({ user }: { user: Account }) {
 
     const [open, setOpen] = useState(true);
 
+    if (process.env.NEXT_PUBLIC_PRODUCTION === "true") return null;
+
     return (
 
         <>
