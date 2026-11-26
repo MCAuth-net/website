@@ -160,7 +160,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                         <label
                             htmlFor={"profile-picture-upload"}
-                            className={"bg-[#262626] hover:bg-[#2e2e2e] p-1 pr-2 pl-2 rounded-sm text-sm w-23 cursor-pointer duration-200"}
+                            className={"bg-[#262626] hover:bg-[#2e2e2e] p-1 pr-2 pl-2 rounded-sm text-sm w-fit cursor-pointer duration-200"}
                         >
                             Upload PFP
                         </label>
@@ -273,7 +273,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                     <div className={"flex flex-row gap-3 items-center"}>
 
                         <div
-                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] border border-[#ffffff44] p-1 rounded-md shadow-md cursor-pointer duration-200"}
+                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] border border-[#ffffff22] p-1 rounded-md shadow-md cursor-pointer duration-200"}
                             onClick={() => {
 
 
@@ -289,10 +289,10 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                 </div>
 
-                <div className={"flex flex-row justify-between"}>
+                <div className={"flex flex-row gap-2"}>
 
                     <div
-                        className={`flex flex-row gap-1 items-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
+                        className={`flex flex-row gap-1 items-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] rounded-md p-1 pr-2 duration-200 cursor-pointer`}
                         onClick={async () => {
 
                             await logout();
@@ -310,6 +310,21 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                         <GoogleIcon icon={"logout"} className={"select-none"} />
 
                         <p className={"select-none"}>Log out</p>
+
+                    </div>
+
+                    <div
+                        className={"flex flex-row gap-1 items-center bg-[#c83030dd] hover:bg-[#c83030] border border-[#ffffff22] rounded-md p-1 pr-2 duration-200 cursor-pointer"}
+                        onClick={async () => {
+
+
+
+                        }}
+                    >
+
+                        <GoogleIcon icon={"delete"} className={"select-none"} />
+
+                        <p className={"select-none"}>Delete account</p>
 
                     </div>
 
