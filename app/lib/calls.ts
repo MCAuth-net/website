@@ -39,8 +39,10 @@ export async function getUser(): Promise<Account | null> {
             uuid: "5248a0e1-a069-45e9-9885-215d88334438",
             name: "Polokalap"
         },
+        "2fa": {
+            email: true
+        },
         color: "violet",
-        session: "asd",
     };
 
     const res = await fetch(`https://api.mcauth.net/v1/profile/me`, {

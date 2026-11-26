@@ -5,12 +5,13 @@ export type Account = {
     name: string | null;
     pfp: boolean | null;
     uuids: Record<string, string>;
+    "2fa": Record<string, boolean>;
     display_name: string | null;
     color: string;
-    session?: string;
 };
 
 export type ServerResponse = {
     success: boolean;
     error?: string;
+    "2fa": boolean;
 }

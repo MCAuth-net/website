@@ -179,6 +179,28 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                 <div className={"flex flex-row justify-between items-center"}>
 
+                    <p>Username</p>
+
+                    <div className={"flex flex-row gap-3 items-center"}>
+
+                        <p className={"text-white/70 select-none"}>{ user.name ? user.name.toLowerCase() : "Not set yet" }</p>
+
+                        <a
+                            className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}
+                            href={"https://www.minecraft.net/en-us/msaprofile"}
+                            target={"_blank"}
+                        >
+
+                            <GoogleIcon icon={"open_in_new"} className={"scale-80 select-none"} />
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div className={"flex flex-row justify-between items-center"}>
+
                     <p>Display name</p>
 
                     <div className={"flex flex-row gap-3 items-center"}>
@@ -213,24 +235,6 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                         >
 
                             <GoogleIcon icon={editingDisplayName ? "close" : "edit"} className={"scale-80 select-none"} />
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className={"flex flex-row justify-between items-center"}>
-
-                    <p>Username</p>
-
-                    <div className={"flex flex-row gap-3 items-center"}>
-
-                        <p className={"text-white/70 select-none"}>{ user.name ? user.name.toLowerCase() : "Not set yet" }</p>
-
-                        <div className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}>
-
-                            <GoogleIcon icon={"edit"} className={"scale-80 select-none"} />
 
                         </div>
 
@@ -348,6 +352,8 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
             />
 
             <SavingMenu saving={saving && open} setSaving={setSaving} onSave={handleSave} onReset={handleReset} user={user} />
+
+
 
         </>
 
