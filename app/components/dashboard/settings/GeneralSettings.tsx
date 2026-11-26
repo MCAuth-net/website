@@ -317,15 +317,6 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
             </div>
 
-            <div
-                className={`block fixed top-0 left-0 w-screen h-screen bg-black/5 z-100 backdrop-blur-xs cursor-pointer ${editingEmail ? "opacity-100" : "opacity-0 pointer-events-none"} transition-opacity duration-200`}
-                onClick={() => {
-
-                    setEditingEmail(false);
-
-                }}
-            ></div>
-
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -437,68 +428,148 @@ export function ChangeEmailMenu(
 
     return (
 
-        <div className={
-            `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22] overflow-hidden`
-        }>
+        <>
 
             <div
-                className={"hidden md:flex flex-col items-center justify-center absolute top-3 right-3 rounded-full bg-transparent hover:bg-[#2e2e2e] h-10 w-10 duration-200 z-100"}
+                className={`block fixed top-0 left-0 w-screen h-screen bg-black/5 z-100 backdrop-blur-xs cursor-pointer ${editingEmail ? "opacity-100" : "opacity-0 pointer-events-none"} transition-opacity duration-200`}
                 onClick={() => {
 
                     setEditingEmail(false);
 
                 }}
-            >
+            ></div>
 
-                <GoogleIcon icon={"close"} className={"text-white/50 scale-125 cursor-pointer select-none"} />
+            <div className={
+                `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22] overflow-hidden`
+            }>
 
-            </div>
+                <div
+                    className={"hidden md:flex flex-col items-center justify-center absolute top-3 right-3 rounded-full bg-transparent hover:bg-[#2e2e2e] h-10 w-10 duration-200 z-100"}
+                    onClick={() => {
 
-            <div className={`absolute ${ page == 0 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+                        setEditingEmail(false);
 
-                <h1 className={"text-4xl md:text-5xl font-semibold"}>Set your new email</h1>
-                <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter your new email bellow, and your password, so we know it&#39;s actually you.</p>
+                    }}
+                >
 
-                <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+                    <GoogleIcon icon={"close"} className={"text-white/50 scale-125 cursor-pointer select-none"} />
 
-                    <label className={"flex flex-col"}>
+                </div>
 
-                        <p className={"text-md"}>New email:</p>
+                <div className={`absolute ${ page == 0 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
 
-                        <input
-                            type={"email"}
-                            className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
-                            value={email || ""}
-                            onChange={(e) => { setEmail(e.target.value); }}
-                        />
+                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Set your new email</h1>
+                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter your new email bellow, and your password, so we know it&#39;s actually you.</p>
 
-                    </label>
+                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
 
-                    { defaultEmail != null && defaultEmail != "" && <label className={"flex flex-col"}>
+                        <label className={"flex flex-col"}>
 
-                        <p className={"text-md"}>Password:</p>
+                            <p className={"text-md"}>New email:</p>
 
-                        <input
-                            type={"password"}
-                            className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
-                            value={emailPassword || ""}
-                            onChange={(e) => { setEmailPassword(e.target.value); }}
-                        />
+                            <input
+                                type={"email"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                                value={email || ""}
+                                onChange={(e) => { setEmail(e.target.value); }}
+                            />
 
-                    </label> }
+                        </label>
 
-                    <div
-                        className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
-                        onClick={async () => {
+                        { defaultEmail != null && defaultEmail != "" && <label className={"flex flex-col"}>
 
-                            if (!isDataEntered) return;
+                            <p className={"text-md"}>Password:</p>
 
-                            await changeEmailHandler();
+                            <input
+                                type={"password"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                                value={emailPassword || ""}
+                                onChange={(e) => { setEmailPassword(e.target.value); }}
+                            />
 
-                        }}
-                    >
+                        </label> }
 
-                        <p className={"font-semibold leading-none"}>Next</p>
+                        <div
+                            className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                            onClick={async () => {
+
+                                if (!isDataEntered) return;
+
+                                await changeEmailHandler();
+
+                            }}
+                        >
+
+                            <p className={"font-semibold"}>Next</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className={`absolute ${ page == 1 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+
+                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Confirm your email</h1>
+                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter the code from the email we sent you, to verify your ownership.</p>
+
+                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+
+                        <label className={"flex flex-col items-center lg:scale-120"}>
+
+                            <p className={"text-md"}>Code</p>
+
+                            <input
+                                type={"text"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1 text-center"}
+                                inputMode={"numeric"}
+                                pattern={"[0-9]*"}
+                                value={code || ""}
+                                onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
+                                maxLength={6}
+                            />
+
+                        </label>
+
+                        <div
+                            className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                            onClick={async () => {
+
+                                if (!isCodeEntered) return;
+
+                                await confirmEmailHandler();
+
+                            }}
+                        >
+
+                            <p className={"font-semibold"}>Confirm</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div className={`absolute ${ page == 2 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+
+                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Your email is ready</h1>
+                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Your email has been set successfully!</p>
+
+                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+
+                        <div
+                            className={`flex flex-col items-center justify-center bg-[#${siteColor}] cursor-pointer duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                            onClick={() => {
+
+                                setEditingEmail(false);
+                                setPage(0);
+
+                            }}
+                        >
+
+                            <p className={"font-semibold"}>Close</p>
+
+                        </div>
 
                     </div>
 
@@ -506,74 +577,7 @@ export function ChangeEmailMenu(
 
             </div>
 
-            <div className={`absolute ${ page == 1 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
-
-                <h1 className={"text-4xl md:text-5xl font-semibold"}>Confirm your email</h1>
-                <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter the code from the email we sent you, to verify your ownership.</p>
-
-                <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
-
-                    <label className={"flex flex-col items-center lg:scale-120"}>
-
-                        <p className={"text-md"}>Code</p>
-
-                        <input
-                            type={"text"}
-                            className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1 text-center"}
-                            inputMode={"numeric"}
-                            pattern={"[0-9]*"}
-                            value={code || ""}
-                            onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-                            maxLength={6}
-                        />
-
-                    </label>
-
-                    <div
-                        className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
-                        onClick={async () => {
-
-                            if (!isCodeEntered) return;
-
-                            await confirmEmailHandler();
-
-                        }}
-                    >
-
-                        <p className={"font-semibold leading-none"}>Confirm</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div className={`absolute ${ page == 2 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
-
-                <h1 className={"text-4xl md:text-5xl font-semibold"}>Your email is ready</h1>
-                <p className={"text-white/70 mr-2.5 ml-2.5"}>Your email has been set successfully!</p>
-
-                <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
-
-                    <div
-                        className={`flex flex-col items-center justify-center bg-[#${siteColor}] cursor-pointer duration-200 p-2 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
-                        onClick={() => {
-
-                            setEditingEmail(false);
-                            setPage(0);
-
-                        }}
-                    >
-
-                        <p className={"font-semibold leading-none"}>Close</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+        </>
 
     )
 
