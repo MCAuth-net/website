@@ -338,7 +338,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 </div>
 
             </div>
-
+            
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -393,6 +393,7 @@ export function ChangeEmailMenu(
     }) {
 
     const [code, setCode] = useState("");
+    const [passwordError, setPasswordError] = useState(false);
 
     const hasPassword = !!emailPassword && emailPassword.length > 0;
     const noDefaultEmail = defaultEmail == null || defaultEmail === "";
@@ -422,6 +423,7 @@ export function ChangeEmailMenu(
             toast.error("Failed to verify password, try again.");
             setEmailPassword("");
             setPage(0);
+            setPasswordError(true);
 
         }
 
@@ -492,11 +494,17 @@ export function ChangeEmailMenu(
 
                         <label className={"flex flex-col"}>
 
-                            <p className={"text-md"}>New email:</p>
+                            <div className={"flex flex-row gap-2 items-center justify-between"}>
+
+                                <p className={"text-md"}>New email</p>
+
+                                <p className={`font-bold text-sm text-[#ff7777] ${email.toLowerCase() === defaultEmail.toLowerCase() ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Invalid password</p>
+
+                            </div>
 
                             <input
                                 type={"email"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
+                                className={`input ${email.toLowerCase() === defaultEmail.toLowerCase() ? "!border-[#ff7777] !active:border-[#ffffff66]" : "!border-[#ffffff22] !active:border-[#ffffff66]"} !p-2 !pl-3 !pr-3 !rounded-lg`}
                                 value={email || ""}
                                 placeholder={"example@mcauth.net"}
                                 onChange={(e) => { setEmail(e.target.value); }}
@@ -504,19 +512,31 @@ export function ChangeEmailMenu(
 
                         </label>
 
-                        { defaultEmail != null && defaultEmail != "" && <label className={"flex flex-col"}>
+                        { defaultEmail != null && defaultEmail != "" && <div className={"relative flex flex-col"}>
 
-                            <p className={"text-md"}>Password:</p>
+                            <div className={"flex flex-row gap-2 items-center justify-between"}>
+
+                                <p className={"text-md"}>Password</p>
+
+                                <p className={`font-bold text-sm text-[#ff7777] ${passwordError ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Invalid password</p>
+
+                            </div>
 
                             <input
                                 type={"password"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
+                                className={`input ${passwordError ? "!border-[#ff7777] !active:border-[#ffffff66]" : "!border-[#ffffff22] !active:border-[#ffffff66]"} !p-2 !pl-3 !pr-3 !rounded-lg`}
                                 value={emailPassword || ""}
                                 placeholder={"Your password"}
-                                onChange={(e) => { setEmailPassword(e.target.value); }}
+                                onChange={(e) => {
+
+                                    setEmailPassword(e.target.value);
+
+                                    if (passwordError) setPasswordError(false);
+
+                                }}
                             />
 
-                        </label> }
+                        </div> }
 
                     </div>
 
