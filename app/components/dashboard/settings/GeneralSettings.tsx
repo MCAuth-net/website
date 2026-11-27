@@ -2,7 +2,7 @@ import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import toast from "react-hot-toast";
 import SavingMenu from "@/app/components/saving/SavingMenu";
 import { Account } from "@/app/lib/types";
-import {changeEmail, changeName, changePfp, confirmEmail, logout} from "@/app/lib/calls";
+import {changeEmail, changeName, changePfp, confirmEmail, getUser, logout} from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Menu2fa from "@/app/components/2fa-menu/2fa";
@@ -75,6 +75,8 @@ export default function GeneralSettings({ user, setUser, open, saving, setSaving
         toast.success("Saved successfully!");
         setDefaultDisplayName(displayName);
         setPfpFile(null);
+
+        setUser(await getUser());
 
     };
 
@@ -287,7 +289,7 @@ export default function GeneralSettings({ user, setUser, open, saving, setSaving
                             }}
                         >
 
-                            Change password
+                            { user.password ? "Change password" : "Set password" }
 
                         </div>
 

@@ -109,7 +109,7 @@ export async function login(username: string, password: string): Promise<ServerR
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -134,7 +134,7 @@ export async function changeEmail(email: string, password: string): Promise<Serv
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
     }
 
@@ -161,7 +161,7 @@ export async function confirmEmail(code: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -189,7 +189,7 @@ export async function changePassword(old_password: string, new_password: string)
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -217,7 +217,7 @@ export async function changeColor(color: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -245,7 +245,7 @@ export async function changeName(name: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -273,7 +273,7 @@ export async function changePrimaryUUID(uuid: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -303,7 +303,7 @@ export async function changePfp(file: File): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -329,7 +329,7 @@ export async function getToken(): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -357,7 +357,7 @@ export async function checkToken(body: Record<string, unknown>): Promise<ServerR
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -396,7 +396,7 @@ export async function deleteAccount(): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -424,7 +424,7 @@ export async function change2FAMethods(body: Record<string, unknown>): Promise<S
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -452,7 +452,7 @@ export async function set2FAApp(code?: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -478,7 +478,7 @@ export async function remove2FAApp(): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -506,7 +506,7 @@ export async function auth2FAApp(code: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -526,7 +526,7 @@ export async function auth2FAEmailStart(): Promise<ServerResponse> {
     if (!res.ok) return {
         success: false,
         error: res.statusText,
-        "2fa": false
+        sudo: false
     }
 
     try {
@@ -538,7 +538,7 @@ export async function auth2FAEmailStart(): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -566,7 +566,7 @@ export async function auth2FAEmailEnd(code: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -592,7 +592,7 @@ export async function listClients(): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -618,7 +618,7 @@ export async function readClient(id: string): Promise<ServerResponse> {
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -646,7 +646,7 @@ export async function createClient(body: Record<string, unknown>): Promise<Serve
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -674,7 +674,7 @@ export async function updateClient(body: Record<string, unknown>): Promise<Serve
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -702,7 +702,7 @@ export async function deleteClient(body: Record<string, unknown>): Promise<Serve
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }
@@ -730,7 +730,7 @@ export async function updateClientSecret(body: Record<string, unknown>): Promise
         return {
             success: false,
             error: res.statusText,
-            "2fa": false,
+            sudo: false,
         };
 
     }

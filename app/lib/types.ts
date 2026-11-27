@@ -15,5 +15,5 @@ export type Account = {
 export type ServerResponse = {
     success: boolean;
     error?: string;
-    "2fa": boolean;
+    sudo: boolean;
 }
