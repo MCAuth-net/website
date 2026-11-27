@@ -111,7 +111,7 @@ export function ChangeEmailMenu(
             ></div>
 
             <div className={
-                     `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-110 ${page == 0 || page == -1 ? "md:h-90" : page == 1 ? "md:h-80" : page == 2 ? "md:h-60" : ""} rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-[opacity,height] duration-200 border border-[#ffffff22] overflow-hidden`
+                     `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-110 ${page == 0 || page == -1 ? user.password && user.email ? "md:h-90" : "md:h-70" : page == 1 ? "md:h-80" : page == 2 ? "md:h-60" : ""} rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-[opacity,height] duration-200 border border-[#ffffff22] overflow-hidden`
                  }>
 
                 <div
@@ -158,7 +158,7 @@ export function ChangeEmailMenu(
 
                         </label>
 
-                        { defaultEmail != null && defaultEmail != "" && <div className={"relative flex flex-col"}>
+                        { !defaultEmail || user.password && <div className={"relative flex flex-col"}>
 
                             <div className={"flex flex-row gap-2 items-center justify-between"}>
 
