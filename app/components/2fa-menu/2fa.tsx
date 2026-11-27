@@ -94,7 +94,7 @@ export default function Menu2fa(
                         <div className={"flex flex-col gap-2"}>
 
                             <h1 className={"text-4xl md:text-[27px] font-semibold"}>Multi-Factor Authentication</h1>
-                            <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(split[0].length - 1, 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
+                            <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(Math.max(split[0].length - 1, 0), 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
 
                         </div>
 

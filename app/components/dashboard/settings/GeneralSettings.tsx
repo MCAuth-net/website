@@ -251,7 +251,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                     <div className={"flex flex-row gap-3 items-center"}>
 
-                        <p className={`text-white/70 select-none hover:blur-none duration-200`}>{ defaultEmail && split ? `${split[0].at(0)}${"*".repeat(Math.min(split[0].length - 1, 8))}@${split[1]}` : "Not set yet" }</p>
+                        <p className={`text-white/70 select-none hover:blur-none duration-200`}>{ defaultEmail && split ? `${split[0].at(0)}${"*".repeat(Math.min(Math.max(split[0].length - 1, 0), 8))}@${split[1]}` : "Not set yet" }</p>
 
                         <div
                             className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}
@@ -581,7 +581,7 @@ export function ChangeEmailMenu(
                     <div className={"flex flex-col gap-2"}>
 
                         <h1 className={"text-4xl md:text-[27px] font-semibold"}>Confirm your email</h1>
-                        <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(split[0].length - 1, 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
+                        <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(Math.max(split[0].length - 1, 0), 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
 
                     </div>
 
