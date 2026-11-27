@@ -447,7 +447,7 @@ export function ChangeEmailMenu(
 
             toast.error(request.error || "Internal server error");
             setPage(1);
-            setPasswordError(true);
+            setCodeError(true);
 
         }
 
