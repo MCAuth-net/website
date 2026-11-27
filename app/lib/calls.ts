@@ -98,6 +98,12 @@ export async function login(username: string, password: string): Promise<ServerR
         body: JSON.stringify({ name, email, password }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -113,6 +119,12 @@ export async function changeEmail(email: string, password: string): Promise<Serv
         },
         body: JSON.stringify({ new_email: email, password }),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -130,6 +142,12 @@ export async function confirmEmail(code: string): Promise<ServerResponse> {
         body: JSON.stringify({ code }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -145,6 +163,12 @@ export async function changePassword(old_password: string, new_password: string)
         },
         body: JSON.stringify({ old_password, new_password }),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -162,6 +186,12 @@ export async function changeColor(color: string): Promise<ServerResponse> {
         body: JSON.stringify({ new_color: color }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -178,6 +208,12 @@ export async function changeName(name: string): Promise<ServerResponse> {
         body: JSON.stringify({ new_name: name }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -193,6 +229,12 @@ export async function changePrimaryUUID(uuid: string): Promise<ServerResponse> {
         },
         body: JSON.stringify({ primary_uuid: uuid }),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -212,6 +254,12 @@ export async function changePfp(file: File): Promise<ServerResponse> {
         body: form,
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -225,6 +273,12 @@ export async function getToken(): Promise<ServerResponse> {
             accept: "application/json",
         },
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -241,6 +295,12 @@ export async function checkToken(body: Record<string, unknown>): Promise<ServerR
         },
         body: JSON.stringify(body),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -269,6 +329,12 @@ export async function deleteAccount(): Promise<ServerResponse> {
         },
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -284,6 +350,12 @@ export async function change2FAMethods(body: Record<string, unknown>): Promise<S
         },
         body: JSON.stringify(body),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -301,6 +373,12 @@ export async function set2FAApp(code?: string): Promise<ServerResponse> {
         body: JSON.stringify({ code }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -314,6 +392,12 @@ export async function remove2FAApp(): Promise<ServerResponse> {
             accept: "application/json",
         },
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -331,6 +415,12 @@ export async function auth2FAApp(code: string): Promise<ServerResponse> {
         body: JSON.stringify({ code }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -344,6 +434,18 @@ export async function auth2FAEmailStart(): Promise<ServerResponse> {
             accept: "application/json",
         },
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -361,6 +463,12 @@ export async function auth2FAEmailEnd(code: string): Promise<ServerResponse> {
         body: JSON.stringify({ code }),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -375,6 +483,12 @@ export async function listClients(): Promise<ServerResponse> {
         },
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -388,6 +502,12 @@ export async function readClient(id: string): Promise<ServerResponse> {
             accept: "application/json",
         },
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -405,6 +525,12 @@ export async function createClient(body: Record<string, unknown>): Promise<Serve
         body: JSON.stringify(body),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -420,6 +546,12 @@ export async function updateClient(body: Record<string, unknown>): Promise<Serve
         },
         body: JSON.stringify(body),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
@@ -437,6 +569,12 @@ export async function deleteClient(body: Record<string, unknown>): Promise<Serve
         body: JSON.stringify(body),
     });
 
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
+
     return await res.json();
 
 }
@@ -452,6 +590,12 @@ export async function updateClientSecret(body: Record<string, unknown>): Promise
         },
         body: JSON.stringify(body),
     });
+
+    if (!res.ok) return {
+        success: true,
+        error: res.statusText,
+        "2fa": false
+    }
 
     return await res.json();
 
