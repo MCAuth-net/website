@@ -99,7 +99,7 @@ export async function login(username: string, password: string): Promise<ServerR
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -121,7 +121,7 @@ export async function changeEmail(email: string, password: string): Promise<Serv
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -143,7 +143,7 @@ export async function confirmEmail(code: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -165,7 +165,7 @@ export async function changePassword(old_password: string, new_password: string)
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -187,7 +187,7 @@ export async function changeColor(color: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -209,7 +209,7 @@ export async function changeName(name: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -231,7 +231,7 @@ export async function changePrimaryUUID(uuid: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -255,7 +255,7 @@ export async function changePfp(file: File): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -275,7 +275,7 @@ export async function getToken(): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -297,7 +297,7 @@ export async function checkToken(body: Record<string, unknown>): Promise<ServerR
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -330,7 +330,7 @@ export async function deleteAccount(): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -352,7 +352,7 @@ export async function change2FAMethods(body: Record<string, unknown>): Promise<S
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -374,7 +374,7 @@ export async function set2FAApp(code?: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -394,7 +394,7 @@ export async function remove2FAApp(): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -416,7 +416,7 @@ export async function auth2FAApp(code: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -436,13 +436,13 @@ export async function auth2FAEmailStart(): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -464,7 +464,7 @@ export async function auth2FAEmailEnd(code: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -484,7 +484,7 @@ export async function listClients(): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -504,7 +504,7 @@ export async function readClient(id: string): Promise<ServerResponse> {
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -526,7 +526,7 @@ export async function createClient(body: Record<string, unknown>): Promise<Serve
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -548,7 +548,7 @@ export async function updateClient(body: Record<string, unknown>): Promise<Serve
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -570,7 +570,7 @@ export async function deleteClient(body: Record<string, unknown>): Promise<Serve
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
@@ -592,7 +592,7 @@ export async function updateClientSecret(body: Record<string, unknown>): Promise
     });
 
     if (!res.ok) return {
-        success: true,
+        success: false,
         error: res.statusText,
         "2fa": false
     }
