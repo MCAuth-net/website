@@ -339,7 +339,6 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
             </div>
 
-
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -524,7 +523,7 @@ export function ChangeEmailMenu(
                     <div className={"flex flex-row gap-2 justify-between w-full"}>
 
                         <div
-                            className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                            className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${siteColor}dd] hover:bg-[#${siteColor}] cursor-pointer` : "bg-[#262626] cursor-not-allowed"} border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full duration-200`}
                             onClick={async () => {
 
                                 if (!isDataEntered) return;
@@ -596,7 +595,7 @@ export function ChangeEmailMenu(
                     <div className={"flex flex-row gap-2 justify-between w-full"}>
 
                         <div
-                            className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                            className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}dd] hover:bg-[#${siteColor}] cursor-pointer` : "bg-[#262626] cursor-not-allowed"} border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full duration-200`}
                             onClick={async () => {
 
                                 if (!isCodeEntered) return;
