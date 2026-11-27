@@ -3,11 +3,12 @@ import GeneralSettings from "../settings/GeneralSettings";
 import AppearanceSettings from "@/app/components/dashboard/settings/AppearanceSettings";
 import SettingsNavigation from "@/app/components/dashboard/settings/SettingsNavigation";
 import PrivacySettings from "@/app/components/dashboard/settings/PrivacySettings";
+import MFASettings from "@/app/components/dashboard/settings/MFASettings";
 import { Account } from "@/app/lib/types";
-import { useState } from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import { getAccentColor } from "@/app/lib/settings";
 
-export default function SettingsContent({ user }: { user: Account }) {
+export default function SettingsContent({ user, setUser }: { user: Account, setUser: Dispatch<SetStateAction<Account | null>> }) {
 
     const [id, setId] = useState(0);
     const [saving, setSaving] = useState(false);
@@ -66,9 +67,10 @@ export default function SettingsContent({ user }: { user: Account }) {
 
                 <div className={"relative flex flex-col md:w-full mr-4"}>
 
-                    <GeneralSettings user={user} open={id === 0} saving={saving} setSaving={setSaving} siteColor={siteColor} />
-                    <AppearanceSettings user={user} open={id === 1} saving={saving} setSaving={setSaving} siteColor={siteColor} setSiteColor={setSiteColor} />
-                    <PrivacySettings user={user} open={id === 2} saving={saving} setSaving={setSaving} siteColor={siteColor} />
+                    <GeneralSettings user={user} setUser={setUser} open={id === 0} saving={saving} setSaving={setSaving} siteColor={siteColor} />
+                    <AppearanceSettings user={user} setUser={setUser} open={id === 1} saving={saving} setSaving={setSaving} siteColor={siteColor} setSiteColor={setSiteColor} />
+                    <PrivacySettings user={user} setUser={setUser} open={id === 2} saving={saving} setSaving={setSaving} siteColor={siteColor} />
+                    <MFASettings user={user} setUser={setUser} open={id === 3} saving={saving} setSaving={setSaving} siteColor={siteColor} />
 
                 </div>
 

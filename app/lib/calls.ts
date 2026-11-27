@@ -39,9 +39,10 @@ export async function getUser(): Promise<Account | null> {
             uuid: "5248a0e1-a069-45e9-9885-215d88334438",
             name: "Polokalap"
         },
-        "2fa": {
-            email: true
-        },
+        "2fa": [
+            "email"
+        ],
+        sudo: false,
         color: "violet",
     };
 

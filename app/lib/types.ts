@@ -5,7 +5,8 @@ export type Account = {
     name: string | null;
     pfp: boolean | null;
     uuids: Record<string, string>;
-    "2fa": Record<string, boolean>;
+    "2fa": string[];
+    sudo: boolean;
     display_name: string | null;
     color: string;
 };

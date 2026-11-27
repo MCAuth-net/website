@@ -35,7 +35,7 @@ export default function Dashboard() {
 
                     <Topbar text={"Settings"} open={open} setOpen={setOpen} />
 
-                    <SettingsContent user={user} />
+                    <SettingsContent user={user} setUser={setUser} />
 
                 </div>
 

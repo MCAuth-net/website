@@ -1,19 +1,21 @@
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
-import {useEffect, useRef, useState} from "react";
-import { Account } from "@/app/lib/types";
-import {getAccentColor} from "@/app/lib/settings";
-import {auth2FAEmailEnd, auth2FAEmailStart} from "@/app/lib/calls";
 import toast from "react-hot-toast";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Account } from "@/app/lib/types";
+import { getAccentColor } from "@/app/lib/settings";
+import {auth2FAEmailEnd, auth2FAEmailStart, getUser} from "@/app/lib/calls";
 
 export default function Menu2fa(
         {
             user,
+            setUser,
             siteColor = getAccentColor(user),
             onClose,
             onSuccess,
         }:
         {
             user: Account,
+            setUser: Dispatch<SetStateAction<Account | null>>,
             siteColor?: string,
             onClose: () => void,
             onSuccess: () => void
@@ -22,9 +24,12 @@ export default function Menu2fa(
 
     const started = useRef(false);
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const [page, setPage] = useState(0);
     const [code, setCode] = useState("");
+    const [codeError, setCodeError] = useState(false);
+
+    const isCodeEntered = code.length >= 6;
 
     useEffect(() => {
 
@@ -32,6 +37,7 @@ export default function Menu2fa(
         started.current = true;
 
         auth2FAEmailStart();
+        setOpen(true);
 
     });
 
@@ -47,6 +53,7 @@ export default function Menu2fa(
 
             toast.success("2FA Passed successfully")
             setOpen(false);
+            setUser(await getUser());
             onSuccess();
 
         }
@@ -68,6 +75,7 @@ export default function Menu2fa(
                     onClick={() => {
 
                         setOpen(false);
+                        onClose();
 
                     }}
                 ></div>
@@ -81,6 +89,7 @@ export default function Menu2fa(
                         onClick={() => {
 
                             setOpen(false);
+                            onClose();
 
                         }}
                     >
@@ -93,20 +102,26 @@ export default function Menu2fa(
 
                         <div className={"flex flex-col gap-2"}>
 
-                            <h1 className={"text-4xl md:text-[27px] font-semibold"}>Multi-Factor Authentication</h1>
+                            <h1 className={"text-4xl md:text-[27px] font-semibold"}>Confirm your email</h1>
                             <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(Math.max(split[0].length - 1, 0), 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
 
                         </div>
 
                         <div className={"flex flex-col gap-1 w-full"}>
 
-                            <p className={"text-md"}>Enter Received Auth Code</p>
+                            <div className={"flex flex-row gap-2 items-center justify-between"}>
+
+                                <p className={"text-md"}>Enter Received Auth Code</p>
+
+                                <p className={`font-bold text-sm text-[#ff7777] ${codeError ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Invalid code</p>
+
+                            </div>
 
                             <div className={"flex flex-row gap-2"}>
 
                                 <input
                                     type={"text"}
-                                    className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
+                                    className={`input ${codeError ? "!border-[#ff7777] !active:border-[#ffffff66]" : "!border-[#ffffff22] !active:border-[#ffffff66]"} !p-2 !pl-3 !pr-3 !rounded-lg`}
                                     inputMode={"numeric"}
                                     pattern={"[0-9]*"}
                                     value={code || ""}
@@ -130,7 +145,7 @@ export default function Menu2fa(
                         <div className={"flex flex-row gap-2 justify-between w-full"}>
 
                             <div
-                                className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                                className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}dd] hover:bg-[#${siteColor}] cursor-pointer` : "bg-[#262626] cursor-not-allowed"} border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full duration-200`}
                                 onClick={async () => {
 
                                     await verify();
@@ -152,7 +167,7 @@ export default function Menu2fa(
                                 }}
                             >
 
-                                <p className={"text-lg select-none"}>Cancel</p>
+                                <p className={"text-lg select-none"}>Back</p>
 
                             </div>
 

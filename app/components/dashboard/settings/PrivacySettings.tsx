@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
 import toast from "react-hot-toast";
 
-export default function PrivacySettings({ user, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
+export default function PrivacySettings({ user, setUser, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, setUser: Dispatch<SetStateAction<Account | null>>, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
 
     const [defaultAltTracking, setDefaultAltTracking] = useState(true);
     const [defaultVpnLogging, setDefaultVpnLogging] = useState(true);

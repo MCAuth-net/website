@@ -5,7 +5,7 @@ import { getAccentColor, getColorName } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { changeColor } from "@/app/lib/calls";
 
-export default function AppearanceSettings({ user, open, saving, setSaving, siteColor = getAccentColor(user), setSiteColor }: { user: Account, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string, setSiteColor: Dispatch<SetStateAction<string>> }) {
+export default function AppearanceSettings({ user, setUser, open, saving, setSaving, siteColor = getAccentColor(user), setSiteColor }: { user: Account, setUser: Dispatch<SetStateAction<Account | null>>, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string, setSiteColor: Dispatch<SetStateAction<string>> }) {
 
     const [accentColor, setAccentColor] = useState(getAccentColor(user));
     const [selected, setSelected] = useState(accentColor);
