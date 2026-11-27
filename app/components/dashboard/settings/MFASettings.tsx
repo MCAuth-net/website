@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { getAccentColor } from "@/app/lib/settings";
 import {change2FAMethods, getUser} from "@/app/lib/calls";
 import Menu2fa from "@/app/components/2fa-menu/2fa";
+import Tooltip from "@/app/components/tooltip/Tooltip";
 
 export default function MFASettings({ user, setUser, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, setUser: Dispatch<SetStateAction<Account | null>>, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
 
@@ -62,9 +63,13 @@ export default function MFASettings({ user, setUser, open, saving, setSaving, si
         const currentUser = await getUser();
 
         if (!currentUser) return false;
+
+        if (!user.email) return false;
+
         if (currentUser.sudo) return true;
 
         setSudoMenu(true);
+
         return false;
 
     };
@@ -82,17 +87,21 @@ export default function MFASettings({ user, setUser, open, saving, setSaving, si
 
                 </div>
 
-                <div className={"flex flex-col gap-2"}>
+                <div className={"relative flex flex-col gap-2"}>
 
                     <div className={"flex flex-row items-center justify-between mt-1"}>
 
                         <p>2FA via Email</p>
 
-                        <div className={"flex flex-row gap-3 items-center"}>
+                        <div className={"flex flex-row gap-2 items-center"}>
+
+                            { user.email != null || <Tooltip text={"You must set an email first!"} /> }
 
                             <div
-                                className={`relative flex flex-col items-center justify-center w-12 h-6 ${emailMultiFA ? `bg-[#${siteColor}dd] hover:bg-[#${siteColor}]` : "bg-[#1e1e1e] hover:bg-[#262626]"} border border-[#ffffff44] p-1 rounded-full shadow-md cursor-pointer duration-200`}
+                                className={`relative flex flex-col items-center justify-center w-12 h-6 ${user.email != null ? emailMultiFA ? `bg-[#${siteColor}dd] hover:bg-[#${siteColor}] cursor-pointer` : "bg-[#1e1e1e] hover:bg-[#262626] cursor-pointer" : " bg-[#1e1e1e] cursor-not-allowed"} border border-[#ffffff44] p-1 rounded-full shadow-md duration-200`}
                                 onClick={() => {
+
+                                    if (!user.email) return;
 
                                     MFACheck();
 
@@ -101,7 +110,7 @@ export default function MFASettings({ user, setUser, open, saving, setSaving, si
                                 }}
                             >
 
-                                <div className={`absolute ${emailMultiFA ? "right-1" : "right-6.5"} h-4 w-4 bg-white rounded-full duration-200`}></div>
+                                <div className={`absolute ${emailMultiFA ? "right-1" : "right-6.5"} h-4 w-4 ${user.email != null ? "bg-white" : "bg-[#ffffff66]"} rounded-full duration-200`}></div>
 
                             </div>
 
