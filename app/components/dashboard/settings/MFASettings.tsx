@@ -103,8 +103,6 @@ export default function MFASettings({ user, setUser, open, saving, setSaving, si
 
                                     if (!user.email) return;
 
-                                    MFACheck();
-
                                     setEmailMultiFA(!emailMultiFA);
 
                                 }}

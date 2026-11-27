@@ -33,6 +33,7 @@ export async function getUser(): Promise<Account | null> {
         email: "Polokalap@proton.me",
         id: 1,
         name: "Polokalap",
+        password: false,
         pfp: false,
         uuid: "5248a0e1-a069-45e9-9885-215d88334438",
         uuids: {
@@ -42,7 +43,7 @@ export async function getUser(): Promise<Account | null> {
         "2fa": [
             "email"
         ],
-        sudo: false,
+        sudo: true,
         color: "violet",
     };
 

@@ -3,6 +3,7 @@ export type Account = {
     email: string | null;
     uuid: string | null;
     name: string | null;
+    password: boolean;
     pfp: boolean | null;
     uuids: Record<string, string>;
     "2fa": string[];
