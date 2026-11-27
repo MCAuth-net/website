@@ -500,7 +500,7 @@ export function ChangeEmailMenu(
 
                                 <p className={"text-md"}>New email</p>
 
-                                <p className={`font-bold text-sm text-[#ff7777] ${email.toLowerCase() === defaultEmail.toLowerCase() ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Invalid password</p>
+                                <p className={`font-bold text-sm text-[#ff7777] ${email.toLowerCase() === defaultEmail.toLowerCase() ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Set a new email</p>
 
                             </div>
 
