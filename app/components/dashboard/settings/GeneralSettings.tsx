@@ -24,6 +24,8 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
     const [pfpFile, setPfpFile] = useState<File | null>(null);
     const [pfpPreview, setPfpPreview] = useState<string | null>(null);
 
+    const split = defaultEmail ? defaultEmail.split("@") : null;
+
     useEffect(() => {
 
         if (
@@ -249,7 +251,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
                     <div className={"flex flex-row gap-3 items-center"}>
 
-                        <p className={`text-white/70 select-none ${user.email ? "blur-[4.5px]" : ""} hover:blur-none duration-200`}>{ defaultEmail || "Not set yet" }</p>
+                        <p className={`text-white/70 select-none hover:blur-none duration-200`}>{ defaultEmail && split ? `${split[0].at(0)}${"*".repeat(Math.min(split[0].length - 1, 8))}@${split[1]}` : "Not set yet" }</p>
 
                         <div
                             className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] p-1 rounded-md shadow-md cursor-pointer duration-200"}
@@ -337,6 +339,8 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
 
             </div>
 
+
+
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -402,6 +406,7 @@ export function ChangeEmailMenu(
         (hasPassword || noDefaultEmail);
 
     const isCodeEntered = code.length >= 6;
+    const split = defaultEmail?.split("@");
 
     const changeEmailHandler = async () => {
 
@@ -451,7 +456,7 @@ export function ChangeEmailMenu(
         <>
 
             <div
-                className={`block fixed top-0 left-0 w-screen h-screen bg-black/5 z-100 backdrop-blur-xs cursor-pointer ${editingEmail ? "opacity-100" : "opacity-0 pointer-events-none"} transition-opacity duration-200`}
+                className={`block fixed top-0 left-0 w-screen h-screen bg-black/50 z-100 cursor-pointer ${editingEmail ? "opacity-100" : "opacity-0 pointer-events-none"} transition-[opacity,h] duration-200 z-101`}
                 onClick={() => {
 
                     setEditingEmail(false);
@@ -460,8 +465,8 @@ export function ChangeEmailMenu(
             ></div>
 
             <div className={
-                `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-135 md:h-100 rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-opacity duration-200 border border-[#ffffff22] overflow-hidden`
-            }>
+                     `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-110 ${page == 0 ? "md:h-90" : page == 1 ? "md:h-80" : page == 2 ? "md:h-60" : ""} rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingEmail ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-[opacity,height] duration-200 border border-[#ffffff22] overflow-hidden`
+                 }>
 
                 <div
                     className={"hidden md:flex flex-col items-center justify-center absolute top-3 right-3 rounded-full bg-transparent hover:bg-[#2e2e2e] h-10 w-10 duration-200 z-100"}
@@ -476,12 +481,16 @@ export function ChangeEmailMenu(
 
                 </div>
 
-                <div className={`absolute ${ page == 0 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+                <div className={`absolute ${ page == 0 ? "opacity-100" : "opacity-0 pointer-events-none"} flex flex-col gap-1 items-center md:items-start md:p-8 md:pl-7 md:pr-7 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
 
-                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Set your new email</h1>
-                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter your new email bellow, and your password, so we know it&#39;s actually you.</p>
+                    <div className={"flex flex-col gap-2"}>
 
-                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+                        <h1 className={"text-4xl md:text-[27px] font-semibold"}>Set your new email</h1>
+                        <p className={"text-[17px] font-semibold"}>Enter the new email address for your account. <br /> We&#39;ll send a code to confirm it&#39;s yours.</p>
+
+                    </div>
+
+                    <div className={"flex flex-col gap-2 items-center mt-13 md:mt-1 mb-10 md:mb-3 scale-125 md:scale-100"}>
 
                         <label className={"flex flex-col"}>
 
@@ -489,8 +498,9 @@ export function ChangeEmailMenu(
 
                             <input
                                 type={"email"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
                                 value={email || ""}
+                                placeholder={"example@mcauth.net"}
                                 onChange={(e) => { setEmail(e.target.value); }}
                             />
 
@@ -502,15 +512,20 @@ export function ChangeEmailMenu(
 
                             <input
                                 type={"password"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
                                 value={emailPassword || ""}
+                                placeholder={"Your password"}
                                 onChange={(e) => { setEmailPassword(e.target.value); }}
                             />
 
                         </label> }
 
+                    </div>
+
+                    <div className={"flex flex-row gap-2 justify-between w-full"}>
+
                         <div
-                            className={`flex flex-col items-center justify-center ${isDataEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                            className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
                             onClick={async () => {
 
                                 if (!isDataEntered) return;
@@ -520,7 +535,20 @@ export function ChangeEmailMenu(
                             }}
                         >
 
-                            <p className={"font-semibold"}>Next</p>
+                            <p className={"text-lg font-semibold select-none"}>Next</p>
+
+                        </div>
+
+                        <div
+                            className={`flex flex-col items-center justify-center bg-[#262626] hover:bg-[#2e2e2e] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                            onClick={() => {
+
+                                setEditingEmail(false);
+
+                            }}
+                        >
+
+                            <p className={"text-lg select-none"}>Cancel</p>
 
                         </div>
 
@@ -528,31 +556,48 @@ export function ChangeEmailMenu(
 
                 </div>
 
-                <div className={`absolute ${ page == 1 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+                <div className={`absolute ${ page == 1 ? "opacity-100" : "opacity-0 pointer-events-none"} flex flex-col gap-5 items-center md:items-start md:p-8 md:pl-7 md:pr-7 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
 
-                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Confirm your email</h1>
-                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Enter the code from the email we sent you, to verify your ownership.</p>
+                    <div className={"flex flex-col gap-2"}>
 
-                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+                        <h1 className={"text-4xl md:text-[27px] font-semibold"}>Confirm your email</h1>
+                        <p className={"text-[17px] font-semibold"}>We&#39;ve sent you an email with a code. <br /> Please enter it to verify it&#39;s yours.</p>
 
-                        <label className={"flex flex-col items-center lg:scale-120"}>
+                    </div>
 
-                            <p className={"text-md"}>Code</p>
+                    <div className={"flex flex-col gap-1 w-full"}>
+
+                        <p className={"text-md"}>Enter Received Auth Code</p>
+
+                        <div className={"flex flex-row gap-2"}>
 
                             <input
                                 type={"text"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] p-1 text-center"}
+                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
                                 inputMode={"numeric"}
                                 pattern={"[0-9]*"}
                                 value={code || ""}
                                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
                                 maxLength={6}
+                                placeholder={"6-digit authentication code"}
                             />
 
-                        </label>
+                            <div
+                                className={"flex flex-col items-center justify-center bg-[#262626] hover:bg-[#2e2e2e] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200"}
+                            >
+
+                                <p className={"text-[16px] select-none"}>Resend email?</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div className={"flex flex-row gap-2 justify-between w-full"}>
 
                         <div
-                            className={`flex flex-col items-center justify-center ${isCodeEntered ? `bg-[#${siteColor}] cursor-pointer` : "bg-zinc-600 cursor-not-allowed"} duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
+                            className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
                             onClick={async () => {
 
                                 if (!isCodeEntered) return;
@@ -562,7 +607,21 @@ export function ChangeEmailMenu(
                             }}
                         >
 
-                            <p className={"font-semibold"}>Confirm</p>
+                            <p className={"text-lg font-semibold select-none"}>Confirm</p>
+
+                        </div>
+
+                        <div
+                            className={`flex flex-col items-center justify-center bg-[#262626] hover:bg-[#2e2e2e] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                            onClick={() => {
+
+                                setPage(0);
+                                setEmailPassword("");
+
+                            }}
+                        >
+
+                            <p className={"text-lg select-none"}>Back</p>
 
                         </div>
 
@@ -570,24 +629,33 @@ export function ChangeEmailMenu(
 
                 </div>
 
-                <div className={`absolute ${ page == 2 ? "top-0 opacity-100" : "top-150 opacity-0 pointer-events-none"} flex flex-col items-center md:p-10 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
+                <div className={`absolute ${ page == 2 ? "opacity-100" : "opacity-0 pointer-events-none"} flex flex-col gap-10 items-center md:items-start md:p-8 md:pl-7 md:pr-7 md:mt-2 p-7 w-full h-full transition-[top,opacity] duration-300`}>
 
-                    <h1 className={"text-4xl md:text-5xl font-semibold"}>Your email is ready</h1>
-                    <p className={"text-white/70 mr-2.5 ml-2.5"}>Your email has been set successfully!</p>
+                    <div className={"flex flex-col gap-2"}>
 
-                    <div className={"flex flex-col gap-4 items-center mt-13 md:mt-4 scale-125 md:scale-100"}>
+                        <h1 className={"text-4xl md:text-[27px] font-semibold"}>Your email has been set!</h1>
+                        <p className={"text-[17px] font-semibold"}>Your new email has been set successfully! <br /> If something breaks, please refresh the site!</p>
+
+                    </div>
+
+                    <div className={"flex flex-row gap-2 justify-between w-full"}>
 
                         <div
-                            className={`flex flex-col items-center justify-center bg-[#${siteColor}] cursor-pointer duration-200 p-2 pt-1 pb-1 mt-3 rounded-md shadow-md scale-125 select-none`}
-                            onClick={() => {
+                            className={`flex flex-col items-center justify-center bg-[#${siteColor}dd] hover:bg-[#${siteColor}] border border-[#ffffff22] p-1 pr-2 pl-2 rounded-md text-sm w-full cursor-pointer duration-200`}
+                            onClick={async () => {
 
                                 setEditingEmail(false);
-                                setPage(0);
+
+                                setTimeout(() => {
+
+                                    setPage(0);
+
+                                }, 200);
 
                             }}
                         >
 
-                            <p className={"font-semibold"}>Close</p>
+                            <p className={"text-lg font-semibold select-none"}>Close</p>
 
                         </div>
 
