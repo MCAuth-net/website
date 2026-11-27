@@ -402,7 +402,7 @@ export function ChangeEmailMenu(
     const isDataEntered =
         !!email &&
         emailCheck.test(email) &&
-        defaultEmail !== email &&
+        defaultEmail.toLowerCase() !== email.toLowerCase() &&
         (hasPassword || noDefaultEmail);
 
     const isCodeEntered = code.length >= 6;
@@ -421,7 +421,7 @@ export function ChangeEmailMenu(
 
         } else {
 
-            toast.error("Failed to verify password, try again.");
+            toast.error(request.error || "Failed to verify password, try again.");
             setEmailPassword("");
             setPage(0);
             setPasswordError(true);
