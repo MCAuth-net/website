@@ -338,7 +338,7 @@ export default function GeneralSettings({ user, open, saving, setSaving, siteCol
                 </div>
 
             </div>
-            
+
             <ChangeEmailMenu
                 user={user}
                 defaultEmail={defaultEmail || ""}
@@ -394,6 +394,7 @@ export function ChangeEmailMenu(
 
     const [code, setCode] = useState("");
     const [passwordError, setPasswordError] = useState(false);
+    const [codeError, setCodeError] = useState(false);
 
     const hasPassword = !!emailPassword && emailPassword.length > 0;
     const noDefaultEmail = defaultEmail == null || defaultEmail === "";
@@ -405,7 +406,7 @@ export function ChangeEmailMenu(
         (hasPassword || noDefaultEmail);
 
     const isCodeEntered = code.length >= 6;
-    const split = defaultEmail?.split("@");
+    const split = email?.split("@")
 
     const changeEmailHandler = async () => {
 
@@ -445,7 +446,8 @@ export function ChangeEmailMenu(
         } else {
 
             toast.error(request.error || "Internal server error");
-            setPage(0);
+            setPage(1);
+            setPasswordError(true);
 
         }
 
@@ -579,19 +581,25 @@ export function ChangeEmailMenu(
                     <div className={"flex flex-col gap-2"}>
 
                         <h1 className={"text-4xl md:text-[27px] font-semibold"}>Confirm your email</h1>
-                        <p className={"text-[17px] font-semibold"}>We&#39;ve sent you an email with a code. <br /> Please enter it to verify it&#39;s yours.</p>
+                        <p className={"text-[17px] font-semibold"}>We&#39;ve sent an email to <span className={`text-white/90`}>{ `${split[0].at(0)}${"*".repeat(Math.min(split[0].length - 1, 8))}@${split[1]}` }</span>. <br/> Please enter the code you received.</p>
 
                     </div>
 
                     <div className={"flex flex-col gap-1 w-full"}>
 
-                        <p className={"text-md"}>Enter Received Auth Code</p>
+                        <div className={"flex flex-row gap-2 items-center justify-between"}>
+
+                            <p className={"text-md"}>Enter Received Auth Code</p>
+
+                            <p className={`font-bold text-sm text-[#ff7777] ${codeError ? "opacity-100" : "opacity-0 pointer-events-none"} duration-200 transition-opacity`}>Invalid code</p>
+
+                        </div>
 
                         <div className={"flex flex-row gap-2"}>
 
                             <input
                                 type={"text"}
-                                className={"input !border-[#ffffff22] !active:border-[#ffffff66] !p-2 !pl-3 !pr-3 !rounded-lg"}
+                                className={`input ${codeError ? "!border-[#ff7777] !active:border-[#ffffff66]" : "!border-[#ffffff22] !active:border-[#ffffff66]"} !p-2 !pl-3 !pr-3 !rounded-lg`}
                                 inputMode={"numeric"}
                                 pattern={"[0-9]*"}
                                 value={code || ""}
