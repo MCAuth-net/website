@@ -3,9 +3,10 @@ import toast from "react-hot-toast";
 import { changePassword } from "@/app/lib/calls";
 import { Account } from "@/app/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
+import Tooltip from "@/app/components/tooltip/Tooltip";
 
 const passwordRegex = /^[A-Za-z0-9!"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~]*$/;
-const invalidChars = /[^A-Za-z0-9!"#$%&'()*+,\-.\/:;<=>?@\[\\\]^_`{|}~]/g;
+const passwordSendRegex = /^(?=.*\p{Ll})(?=.*\p{Lu})(?=.*\p{Nd})(?=.*[\p{P}\p{S}])[\s\S]{8,64}$/u;
 
 export default function ChangePasswordMenu(
     {
@@ -29,7 +30,9 @@ export default function ChangePasswordMenu(
     const [newPassword, setNewPassword] = useState("");
     const [passwordError, setPasswordError] = useState(false);
 
-    const isDataEntered = oldPassword ?(oldPassword.length > 8 && newPassword.length > 8 && oldPassword != newPassword) : newPassword.length > 8;
+    const isDataEntered =
+        passwordSendRegex.test(newPassword) &&
+        (!user.password || (oldPassword.length > 0 && oldPassword !== newPassword));
 
     const changePasswordHandler = async () => {
 
@@ -84,7 +87,7 @@ export default function ChangePasswordMenu(
             ></div>
 
             <div className={
-                     `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-110 ${page == 0 || page == -1 ? user.password && user.email ? "md:h-90" : "md:h-70" : page == 1 ? "md:h-60" : ""} rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingPassword ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-[opacity,height] duration-200 border border-[#ffffff22] overflow-hidden`
+                     `fixed -bottom-300 right-[50%] translate-x-[50%] w-screen h-[85vh] md:bottom-[50%] md:right-[50%] md:translate-[50%] md:w-110 ${page == 0 || page == -1 ? user.password && user.email ? "md:h-90" : "md:h-70" : page == 1 ? "md:h-60" : ""} rounded-t-2xl md:rounded-xl shadow-xl shadow-[#00000033] bg-[#1e1e1e] z-101 ${editingPassword ? "opacity-100 bottom-0" : "opacity-0 -bottom-300 md:bottom-0 pointer-events-none"} transition-[opacity,bottom] md:transition-[opacity,height] duration-200 border border-[#ffffff22]`
                  }>
 
                 <div
@@ -106,7 +109,7 @@ export default function ChangePasswordMenu(
                     <div className={"flex flex-col gap-2"}>
 
                         <h1 className={"text-4xl md:text-[27px] font-semibold"}>Set your new password</h1>
-                        <p className={"text-[17px] font-semibold"}>Enter the new password for this account. <br /> Pick a strong one that you&#39;ll remember!</p>
+                        <p className={"text-[17px] font-semibold"}>Use 8-64 characters with an uppercase letter, a lowercase letter, a number, and a symbol.</p>
 
                     </div>
 
