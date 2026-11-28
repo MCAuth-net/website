@@ -412,7 +412,7 @@ export async function change2FAMethods(body: string[]): Promise<ServerResponse> 
             "Content-Type": "application/json",
             accept: "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({ methods: body }),
     });
 
     try {
