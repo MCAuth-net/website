@@ -1,12 +1,13 @@
 import GoogleIcon from "@/app/components/icons/GoogleIcon";
 import toast from "react-hot-toast";
 import SavingMenu from "@/app/components/saving/SavingMenu";
+import Menu2fa from "@/app/components/2fa-menu/2fa";
+import ChangeEmailMenu from "@/app/components/dashboard/change-menu/ChangeEmailMenu";
+import ChangePasswordMenu from "@/app/components/dashboard/change-menu/ChangePasswordMenu";
 import { Account } from "@/app/lib/types";
 import {changeEmail, changeName, changePfp, confirmEmail, getUser, logout} from "@/app/lib/calls";
 import { getAccentColor } from "@/app/lib/settings";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Menu2fa from "@/app/components/2fa-menu/2fa";
-import {ChangeEmailMenu} from "@/app/components/dashboard/change-menu/ChangeEmailMenu";
 
 export default function GeneralSettings({ user, setUser, open, saving, setSaving, siteColor = getAccentColor(user) }: { user: Account, setUser: Dispatch<SetStateAction<Account | null>>, open: boolean, saving: boolean, setSaving: Dispatch<SetStateAction<boolean>>, siteColor: string }) {
 
@@ -18,6 +19,9 @@ export default function GeneralSettings({ user, setUser, open, saving, setSaving
     const [email, setEmail] = useState(defaultEmail);
     const [editingEmail, setEditingEmail] = useState(false);
     const [emailPassword, setEmailPassword] = useState("");
+
+    const [editingPassword, setEditingPassword] = useState(false);
+
     const [page, setPage] = useState(0);
 
     const [pfpFile, setPfpFile] = useState<File | null>(null);
@@ -284,12 +288,13 @@ export default function GeneralSettings({ user, setUser, open, saving, setSaving
                             className={"flex flex-col items-center justify-center bg-[#212121] hover:bg-[#262626] border border-[#ffffff22] p-1 rounded-md shadow-md cursor-pointer duration-200"}
                             onClick={() => {
 
-
+                                setPage(0);
+                                setEditingPassword(true);
 
                             }}
                         >
 
-                            { user.password ? "Change password" : "Set password" }
+                            <p className={"select-none"}>{ user.password ? "Change password" : "Set password" }</p>
 
                         </div>
 
@@ -352,6 +357,15 @@ export default function GeneralSettings({ user, setUser, open, saving, setSaving
                 setEmailPassword={setEmailPassword}
                 editingEmail={editingEmail}
                 setEditingEmail={setEditingEmail}
+                page={page}
+                setPage={setPage}
+                siteColor={siteColor}
+            />
+
+            <ChangePasswordMenu
+                user={user}
+                editingPassword={editingPassword}
+                setEditingPassword={setEditingPassword}
                 page={page}
                 setPage={setPage}
                 siteColor={siteColor}

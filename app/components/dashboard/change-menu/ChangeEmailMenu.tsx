@@ -6,7 +6,7 @@ import {Dispatch, SetStateAction, useState} from "react";
 
 const emailCheck = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-export function ChangeEmailMenu(
+export default function ChangeEmailMenu(
     {
         user,
         defaultEmail,
@@ -138,7 +138,7 @@ export function ChangeEmailMenu(
 
                     <div className={"flex flex-col gap-2 items-center mt-13 md:mt-1 mb-10 md:mb-3 scale-125 md:scale-100"}>
 
-                        <label className={"flex flex-col"}>
+                        <div className={"flex flex-col"}>
 
                             <div className={"flex flex-row gap-2 items-center justify-between"}>
 
@@ -156,7 +156,7 @@ export function ChangeEmailMenu(
                                 onChange={(e) => { setEmail(e.target.value); }}
                             />
 
-                        </label>
+                        </div>
 
                         { !defaultEmail || user.password && <div className={"relative flex flex-col"}>
 
