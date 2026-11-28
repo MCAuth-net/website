@@ -403,7 +403,7 @@ export async function deleteAccount(): Promise<ServerResponse> {
 
 }
 
-export async function change2FAMethods(body: Record<string, unknown>): Promise<ServerResponse> {
+export async function change2FAMethods(body: string[]): Promise<ServerResponse> {
 
     const res = await fetch("https://api.mcauth.net/v1/profile/change/2fa_methods", {
         method: "POST",

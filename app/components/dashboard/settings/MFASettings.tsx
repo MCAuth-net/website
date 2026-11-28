@@ -37,15 +37,19 @@ export default function MFASettings({ user, setUser, open, saving, setSaving, si
         if (!isSudo) return false;
 
         if (emailMultiFA != defaultEmailMultiFA) {
-            const altTrackingChange = await change2FAMethods({ email: emailMultiFA });
 
-            if (!altTrackingChange.success) {
-                toast.error(altTrackingChange.error || "Internal server error");
+            const mfaChange = await change2FAMethods(emailMultiFA ? ["email"] : []);
+
+            if (!mfaChange.success) {
+
+                toast.error(mfaChange.error || "Internal server error");
                 handleReset();
                 return false;
+
             }
 
             setUser(await getUser());
+
         }
 
         return true;
