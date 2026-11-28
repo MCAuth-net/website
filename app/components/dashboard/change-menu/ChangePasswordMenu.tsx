@@ -112,7 +112,7 @@ export default function ChangePasswordMenu(
 
                     <div className={"flex flex-col gap-2 items-center mt-13 md:mt-1 mb-10 md:mb-3 scale-125 md:scale-100"}>
 
-                        <div className={"flex flex-col"}>
+                        { user.password && <div className={"flex flex-col"}>
 
                                 <div className={"flex flex-row gap-2 items-center justify-between"}>
 
@@ -138,9 +138,9 @@ export default function ChangePasswordMenu(
                                     }}
                                 />
 
-                        </div>
+                        </div> }
 
-                        { user.password && <div className={"flex flex-col"}>
+                        <div className={"flex flex-col"}>
 
                             <div className={"flex flex-row gap-2 items-center justify-between"}>
 
@@ -168,7 +168,7 @@ export default function ChangePasswordMenu(
                                 }}
                             />
 
-                        </div> }
+                        </div>
 
                     </div>
 
